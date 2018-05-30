@@ -465,6 +465,7 @@ ul {
     margin: 0;
     width: 150px;
     border: none;
+    background: none;
 }
 .cart-box > ul > li:not(:first-child) {
   margin-left: 20px;

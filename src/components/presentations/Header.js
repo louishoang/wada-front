@@ -13,31 +13,14 @@ const Header = () => (
                   <li><a href="checkout.html">Checkout</a></li>
               </ul>
               <ul>                                          
-                  <li><span>Language</span> <a href="#">English<i className="lnr lnr-chevron-down"></i></a>
-                      {/* <!-- Dropdown Start --> */}
-                      <ul className="ht-dropdown">
-                          <li><a href="#"><img src={require('../../assets/img/header/1.jpg')} alt="language-selector"/>English</a></li>
-                          <li><a href="#"><img src={require('../../assets/img/header/2.jpg')} alt="language-selector"/>Francis</a></li>
-                      </ul>
-                      {/* <!-- Dropdown End --> */}
-                  </li>
-                  <li><span>Currency</span><a href="#"> USD $ <i className="lnr lnr-chevron-down"></i></a>
-                      {/* <!-- Dropdown Start --> */}
-                      <ul className="ht-dropdown">
-                          <li><a href="#">&#36; USD</a></li>
-                          <li><a href="#"> € Euro</a></li>
-                          <li><a href="#">&#163; Pound Sterling</a></li>
-                      </ul>
-                      {/* <!-- Dropdown End --> */}
-                  </li>
-                  <li><a href="#">My Account<i className="lnr lnr-chevron-down"></i></a>
-                      {/* <!-- Dropdown Start --> */}
-                      <ul className="ht-dropdown">
-                          <li><a href="login.html">Login</a></li>
-                          <li><a href="register.html">Register</a></li>
-                      </ul>
-                      {/* <!-- Dropdown End --> */}
-                  </li> 
+                <li><a href="#">My Account<i className="lnr lnr-chevron-down"></i></a>
+                    {/* <!-- Dropdown Start --> */}
+                    <ul className="ht-dropdown">
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                    {/* <!-- Dropdown End --> */}
+                </li> 
               </ul>
           </div>
           {/* <!-- Header Top End --> */}
@@ -148,12 +131,13 @@ const Header = () => (
                                   </li>
                               </ul>
                           </li>
-                          <li><a href="#"><i className="lnr lnr-heart"></i><span className="my-cart"><span>Wish</span><span>list (0)</span></span></a>
-                          </li>
-                          <li><a href="#"><i className="lnr lnr-user"></i><span className="my-cart"><span> <strong>Sign in</strong> Or</span><span> Join My Site</span></span></a>
-
-
-
+                          <li>
+                            <a href="#">
+                              <i className="lnr lnr-user"></i>
+                              <span className="my-cart">
+                                <strong>Sign in</strong>
+                              </span>
+                            </a>
                           </li>
                       </ul>
                   </div>
@@ -194,7 +178,6 @@ const Header = () => (
                                   <li><a href="compare.html">compare</a></li>
                                   <li><a href="cart.html">cart</a></li>
                                   <li><a href="checkout.html">checkout</a></li>
-                                  <li><a href="wishlist.html">wishlist</a></li>
                               </ul>
                               {/* <!-- Home Version Dropdown End --> */}
                           </li>
@@ -240,7 +223,6 @@ const Header = () => (
                                       <li><a href="compare.html">compare</a></li>
                                       <li><a href="cart.html">cart</a></li>
                                       <li><a href="checkout.html">checkout</a></li>
-                                      <li><a href="wishlist.html">wishlist</a></li>
                                   </ul>
                                   {/* <!-- Mobile Menu Dropdown End --> */}
                               </li>
