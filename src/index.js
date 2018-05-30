@@ -26,9 +26,13 @@ ReactDOM.render(<App />, document.getElementById('app'));
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js').then(registration => {
-      console.log('SW registered: ', registration);
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){ 
+        console.log('SW registered: ', registration); // eslint-disable-line no-console
+      }
     }).catch(registrationError => {
-      console.log('SW registration failed: ', registrationError);
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log('SW registration failed: ', registrationError); // eslint-disable-line no-console
+      }
     });
   });
 }
