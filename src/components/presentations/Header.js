@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = (props) => (
+const Header = () => (
   <header>
   {/* <!-- Header Top Start Here --> */}
   <div className="header-top-area">
