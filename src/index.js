@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/containers/App';
+
+import store from './stores';
+import { Provider } from 'react-redux';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/assets/css/default.css';
 import '../src/assets/css/themestyle.css';
@@ -21,7 +26,12 @@ import '../src/assets/css/themestyle.css';
 
 // import '../../assets/css/responsive.css';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store.configure(null)}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
