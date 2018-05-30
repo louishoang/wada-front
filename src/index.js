@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/containers/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../src/assets/css/default.css';
+import '../src/assets/css/themestyle.css';
 
 // import '../../assets/css/font-awesome.min.css';
 // import '../../assets/css/ionicons.min.css';
