@@ -841,13 +841,13 @@ span.total-pro {
   text-transform: uppercase;
 }
 
-.vertical-menu > span::after {
-    content: "";
-    font-family: "Ionicons";
-    font-size: 27px;
-    font-weight: normal;
-    left: 16px;
-    position: absolute;
+.vertical-menu > span::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0c9";
+  font-size: 20px;
+  left: 10px;
+  position: absolute;
 }
 
 /* vertical mega menu css start */
