@@ -73,7 +73,7 @@ const Header = () => (
                               </select>
                           </div>
                           <input type="text" name="search" placeholder="I’m shopping for..."/>
-                          <button><i className="lnr lnr-magnifier"></i></button>
+                          <button><i className="fas fa-search"></i></button>
                       </form>
                   </div>
               </div>
@@ -82,7 +82,7 @@ const Header = () => (
               <div className="col-lg-4 col-md-12">
                   <div className="cart-box mt-all-30">
                       <ul className="d-flex justify-content-lg-end justify-content-center align-items-center">
-                          <li><a href="#"><i className="lnr lnr-cart"></i><span className="my-cart"><span className="total-pro">2</span><span>cart</span></span></a>
+                          <li><a href="#"><i className="fas fa-shopping-cart"></i><span className="my-cart"><span className="total-pro">2</span><span>cart</span></span></a>
                               <ul className="ht-dropdown cart-box-width">
                                   <li>
                                       {/* <!-- Cart Box Start --> */}
@@ -133,7 +133,7 @@ const Header = () => (
                           </li>
                           <li>
                             <a href="#">
-                              <i className="lnr lnr-user"></i>
+                              <i className="fas fa-user"></i>
                               <span className="my-cart">
                                 <strong>Sign in</strong>
                               </span>
