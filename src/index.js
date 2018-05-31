@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/assets/css/default.css';
 import '../src/assets/css/themestyle.css';
 import '../src/assets/css/responsive.css';
+import '../src/assets/css/main.css';
 
 ReactDOM.render(
   <Provider store={store.configure(null)}>
