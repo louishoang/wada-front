@@ -10,3 +10,7 @@
 .popup_banner.closed{
   max-height: 0px;
 }
+
+.popup_banner.closed .popup_off_banner{
+	display: none;
+}

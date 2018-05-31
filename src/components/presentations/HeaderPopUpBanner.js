@@ -9,7 +9,7 @@ class HeaderPopUpBanner extends Component{
     }
   }
 
-  hidePopUp(e) {
+  hidePopUp() {
     this.setState({hidden: true})
     sessionStorage.setItem('showHeaderPopUp', true);
   }
