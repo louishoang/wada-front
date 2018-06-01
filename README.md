@@ -1,3 +1,5 @@
+<a href='https://semaphoreci.com/louishoang-77/wada-front'> <img src='https://semaphoreci.com/api/v1/projects/d2a8cdb9-06cd-4e1e-a5e6-7a2634e78575/2003046/badge.svg' alt='Build Status'></a>
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
