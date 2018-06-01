@@ -156,7 +156,7 @@ const Header = () => (
           <div className="col-xl-3 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
             <span className="categorie-title">
               Shop by Categories
-                  </span>
+            </span>
           </div>
           <div className="col-xl-9 col-lg-8 col-md-12 ">
             <nav className="d-none d-lg-block">
