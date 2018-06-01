@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { 
+import {
   BrowserRouter as Router,
   Route,
   Switch
@@ -13,9 +13,9 @@ class App extends Component {
       <Router>
         <div className="wrapper">
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/about" component={AboutUs}/>
-            <Route render={() => <h1 className="text-center">Page not found!</h1> } />
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={AboutUs} />
+            <Route render={() => <h1 className="text-center">Page not found!</h1>} />
           </Switch>
         </div>
       </Router>

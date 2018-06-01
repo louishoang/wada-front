@@ -9,7 +9,7 @@ export default {
 
     })
 
-    if(initialState){
+    if (initialState) {
       store = createStore(
         reducers,
         initialState,

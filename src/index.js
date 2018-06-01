@@ -20,11 +20,11 @@ ReactDOM.render(
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js').then(registration => {
-      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){ 
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         console.log('SW registered: ', registration); // eslint-disable-line no-console
       }
     }).catch(registrationError => {
-      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         console.log('SW registration failed: ', registrationError); // eslint-disable-line no-console
       }
     });
