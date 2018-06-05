@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { Control, Form } from 'react-redux-form';
 
 class Register extends Component {
   constructor() {
     super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(user) {
+    console.log(user);
+    return null;
   }
 
   render() {
@@ -20,49 +27,78 @@ class Register extends Component {
 
           <div className="row">
             <div className="col-sm-12">
-              <form className="form-register" action="#">
+              <Form model="forms.user"
+                className="form-register"
+                onSubmit={(user) => this.handleSubmit(user)}>
+
                 <fieldset>
                   <legend>Your Personal Details</legend>
                   <div className="form-group d-md-flex align-items-md-center">
-                    <label className="control-label col-md-2" htmlFor="f-name"><span className="require">*</span>First Name</label>
+                    <label className="control-label col-md-2" htmlFor="user.firstName">
+                      <span className="require">*</span>First Name
+                    </label>
                     <div className="col-md-10">
-                      <input type="text"
+                      <Control.text model="forms.user.firstName"
+                        id="forms.users.firstName"
                         className="form-control"
-                        id="f-name"
                         placeholder="First Name" />
                     </div>
                   </div>
                   <div className="form-group d-md-flex align-items-md-center">
-                    <label className="control-label col-md-2" htmlFor="l-name"><span className="require">*</span>Last Name</label>
+                    <label className="control-label col-md-2" htmlFor="lastName">
+                      <span className="require">*</span>Last Name
+                    </label>
                     <div className="col-md-10">
-                      <input type="text" className="form-control" id="l-name" placeholder="Last Name" />
+                      <Control.text model="forms.user.lastName"
+                        id="l-name"
+                        placeholder="Last Name"
+                        className="form-control" />
                     </div>
                   </div>
                   <div className="form-group d-md-flex align-items-md-center">
-                    <label className="control-label col-md-2" htmlFor="email"><span className="require">*</span>Enter you email address here...</label>
+                    <label className="control-label col-md-2" htmlFor="email">
+                      <span className="require">*</span>Email
+                    </label>
                     <div className="col-md-10">
-                      <input type="email" className="form-control" id="email" placeholder="Enter you email address here..." />
+                      <Control.text model="forms.user.email"
+                        className="form-control"
+                        id="email"
+                        placeholder="Enter you email address here..." />
                     </div>
                   </div>
-                  <div className="form-group d-md-flex align-items-md-center">
-                    <label className="control-label col-md-2" htmlFor="number"><span className="require">*</span>Telephone</label>
+                  {/* <div className="form-group d-md-flex align-items-md-center">
+                    <label className="control-label col-md-2" htmlFor="number">
+                      <span className="require">*</span>Telephone
+                    </label>
                     <div className="col-md-10">
                       <input type="email" className="form-control" id="number" placeholder="Telephone" />
                     </div>
-                  </div>
+                  </div> */}
                 </fieldset>
                 <fieldset>
                   <legend>Your Password</legend>
                   <div className="form-group d-md-flex align-items-md-center">
-                    <label className="control-label col-md-2" htmlFor="pwd"><span className="require">*</span>Password:</label>
+                    <label className="control-label col-md-2" htmlFor="password">
+                      <span className="require">*</span>Password:
+                    </label>
                     <div className="col-md-10">
-                      <input type="password" className="form-control" id="pwd" placeholder="Password" />
+                      <Control model="forms.user.password"
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Password" />
                     </div>
                   </div>
                   <div className="form-group d-md-flex align-items-md-center">
-                    <label className="control-label col-md-2" htmlFor="pwd-confirm"><span className="require">*</span>Confirm Password</label>
+                    <label className="control-label col-md-2" htmlFor="passwordConfirmation">
+                      <span className="require">*</span>Confirm Password
+                    </label>
                     <div className="col-md-10">
-                      <input type="password" className="form-control" id="pwd-confirm" placeholder="Confirm password" />
+                      <Control model="forms.user.password_confirmation"
+                        type="password"
+                        className="form-control"
+                        id="passwordConfirmation"
+                        placeholder="Confirm password" />
                     </div>
                   </div>
                 </fieldset>
@@ -73,7 +109,7 @@ class Register extends Component {
                     <input type="submit" value="Continue" className="return-customer-btn" />
                   </div>
                 </div>
-              </form>
+              </Form>
             </div>
           </div>
 
