@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Control, Form, actions, Errors } from 'react-redux-form';
 import { registerUser } from '../../api/Wada';
-import { requestStarted, requestSucceeded, requestFailed } from '../../actions'
 import * as validators from '../../utils/validators'
 import PropTypes from 'prop-types';
+import FormError from '../presentations/FormError';
+import RegisterSuccess from '../presentations/RegisterSuccess';
 
 class RegisterForm extends Component {
   constructor() {
@@ -18,18 +19,15 @@ class RegisterForm extends Component {
   }
 
   handleSubmit(user) {
-    const { submitForm, requestStarted, requestSucceeded, requestFailed } = this.props;
+    const { submitForm } = this.props;
     this.setState({ errors: [] })
-    requestStarted()
     let registerPromise = registerUser(user)
       .then((res) => {
-        requestSucceeded()
         this.setState({ registered: true, confirmationMessage: res.data.message })
       })
       .catch(err => {
-        requestFailed()
         let errors;
-        if (err.response.status) {
+        if (err.response) {
           errors = err.response.data.error_message.split(/\\n/)
         } else {
           errors = ['Something is wrong, please try again later.']
@@ -42,24 +40,7 @@ class RegisterForm extends Component {
   render() {
     const { errors, registered, confirmationMessage } = this.state;
 
-    if (registered) {
-      return (
-        <div className="register-account ptb-100 ptb-sm-60">
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="register-title">
-                  <h3 className="mb-10">Your Account Been Created!</h3>
-                  <p className="mb-10">
-                    {confirmationMessage}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
+    if (registered) { return <RegisterSuccess confirmationMessage={confirmationMessage} /> }
 
     return (
       <div className="register-account ptb-100 ptb-sm-60">
@@ -73,14 +54,9 @@ class RegisterForm extends Component {
             </div>
           </div>
 
-          <div className={errors.length > 0 ? 'alert alert-danger' : 'hide'}>
-            <ul>
-              {errors.map((err, id) => <li key={id}>- {err}</li>)}
-            </ul>
-          </div>
+          <FormError messages={errors}/>
 
           <div className="row">
-
             <div className="col-sm-12">
               <Form model="forms.user"
                 className="form-register"
@@ -237,7 +213,6 @@ class RegisterForm extends Component {
               </Form>
             </div>
           </div>
-
         </div>
       </div>
     )
@@ -252,17 +227,11 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    requestStarted: () => dispatch(requestStarted()),
-    requestSucceeded: () => dispatch(requestSucceeded()),
-    requestFailed: () => dispatch(requestFailed()),
     submitForm: (promise) => dispatch(actions.submit('user', promise))
   }
 }
 
 RegisterForm.propTypes = {
-  requestStarted: PropTypes.func,
-  requestSucceeded: PropTypes.func,
-  requestFailed: PropTypes.func,
   submitForm: PropTypes.func
 }
 
