@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "jest": "^23.1.0",
     "jest-cli": "^23.1.0",
@@ -16,6 +17,7 @@
     "react-scripts": "1.1.4",
     "reactstrap": "^6.0.1",
     "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

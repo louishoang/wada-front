@@ -5,13 +5,16 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import { combineForms } from 'react-redux-form';
-import initialUserState from '../reducers/UserReducers';
+import logger from 'redux-logger';
+import initialUserState from '../reducers/UserReducer';
+import isLoading from '../reducers/isLoadingReducer';
 // import reducers here
 
 var store
 export default {
   configure: (initialState) => {
     const reducers = combineReducers({ // insert reducers here
+      isLoading,
       forms: combineForms({
         user: initialUserState
       }, 'forms')
@@ -21,7 +24,7 @@ export default {
       store = createStore(
         reducers,
         initialState,
-        applyMiddleware(thunk)
+        applyMiddleware(thunk, logger) // logger must be the last in the chain
       )
 
       return store
@@ -29,7 +32,7 @@ export default {
 
     store = createStore(
       reducers,
-      applyMiddleware(thunk)
+      applyMiddleware(thunk, logger) // logger must be the last in the chain
     )
 
     return store

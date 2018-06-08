@@ -8,9 +8,10 @@ import store from '../../stores';
 import { Provider } from 'react-redux';
 import Home from '../containers/Home';
 import AboutUs from '../presentations/AboutUs';
-import Register from '../containers/Register';
+import RegisterForm from '../containers/RegisterForm';
 import HeaderPopUpBanner from '../presentations/HeaderPopUpBanner';
 import Header from '../presentations/Header';
+import Spinner from '../containers/Spinner';
 
 class App extends Component {
   render() {
@@ -20,10 +21,11 @@ class App extends Component {
           <div className="wrapper">
             <HeaderPopUpBanner />
             <Header />
+            <Spinner />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={AboutUs} />
-              <Route path="/register" component={Register} />
+              <Route path="/register" component={RegisterForm} />
               <Route render={() => <h1 className="text-center">Page not found!</h1>} />
             </Switch>
           </div>

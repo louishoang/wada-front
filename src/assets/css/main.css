@@ -14,3 +14,30 @@
 .popup_banner.closed .popup_off_banner{
 	display: none;
 }
+
+#spinner.hide{
+	display: none
+}
+
+#spinner{
+	position: absolute;
+	right: 15;
+	margin-top: 15;
+}
+
+.form-text.errors{
+	color: red;
+	margin-left: 5px;
+}
+
+.form-text.errors span{
+	display: block;
+}
+
+#agree-to-term{
+	display: block;
+	text-align: center;
+	padding: 10px 0 10px 0;
+	font-size: 13px;
+	color: #666666;
+}
