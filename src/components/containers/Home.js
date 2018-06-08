@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import HeaderPopUpBanner from '../presentations/HeaderPopUpBanner';
-import Header from '../presentations/Header';
 
 class Home extends Component {
   constructor() {
@@ -10,8 +8,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <HeaderPopUpBanner />
-        <Header />
         Home
       </div>
     )

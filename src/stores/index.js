@@ -1,19 +1,30 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
+import { 
+  createStore, 
+  applyMiddleware, 
+  combineReducers 
+} from 'redux';
+import thunk from 'redux-thunk';
+import { combineForms } from 'react-redux-form';
+import logger from 'redux-logger';
+import initialUserState from '../reducers/UserReducer';
+import isLoading from '../reducers/IsLoadingReducer';
 // import reducers here
 
 var store
 export default {
   configure: (initialState) => {
     const reducers = combineReducers({ // insert reducers here
-
+      isLoading,
+      forms: combineForms({
+        user: initialUserState
+      }, 'forms')
     })
 
     if (initialState) {
       store = createStore(
         reducers,
         initialState,
-        applyMiddleware(thunk)
+        applyMiddleware(thunk, logger) // logger must be the last in the chain
       )
 
       return store
@@ -21,7 +32,7 @@ export default {
 
     store = createStore(
       reducers,
-      applyMiddleware(thunk)
+      applyMiddleware(thunk, logger) // logger must be the last in the chain
     )
 
     return store

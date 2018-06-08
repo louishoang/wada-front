@@ -16,8 +16,8 @@ const Header = () => (
             <li><a href="#">My Account<i className="lnr lnr-chevron-down"></i></a>
               {/* <!-- Dropdown Start --> */}
               <ul className="ht-dropdown">
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
               </ul>
               {/* <!-- Dropdown End --> */}
             </li>
@@ -132,7 +132,7 @@ const Header = () => (
                   </ul>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="/login">
                     <i className="fas fa-user"></i>
                     <span className="my-cart">
                       <strong>Sign in</strong>
@@ -156,7 +156,7 @@ const Header = () => (
           <div className="col-xl-3 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
             <span className="categorie-title">
               Shop by Categories
-                  </span>
+            </span>
           </div>
           <div className="col-xl-9 col-lg-8 col-md-12 ">
             <nav className="d-none d-lg-block">
