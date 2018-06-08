@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {registerUserRoute} from '../api/ApiRouter';
+import store from '../stores';
+import { requestStarted, requestSucceeded, requestFailed } from '../actions'
 
 let baseURL;
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -11,7 +13,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 const defaultConfig = (authRequired = true) => {
   let config = {
     baseURL: baseURL,
-    timeout: 1000
+    timeout: 4000
   }
 
   const accessToken = localStorage.getItem('accessToken');
@@ -28,3 +30,19 @@ module.exports = {
     return axios(Object.assign(defaultConfig(false), registerUserRoute(user)))
   }
 }
+
+// Do something before request is sent
+axios.interceptors.request.use(function (config) {
+  store.currentStore().dispatch(requestStarted())
+  return config;
+});
+
+axios.interceptors.response.use(function (response) {
+  // Do something with response data
+  store.currentStore().dispatch(requestSucceeded())
+  return response;
+}, function (error) {
+  // Do something with response error
+  store.currentStore().dispatch(requestFailed())
+  return Promise.reject(error);
+});
