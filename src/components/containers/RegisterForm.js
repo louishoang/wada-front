@@ -6,6 +6,7 @@ import * as validators from '../../utils/validators'
 import PropTypes from 'prop-types';
 import FormError from '../presentations/FormError';
 import RegisterSuccess from '../presentations/RegisterSuccess';
+import { getResponseErr } from '../../utils/ResponseHelpers';
 
 class RegisterForm extends Component {
   constructor() {
@@ -26,13 +27,7 @@ class RegisterForm extends Component {
         this.setState({ registered: true, confirmationMessage: res.data.message })
       })
       .catch(err => {
-        let errors;
-        if (err.response) {
-          errors = err.response.data.error_message.split(/\\n/)
-        } else {
-          errors = ['Something is wrong, please try again later.']
-        }
-        this.setState({ errors })
+        this.setState({ errors: getResponseErr(err) })
       })
     submitForm(registerPromise);
   }
