@@ -1,5 +1,8 @@
 import axios from 'axios';
-import {registerUserRoute} from '../api/ApiRouter';
+import {
+  registerUserRoute,
+  loginRoute
+} from '../api/ApiRouter';
 import store from '../stores';
 import { requestStarted, requestSucceeded, requestFailed } from '../actions'
 
@@ -13,13 +16,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 const defaultConfig = (authRequired = true) => {
   let config = {
     baseURL: baseURL,
-    timeout: 4000
+    timeout: 4000,
   }
 
   const accessToken = localStorage.getItem('accessToken');
 
-  if (!authRequired && accessToken !== null) {
-    config.headers['Authorization'] = `Basic ${accessToken}`
+  if (!authRequired && accessToken !== null && accessToken !== 'undefined') {
+    config = Object.assign(config, {headers: { 'Authorization': `Bearer ${accessToken}` }})
   }
 
   return config
@@ -28,6 +31,9 @@ const defaultConfig = (authRequired = true) => {
 module.exports = {
   registerUser: (user) => {
     return axios(Object.assign(defaultConfig(false), registerUserRoute(user)))
+  },
+  callLogin: (user) => {
+    return axios(Object.assign(defaultConfig(false), loginRoute(user)))
   }
 }
 

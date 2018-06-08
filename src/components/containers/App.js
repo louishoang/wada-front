@@ -12,6 +12,7 @@ import RegisterForm from '../containers/RegisterForm';
 import HeaderPopUpBanner from '../presentations/HeaderPopUpBanner';
 import Header from '../presentations/Header';
 import Spinner from '../containers/Spinner';
+import LoginForm from '../containers/LoginForm';
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/about" component={AboutUs} />
               <Route path="/register" component={RegisterForm} />
+              <Route path="/login" component={LoginForm} />
               <Route render={() => <h1 className="text-center">Page not found!</h1>} />
             </Switch>
           </div>
