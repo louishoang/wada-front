@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { combineForms } from 'react-redux-form';
 import logger from 'redux-logger';
 import initialUserState from '../reducers/UserReducer';
-import isLoading from '../reducers/isLoadingReducer';
+import isLoading from '../reducers/IsLoadingReducer';
 // import reducers here
 
 var store
