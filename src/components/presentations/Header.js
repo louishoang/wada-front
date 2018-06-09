@@ -1,47 +1,54 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => (
   <header>
-    {/* <!-- Header Top Start Here --> */}
-    <div className="header-top-area">
-      <div className="container">
-        {/* <!-- Header Top Start --> */}
+    <div className="header-top-area rose-background">
+      <div className="container-fluid">
         <div className="header-top">
           <ul>
-            <li><a href="#">Free Shipping on order over $99</a></li>
-            <li><a href="#">Shopping Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
+            <li>Free Shipping on order over $35</li>
           </ul>
           <ul>
-            <li><a href="#">My Account<i className="lnr lnr-chevron-down"></i></a>
-              {/* <!-- Dropdown Start --> */}
+            <li className="header-li">
+              <i className="fas fa-heart fa-heart-adjusted"></i>
+              <Link to="/wishlist">Wish List</Link>
+            </li>
+            <li className="header-li">
+              <i className="fas fa-percent fa-square-border"></i>
+              <Link to="/deals">Deals</Link>
+            </li>
+            <li className="header-li">
+              <Link to="#">My Account<i className="fa fa-angle-down"></i></Link>
               <ul className="ht-dropdown">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
               </ul>
-              {/* <!-- Dropdown End --> */}
             </li>
           </ul>
         </div>
-        {/* <!-- Header Top End --> */}
       </div>
-      {/* <!-- Container End --> */}
     </div>
-    {/* <!-- Header Top End Here --> */}
-    {/* <!-- Header Middle Start Here --> */}
-    <div className="header-middle ptb-15">
-      <div className="container">
+    <div className="header-middle ptb-15 red-background">
+      <div className="container-fluid">
         <div className="row align-items-center no-gutters">
           <div className="col-lg-3 col-md-12">
             <div className="logo mb-all-30">
-              <a href="index.html"><img src={require('../../assets/img/logo/logo.png')} alt="logo-image" /></a>
+              <Link to="/">
+                <img src="https://s3.amazonaws.com/s3origin.purch.com/s3_uploader-production/Store/19127/logo_image_url.png"
+                  alt="logo-image"
+                  id="main-logo" />
+              </Link>
             </div>
           </div>
-          {/* <!-- Categorie Search Box Start Here --> */}
-          <div className="col-lg-5 col-md-8 ml-auto mr-auto col-10">
-            <div className="categorie-search-box">
-              <form action="#">
-                <div className="form-group">
+          <div className="col-lg-6 col-md-8 ml-auto mr-auto col-10">
+            <div className="">
+              <form action="#" id="main-search-form">
+                {/* <div className="form-group">
                   <select className="bootstrap-select" name="poscats">
                     <option value="0">All categories</option>
                     <option value="2">Arrivals</option>
@@ -71,21 +78,33 @@ const Header = () => (
                     <option value="26">Tablet</option>
                     <option value="27">phones</option>
                   </select>
-                </div>
-                <input type="text" name="search" placeholder="I’m shopping for..." />
+                </div> */}
+                <input type="text" className="search-rounded" placeholder="Search..." />
                 <button><i className="fas fa-search"></i></button>
               </form>
             </div>
           </div>
-          {/* <!-- Categorie Search Box End Here --> */}
-          {/* <!-- Cart Box Start Here --> */}
-          <div className="col-lg-4 col-md-12">
+          <div className="col-lg-3 col-md-12">
             <div className="cart-box mt-all-30">
               <ul className="d-flex justify-content-lg-end justify-content-center align-items-center">
-                <li><a href="#"><i className="fas fa-shopping-cart"></i><span className="my-cart"><span className="total-pro">2</span><span>cart</span></span></a>
+                <li>
+                  <Link to="/login">
+                    <i className="far fa-user"></i>
+                    <span className="sign-in">
+                      <strong>Sign in</strong>
+                    </span>
+                  </Link>
+                </li>
+                <li className="shopping-cart">
+                  <Link to="/shopping-cart">
+                    <i className="fas fa-shopping-cart"></i>
+                    <span className="my-cart">
+                      <span className="total-pro">2</span>
+                      <span>cart</span>
+                    </span>
+                  </Link>
                   <ul className="ht-dropdown cart-box-width">
                     <li>
-                      {/* <!-- Cart Box Start --> */}
                       <div className="single-cart-box">
                         <div className="cart-img">
                           <a href="#"><img src={require('../../assets/img/products/1.jpg')} alt="cart-image" /></a>
@@ -99,8 +118,6 @@ const Header = () => (
                         </div>
                         <a className="del-icone" href="#"><i className="ion-close"></i></a>
                       </div>
-                      {/* <!-- Cart Box End --> */}
-                      {/* <!-- Cart Box Start --> */}
                       <div className="single-cart-box">
                         <div className="cart-img">
                           <a href="#"><img src={require('../../assets/img/products/2.jpg')} alt="cart-image" /></a>
@@ -114,8 +131,6 @@ const Header = () => (
                         </div>
                         <a className="del-icone" href="#"><i className="ion-close"></i></a>
                       </div>
-                      {/* <!-- Cart Box End --> */}
-                      {/* <!-- Cart Footer Inner Start --> */}
                       <div className="cart-footer">
                         <ul className="price-content">
                           <li>Subtotal <span>$57.95</span></li>
@@ -127,29 +142,15 @@ const Header = () => (
                           <a className="cart-checkout" href="checkout.html">Checkout</a>
                         </div>
                       </div>
-                      {/* <!-- Cart Footer Inner End --> */}
                     </li>
                   </ul>
-                </li>
-                <li>
-                  <a href="/login">
-                    <i className="fas fa-user"></i>
-                    <span className="my-cart">
-                      <strong>Sign in</strong>
-                    </span>
-                  </a>
                 </li>
               </ul>
             </div>
           </div>
-          {/* <!-- Cart Box End Here --> */}
         </div>
-        {/* <!-- Row End --> */}
       </div>
-      {/* <!-- Container End --> */}
     </div>
-    {/* <!-- Header Middle End Here --> */}
-    {/* <!-- Header Bottom Start Here --> */}
     <div className="header-bottom  header-sticky">
       <div className="container">
         <div className="row align-items-center">
@@ -161,101 +162,31 @@ const Header = () => (
           <div className="col-xl-9 col-lg-8 col-md-12 ">
             <nav className="d-none d-lg-block">
               <ul className="header-bottom-list d-flex">
-                <li className="active"><a href="index.html">home<i className="fa fa-angle-down"></i></a>
-                  {/* <!-- Home Version Dropdown Start --> */}
-                  <ul className="ht-dropdown">
-                    <li><a href="index.html">Home Version 1</a></li>
-                    <li><a href="index-2.html">Home Version 2</a></li>
-                    <li><a href="index-3.html">Home Version 3</a></li>
-                    <li><a href="index-4.html">Home Version 4</a></li>
-                  </ul>
-                  {/* <!-- Home Version Dropdown End --> */}
+                <li className="active">
+                  <NavLink to="/">Home</NavLink>
                 </li>
-                <li><a href="shop.html">shop<i className="fa fa-angle-down"></i></a>
-                  {/* <!-- Home Version Dropdown Start --> */}
+                <li>
+                  <NavLink to="wada-biz">Wadamart For Business<i className="fa fa-angle-down"></i></NavLink>
                   <ul className="ht-dropdown dropdown-style-two">
                     <li><a href="product.html">product details</a></li>
                     <li><a href="compare.html">compare</a></li>
-                    <li><a href="cart.html">cart</a></li>
-                    <li><a href="checkout.html">checkout</a></li>
                   </ul>
-                  {/* <!-- Home Version Dropdown End --> */}
                 </li>
-                <li><a href="blog.html">blog<i className="fa fa-angle-down"></i></a>
-                  {/* <!-- Home Version Dropdown Start --> */}
+                <li>
+                  <NavLink to="/classified-ads">Classified Ads<i className="fa fa-angle-down"></i></NavLink>
                   <ul className="ht-dropdown dropdown-style-two">
                     <li><a href="single-blog.html">blog details</a></li>
                   </ul>
-                  {/* <!-- Home Version Dropdown End --> */}
                 </li>
-                <li><a href="#">pages<i className="fa fa-angle-down"></i></a>
-                  {/* <!-- Home Version Dropdown Start --> */}
-                  <ul className="ht-dropdown dropdown-style-two">
-                    <li><a href="contact.html">contact us</a></li>
-                    <li><a href="register.html">register</a></li>
-                    <li><a href="login.html">sign in</a></li>
-                    <li><a href="forgot-password.html">forgot password</a></li>
-                    <li><a href="404.html">404</a></li>
-                  </ul>
-                  {/* <!-- Home Version Dropdown End --> */}
+                <li>
+                  <NavLink to="/faq">FAQ</NavLink>
                 </li>
-                <li><a href="about.html">About us</a></li>
-                <li><a href="contact.html">contact us</a></li>
               </ul>
             </nav>
-            <div className="mobile-menu d-block d-lg-none">
-              <nav>
-                <ul>
-                  <li><a href="index.html">home</a>
-                    {/* <!-- Home Version Dropdown Start --> */}
-                    <ul>
-                      <li><a href="index.html">Home Version 1</a></li>
-                      <li><a href="index-2.html">Home Version 2</a></li>
-                      <li><a href="index-3.html">Home Version 3</a></li>
-                      <li><a href="index-4.html">Home Version 4</a></li>
-                    </ul>
-                    {/* <!-- Home Version Dropdown End --> */}
-                  </li>
-                  <li><a href="shop.html">shop</a>
-                    {/* <!-- Mobile Menu Dropdown Start --> */}
-                    <ul>
-                      <li><a href="product.html">product details</a></li>
-                      <li><a href="compare.html">compare</a></li>
-                      <li><a href="cart.html">cart</a></li>
-                      <li><a href="checkout.html">checkout</a></li>
-                    </ul>
-                    {/* <!-- Mobile Menu Dropdown End --> */}
-                  </li>
-                  <li><a href="blog.html">Blog</a>
-                    {/* <!-- Mobile Menu Dropdown Start --> */}
-                    <ul>
-                      <li><a href="single-blog.html">blog details</a></li>
-                    </ul>
-                    {/* <!-- Mobile Menu Dropdown End --> */}
-                  </li>
-                  <li><a href="#">pages</a>
-                    {/* <!-- Mobile Menu Dropdown Start --> */}
-                    <ul>
-                      <li><a href="register.html">register</a></li>
-                      <li><a href="login.html">sign in</a></li>
-                      <li><a href="forgot-password.html">forgot password</a></li>
-                      <li><a href="404.html">404</a></li>
-                    </ul>
-                    {/* <!-- Mobile Menu Dropdown End --> */}
-                  </li>
-                  <li><a href="about.html">about us</a></li>
-                  <li><a href="contact.html">contact us</a></li>
-                </ul>
-              </nav>
-            </div>
           </div>
         </div>
-        {/* <!-- Row End --> */}
       </div>
-      {/* <!-- Container End --> */}
     </div>
-    {/* <!-- Header Bottom End Here --> */}
-    {/* <!-- Mobile Vertical Menu Start Here --> */}
     <div className="container d-block d-lg-none">
       <div className="vertical-menu mt-30">
         <span className="categorie-title mobile-categorei-menu">Shop by Categories</span>
@@ -284,7 +215,6 @@ const Header = () => (
                   <li><a href="shop.html">Microphones</a></li>
                   <li><a href="shop.html">Wireless Transmitters</a></li>
                 </ul>
-                {/* <!-- category submenu end--> */}
               </li>
               <li className="has-sub"><a href="#">Sports & Outdoors</a>
                 <ul className="category-sub">
@@ -294,7 +224,6 @@ const Header = () => (
                   <li><a href="shop.html">Microphones</a></li>
                   <li><a href="shop.html">Wireless Transmitters</a></li>
                 </ul>
-                {/* <!-- category submenu end--> */}
               </li>
               <li className="has-sub"><a href="#">Home & Kitchen</a>
                 <ul className="category-sub">
@@ -303,7 +232,6 @@ const Header = () => (
                   <li><a href="shop.html">kithen three</a></li>
                   <li><a href="shop.html">kithen four</a></li>
                 </ul>
-                {/* <!-- category submenu end--> */}
               </li>
               <li className="has-sub"><a href="#">Phones & Tablets</a>
                 <ul className="category-sub">
@@ -312,7 +240,6 @@ const Header = () => (
                   <li><a href="shop.html">Tablet three</a></li>
                   <li><a href="shop.html">phone four</a></li>
                 </ul>
-                {/* <!-- category submenu end--> */}
               </li>
               <li className="has-sub"><a href="#">TV & Video</a>
                 <ul className="category-sub">
@@ -321,18 +248,15 @@ const Header = () => (
                   <li><a href="shop.html">Microphones</a></li>
                   <li><a href="shop.html">Wireless Transmitters</a></li>
                 </ul>
-                {/* <!-- category submenu end--> */}
               </li>
               <li><a href="#">Beauty</a> </li>
               <li><a href="#">Sport & tourisim</a></li>
               <li><a href="#">Meat & Seafood</a></li>
             </ul>
           </div>
-          {/* <!-- category-menu-end --> */}
         </nav>
       </div>
     </div>
-    {/* <!-- Mobile Vertical Menu Start End --> */}
   </header>
 )
 
