@@ -6,12 +6,17 @@ export const initialLoginState = {
   password: ''
 }
 
-const initialAuthState = {
+let user = JSON.parse(localStorage.getItem('user'));
+
+const initialAuthState = user ? {
+  isAuthenticated: true,
+  user: user
+} : {
   isAuthenticated: false,
   user: {}
 }
 
-export const currentUserReducer = (state = initialAuthState, action) => {
+export const authReducer = (state = initialAuthState, action) => {
   switch(action.type) {
   case SET_CURRENT_USER:
     return {

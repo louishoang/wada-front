@@ -31,7 +31,7 @@ export const setCurrentUser = (user) => {
 
 export const logout = () => {
   return dispatch => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
     dispatch(setCurrentUser({}))
   }
 }

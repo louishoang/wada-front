@@ -24,7 +24,7 @@ class LoginForm extends Component {
     let loginPromise = callLogin(user)
       .then((res) => {
         setCurrentUser(res.data.user)
-        localStorage.setItem('accessToken', res.data.user.authentication_token)
+        localStorage.setItem('user', JSON.stringify(res.data.user))
         this.setState({ redirectToHomePage: true })
       })
       .catch(err => {

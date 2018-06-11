@@ -10,10 +10,11 @@ import Home from '../containers/Home';
 import AboutUs from '../presentations/AboutUs';
 import RegisterForm from '../containers/RegisterForm';
 import HeaderPopUpBanner from '../presentations/HeaderPopUpBanner';
-import Header from '../presentations/Header';
+import Header from '../containers/Header';
 import Spinner from '../containers/Spinner';
 import LoginForm from '../containers/LoginForm';
 import '../../assets/img/favicon.ico';
+import LogoutPage from './LogoutPage';
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
               <Route path="/about" component={AboutUs} />
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />
+              <Route path="/logout" component={LogoutPage}/>
               <Route render={() => <h1 className="text-center">Page not found!</h1>} />
             </Switch>
           </div>

@@ -19,7 +19,7 @@ const defaultConfig = (authRequired = true) => {
     timeout: 4000,
   }
 
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem('user');
 
   if (!authRequired && accessToken !== null && accessToken !== 'undefined') {
     config = Object.assign(config, {headers: { 'Authorization': `Bearer ${accessToken}` }})
