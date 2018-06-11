@@ -41,3 +41,224 @@
 	font-size: 13px;
 	color: #666666;
 }
+
+.header-top-area.rose-background{
+	background-color: #c0172e;
+	color: white;
+	font-size: 14px;
+	font-weight: 900;
+	border-bottom: none;
+}
+
+.header-top-area.rose-background ul > li > a,
+.header-top-area.rose-background ul > li > span,
+.header-middle.red-background ul > li > a,
+.header-middle.red-background ul > li > span{
+	color: white;
+}
+
+.header-middle.red-background ul li .sign-in{
+	color: white;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 500;
+	margin-left: 8px;
+	text-transform: capitalize;
+	vertical-align: super;
+}
+
+.header-middle.red-background ul li span.total-pro {
+	background: white none repeat scroll 0 0;
+	border-radius: 10px;
+	color: rgb(80, 80, 80);
+	display: block;
+	font-size: 13px;
+	font-weight: 800;
+	margin-top: 3px;
+	min-width: 30px;
+	text-align: center;
+}
+
+.header-middle.red-background .my-cart > span {
+	color: white;
+	display: block;
+	line-height: 18px;
+}
+
+.header-middle.red-background li.shopping-cart{
+	margin-top: 10px;
+	margin-right: 20px;
+}
+
+.header-top-area.rose-background ul > li > i{
+	margin-right: 6px;
+}
+
+.header-top-area.rose-background ul > li:not(:last-child){
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.header-top-area.rose-background ul > li:last-child{
+	padding-left: 20px;
+}
+
+.header-middle.red-background{
+	background-color: #ca0813;
+}
+
+.fa-square-border{
+	border: 2px solid white;
+	padding: 2px;
+	font-size: x-small;
+}
+
+.fa-heart-adjusted{
+	font-size: 17px;
+	vertical-align: text-bottom;
+}
+
+#main-logo{
+	width: 270px;
+	height: 70px;
+	margin-left: 10px;
+}
+
+form#main-search-form{
+	width: 85%;
+	margin: 0 auto;
+	float: right;
+}
+
+form#main-search-form .search-rounded { 
+  padding:6px 50px 6px 20px;
+	margin:3px; 
+	border-radius:25px; 
+	-moz-border-radius:25px; 
+	-webkit-border-radius:25px; 
+	color: black;
+	width: 90%;
+	height: 40px;
+	font-size: 16px;
+	line-height: 1.35em;
+	outline: none;
+	border: none;
+	resize: none;
+	font-weight: 600;
+}
+
+#main-search-form button {
+	position: relative;
+	margin-left: -42px;
+	background: none;
+	border: none;
+	vertical-align: text-bottom;
+	font-size: 14px;
+	background-color: #f2f2f2f5;
+	height: 40px;
+	top: 9px;
+	width: 40px;
+	border-radius: 0px 25px 25px 0px;
+	color: rgb(102, 102, 102);
+	font-weight: 100;
+}
+
+.vertical-menu > span.categorie-title.no-bg{
+	background: none;
+	color: #363636;
+	cursor: pointer;
+	display: block;
+	font-family: "lato",sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	padding-left: 45px;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.nav-right{
+	float: right;
+}
+
+#main-category-drop-down{
+	color: #363636;
+	cursor: pointer;
+	display: block;
+	font-family: "lato",sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	padding-left: 45px;
+	position: relative;
+	text-transform: uppercase;
+}
+
+#main-category-drop-down i{
+	margin-right: 15px;
+	font-size: 16px;
+}
+
+.icon-spr{
+	margin-right: 15px;
+}
+
+.vertical-menu-list > li a i.icon-left{
+	position: relative;
+	right: 0; /* override template */
+	top: 0; /* override template */
+}
+
+.vertical-menu-list > li a i.icon-right{
+	position: absolute;
+	right: 14px;
+	top: 12px;
+}
+
+.wd-dropdown{
+	background: #fff;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 100%;
+	-webkiit-transform: scaleY(0);
+	-webkit-transform: scaleY(0);
+	transform: scaleY(0);
+	-webkit-transform-origin: 0 0 0;
+	transform-origin: 0 0 0;
+	width: 280px;
+	visibility: hidden;
+	z-index: 999;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	-webkit-box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
+	-ms-box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
+}
+
+.wd-dropdown.show{
+	opacity: 1;
+	visibility: visible;
+	-webkiit-transform: scaleY(1);
+	-webkit-transform: scaleY(1);
+	transform: scaleY(1);
+}
+
+.header-bottom-list > li > a.active {
+	color: #E62E04;
+}
+
+.single-megamenu ul li.menu-tile a {
+	color: #2c2c2c;
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	margin-bottom: 15px;
+	text-transform: uppercase;
+}

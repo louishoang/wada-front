@@ -13,6 +13,7 @@ import HeaderPopUpBanner from '../presentations/HeaderPopUpBanner';
 import Header from '../presentations/Header';
 import Spinner from '../containers/Spinner';
 import LoginForm from '../containers/LoginForm';
+import '../../assets/img/favicon.ico';
 
 class App extends Component {
   render() {
