@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import CategoryDropDown from '../presentations/CategoryDropDown';
 
 const Header = () => (
   <header>
@@ -7,7 +8,7 @@ const Header = () => (
       <div className="container-fluid">
         <div className="header-top">
           <ul>
-            <li>Free Shipping on order over $35</li>
+            <li><i className="fas fa-truck"></i>Free Shipping on order over $35</li>
           </ul>
           <ul>
             <li className="header-li">
@@ -39,7 +40,7 @@ const Header = () => (
           <div className="col-lg-3 col-md-12">
             <div className="logo mb-all-30">
               <Link to="/">
-                <img src="https://s3.amazonaws.com/s3origin.purch.com/s3_uploader-production/Store/19127/logo_image_url.png"
+                <img src={require('../../assets/img/logo/wada-logo.png')}
                   alt="logo-image"
                   id="main-logo" />
               </Link>
@@ -48,37 +49,6 @@ const Header = () => (
           <div className="col-lg-6 col-md-8 ml-auto mr-auto col-10">
             <div className="">
               <form action="#" id="main-search-form">
-                {/* <div className="form-group">
-                  <select className="bootstrap-select" name="poscats">
-                    <option value="0">All categories</option>
-                    <option value="2">Arrivals</option>
-                    <option value="3">Cameras</option>
-                    <option value="4">Cords and Cables</option>
-                    <option value="5">gps accessories</option>
-                    <option value="6">Microphones</option>
-                    <option value="7">Wireless Transmitters</option>
-                    <option value="8">GamePad</option>
-                    <option value="9">cube lifestyle hd</option>
-                    <option value="10">Bags</option>
-                    <option value="11">Bottoms</option>
-                    <option value="12">Shirts</option>
-                    <option value="13">Tailored</option>
-                    <option value="14">Home &amp; Kitchen</option>
-                    <option value="15">Large Appliances</option>
-                    <option value="16">Armchairs</option>
-                    <option value="17">Bunk Bed</option>
-                    <option value="18">Mattress</option>
-                    <option value="19">Sideboard</option>
-                    <option value="20">Small Appliances</option>
-                    <option value="21">Bootees Bags</option>
-                    <option value="22">Jackets</option>
-                    <option value="23">Shelf</option>
-                    <option value="24">Shoes</option>
-                    <option value="25">Phones &amp; Tablets</option>
-                    <option value="26">Tablet</option>
-                    <option value="27">phones</option>
-                  </select>
-                </div> */}
                 <input type="text" className="search-rounded" placeholder="Search..." />
                 <button><i className="fas fa-search"></i></button>
               </form>
@@ -151,110 +121,38 @@ const Header = () => (
         </div>
       </div>
     </div>
-    <div className="header-bottom  header-sticky">
-      <div className="container">
+    <div className="header-bottom header-sticky">
+      <div className="container-fluid">
         <div className="row align-items-center">
-          <div className="col-xl-3 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
-            <span className="categorie-title">
-              Shop by Categories
-            </span>
+          <div className="col-xl-2 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
+            <CategoryDropDown />
           </div>
-          <div className="col-xl-9 col-lg-8 col-md-12 ">
+          <div className="col-xl-10 col-lg-8 col-md-12 ">
             <nav className="d-none d-lg-block">
               <ul className="header-bottom-list d-flex">
-                <li className="active">
-                  <NavLink to="/">Home</NavLink>
+                <li>
+                  <NavLink exact to="/">Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="wada-biz">Wadamart For Business<i className="fa fa-angle-down"></i></NavLink>
+                  <NavLink to="/wada-biz" activeClassName="active">Wadamart For Business<i className="fa fa-angle-down"></i></NavLink>
                   <ul className="ht-dropdown dropdown-style-two">
                     <li><a href="product.html">product details</a></li>
                     <li><a href="compare.html">compare</a></li>
                   </ul>
                 </li>
                 <li>
-                  <NavLink to="/classified-ads">Classified Ads<i className="fa fa-angle-down"></i></NavLink>
+                  <NavLink to="/classified-ads" activeClassName="active">Classified Ads<i className="fa fa-angle-down"></i></NavLink>
                   <ul className="ht-dropdown dropdown-style-two">
                     <li><a href="single-blog.html">blog details</a></li>
                   </ul>
                 </li>
                 <li>
-                  <NavLink to="/faq">FAQ</NavLink>
+                  <NavLink to="/faq" activeClassName="active">FAQ</NavLink>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
-      </div>
-    </div>
-    <div className="container d-block d-lg-none">
-      <div className="vertical-menu mt-30">
-        <span className="categorie-title mobile-categorei-menu">Shop by Categories</span>
-        <nav>
-          <div id="cate-mobile-toggle" className="category-menu sidebar-menu sidbar-style mobile-categorei-menu-list menu-hidden ">
-            <ul>
-              <li className="has-sub"><a href="#">Automotive & Motorcycle </a>
-                <ul className="category-sub">
-                  <li className="has-sub"><a href="shop.html">Office chair</a>
-                    <ul className="category-sub">
-                      <li><a href="shop.html">Bibendum Cursus</a></li>
-                      <li><a href="shop.html">Dignissim Turpis</a></li>
-                      <li><a href="shop.html">Dining room</a></li>
-                      <li><a href="shop.html">Dining room</a></li>
-                    </ul>
-                  </li>
-                  <li className="has-sub"><a href="shop.html">Purus Lacus</a>
-                    <ul className="category-sub">
-                      <li><a href="shop.html">Magna Pellentesq</a></li>
-                      <li><a href="shop.html">Molestie Tortor</a></li>
-                      <li><a href="shop.html">Vehicula Element</a></li>
-                      <li><a href="shop.html">Sagittis Blandit</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="shop.html">gps accessories</a></li>
-                  <li><a href="shop.html">Microphones</a></li>
-                  <li><a href="shop.html">Wireless Transmitters</a></li>
-                </ul>
-              </li>
-              <li className="has-sub"><a href="#">Sports & Outdoors</a>
-                <ul className="category-sub">
-                  <li className="menu-tile">Cameras</li>
-                  <li><a href="shop.html">Cords and Cables</a></li>
-                  <li><a href="shop.html">gps accessories</a></li>
-                  <li><a href="shop.html">Microphones</a></li>
-                  <li><a href="shop.html">Wireless Transmitters</a></li>
-                </ul>
-              </li>
-              <li className="has-sub"><a href="#">Home & Kitchen</a>
-                <ul className="category-sub">
-                  <li><a href="shop.html">kithen one</a></li>
-                  <li><a href="shop.html">kithen two</a></li>
-                  <li><a href="shop.html">kithen three</a></li>
-                  <li><a href="shop.html">kithen four</a></li>
-                </ul>
-              </li>
-              <li className="has-sub"><a href="#">Phones & Tablets</a>
-                <ul className="category-sub">
-                  <li><a href="shop.html">phone one</a></li>
-                  <li><a href="shop.html">Tablet two</a></li>
-                  <li><a href="shop.html">Tablet three</a></li>
-                  <li><a href="shop.html">phone four</a></li>
-                </ul>
-              </li>
-              <li className="has-sub"><a href="#">TV & Video</a>
-                <ul className="category-sub">
-                  <li><a href="shop.html">smart tv</a></li>
-                  <li><a href="shop.html">real video</a></li>
-                  <li><a href="shop.html">Microphones</a></li>
-                  <li><a href="shop.html">Wireless Transmitters</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Beauty</a> </li>
-              <li><a href="#">Sport & tourisim</a></li>
-              <li><a href="#">Meat & Seafood</a></li>
-            </ul>
-          </div>
-        </nav>
       </div>
     </div>
   </header>
