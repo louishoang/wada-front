@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { combineForms } from 'react-redux-form';
 import logger from 'redux-logger';
 import initialUserState from '../reducers/UserReducer';
-import { initialLoginState, currentUserReducer } from '../reducers/LoginReducer';
+import { initialLoginState, authReducer } from '../reducers/LoginReducer';
 import isLoading from '../reducers/IsLoadingReducer';
 // import reducers here
 
@@ -16,7 +16,7 @@ export default {
   configure: (initialState) => {
     const reducers = combineReducers({ // insert reducers here
       isLoading,
-      user: currentUserReducer,
+      auth: authReducer,
       forms: combineForms({
         user: initialUserState,
         login: initialLoginState
