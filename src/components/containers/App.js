@@ -15,6 +15,7 @@ import Spinner from '../containers/Spinner';
 import LoginForm from '../containers/LoginForm';
 import '../../assets/img/favicon.ico';
 import LogoutPage from './LogoutPage';
+import NotFoundPage from '../presentations/NotFoundPage';
 
 class App extends Component {
   render() {
@@ -31,7 +32,7 @@ class App extends Component {
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />
               <Route path="/logout" component={LogoutPage}/>
-              <Route render={() => <h1 className="text-center">Page not found!</h1>} />
+              <Route component={NotFoundPage} />
             </Switch>
           </div>
         </Router>

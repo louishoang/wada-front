@@ -262,3 +262,28 @@ form#main-search-form .search-rounded {
 	margin-bottom: 15px;
 	text-transform: uppercase;
 }
+
+#main-slider{
+	width: 100%;
+	height: 409px;
+}
+
+#main-slider button.slick-arrow{
+	width: 100px;
+	height: 100px;
+	z-index: 99;
+}
+
+#main-slider button.slick-arrow.slick-prev{
+	left: 25px;
+}
+
+.slick-prev:before, .slick-next:before{
+	font-family: 'slick';
+	font-size: 45px;
+	line-height: 1;
+	opacity: .75;
+	color: white;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

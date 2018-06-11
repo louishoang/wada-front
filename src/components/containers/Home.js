@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import MainSlider from './MainSlider';
 
 class Home extends Component {
   constructor() {
@@ -8,7 +9,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        Home
+        <MainSlider/>
       </div>
     )
   }
