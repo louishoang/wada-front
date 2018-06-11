@@ -20,6 +20,13 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       },
       {
+        test: /\.scss$/,
+        loader:
+          "style!css!sass?outputStyle=expanded&" +
+          "includePaths[]=" +
+          path.resolve(__dirname, "./node_modules")
+      },
+      {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           'file-loader'
