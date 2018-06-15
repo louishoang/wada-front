@@ -278,6 +278,10 @@ form#main-search-form .search-rounded {
 	left: 25px;
 }
 
+#main-slider button.slick-arrow.slick-next{
+	right: 25px;
+}
+
 .slick-prev:before, .slick-next:before{
 	font-family: 'slick';
 	font-size: 45px;
@@ -286,4 +290,10 @@ form#main-search-form .search-rounded {
 	color: white;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.slick-slide img{
+	display: block;
+	width: 100%;
+	height: 100%;
 }

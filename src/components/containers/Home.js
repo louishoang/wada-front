@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MainSlider from './MainSlider';
+import AdsBanner from './AdsBanner';
 
 class Home extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class Home extends Component {
     return (
       <div>
         <MainSlider/>
+        <AdsBanner />
       </div>
     )
   }
