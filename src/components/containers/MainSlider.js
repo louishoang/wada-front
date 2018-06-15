@@ -6,29 +6,29 @@ import 'slick-carousel/slick/slick.css';
 export default class SimpleSlider extends Component {
   render() {
     const settings = {
-      dots: true,
-      speed: 2000,
+      speed: 500,
       arrows: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       fade: true,
       pauseOnHover: true,
+      autoplay: true,
+      autoplaySpeed: 5000,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true
           }
         },
         {
           breakpoint: 600,
           settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 1
           }
         },
         {
@@ -44,14 +44,10 @@ export default class SimpleSlider extends Component {
       <div id="main-slider">
         <Slider {...settings}>
           <div>
-            <h3>
-              <img src={require('../../assets/img/banner/main-photo1.png')} alt="slider1"/>
-            </h3>
+            <img src={require('../../assets/img/banner/main-photo1.png')} alt="slider1" />
           </div>
           <div>
-            <h3>
-              <img src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" />
-            </h3>
+            <img src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" />
           </div>
         </Slider>
       </div>
