@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import { combineForms } from 'react-redux-form';
 import logger from 'redux-logger';
 import initialUserState from '../reducers/UserReducer';
+import { initialAdminProductState } from '../reducers/admin/ProductReducer';
 import { initialLoginState, authReducer } from '../reducers/LoginReducer';
 import isLoading from '../reducers/IsLoadingReducer';
 // import reducers here
@@ -19,7 +20,10 @@ export default {
       auth: authReducer,
       forms: combineForms({
         user: initialUserState,
-        login: initialLoginState
+        login: initialLoginState,
+        admin: {
+          product: initialAdminProductState
+        }
       }, 'forms')
     })
 

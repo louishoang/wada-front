@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import CategoryDropDown from '../presentations/CategoryDropDown';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router'
 
 const MyAccUserView = () => (
   <ul className="ht-dropdown">
@@ -29,7 +30,7 @@ const MyAccGuestView = () => (
   </ul>
 )
 
-const SignInUserView = ({first_name}) => {
+const SignInUserView = ({ first_name }) => {
   return <strong>Hi, {first_name}</strong>
 }
 
@@ -41,15 +42,48 @@ SignInUserView.propTypes = {
   first_name: PropTypes.string.isRequired
 }
 
-class Header extends Component{
-  constructor(){
-    super()
-  }
+const NavigationRow = () => (
+  <div className="header-bottom header-sticky">
+    <div className="container-fluid">
+      <div className="row align-items-center">
+        <div className="col-xl-2 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
+          <CategoryDropDown />
+        </div>
+        <div className="col-xl-10 col-lg-8 col-md-12 ">
+          <nav className="d-none d-lg-block">
+            <ul className="header-bottom-list d-flex">
+              <li>
+                <NavLink exact to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/wada-biz" activeClassName="active">Wadamart For Business<i className="fa fa-angle-down"></i></NavLink>
+                <ul className="ht-dropdown dropdown-style-two">
+                  <li><a href="product.html">product details</a></li>
+                  <li><a href="compare.html">compare</a></li>
+                </ul>
+              </li>
+              <li>
+                <NavLink to="/classified-ads" activeClassName="active">Classified Ads<i className="fa fa-angle-down"></i></NavLink>
+                <ul className="ht-dropdown dropdown-style-two">
+                  <li><a href="single-blog.html">blog details</a></li>
+                </ul>
+              </li>
+              <li>
+                <NavLink to="/faq" activeClassName="active">FAQ</NavLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+)
 
-  render(){
-    const { user, isAuthenticated } = this.props
+class Header extends Component {
+  render() {
+    const { location, user, isAuthenticated } = this.props
 
-    return(
+    return (
       <header>
         <div className="header-top-area rose-background">
           <div className="container-fluid">
@@ -68,7 +102,7 @@ class Header extends Component{
                 </li>
                 <li className="header-li">
                   <Link to="#">My Account<i className="fa fa-angle-down"></i></Link>
-                  { (isAuthenticated) ? <MyAccUserView/> : <MyAccGuestView/>}
+                  {(isAuthenticated) ? <MyAccUserView /> : <MyAccGuestView />}
                 </li>
               </ul>
             </div>
@@ -101,7 +135,7 @@ class Header extends Component{
                       <Link to="/login">
                         <i className="far fa-user"></i>
                         <span className="sign-in">
-                          { isAuthenticated ? <SignInUserView {...user}/> : <SignInGuestView/> }
+                          {isAuthenticated ? <SignInUserView {...user} /> : <SignInGuestView />}
                         </span>
                       </Link>
                     </li>
@@ -161,47 +195,15 @@ class Header extends Component{
             </div>
           </div>
         </div>
-        <div className="header-bottom header-sticky">
-          <div className="container-fluid">
-            <div className="row align-items-center">
-              <div className="col-xl-2 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
-                <CategoryDropDown />
-              </div>
-              <div className="col-xl-10 col-lg-8 col-md-12 ">
-                <nav className="d-none d-lg-block">
-                  <ul className="header-bottom-list d-flex">
-                    <li>
-                      <NavLink exact to="/">Home</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/wada-biz" activeClassName="active">Wadamart For Business<i className="fa fa-angle-down"></i></NavLink>
-                      <ul className="ht-dropdown dropdown-style-two">
-                        <li><a href="product.html">product details</a></li>
-                        <li><a href="compare.html">compare</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <NavLink to="/classified-ads" activeClassName="active">Classified Ads<i className="fa fa-angle-down"></i></NavLink>
-                      <ul className="ht-dropdown dropdown-style-two">
-                        <li><a href="single-blog.html">blog details</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <NavLink to="/faq" activeClassName="active">FAQ</NavLink>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
+
+        {location.pathname.startsWith('/admin') ? null : <NavigationRow />}
       </header>
     )
   }
 }
 
 const stateToProps = (state) => {
-  return { 
+  return {
     user: state.auth.user,
     isAuthenticated: state.auth.isAuthenticated
   }
@@ -212,4 +214,4 @@ Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 }
 
-export default connect(stateToProps)(Header)
+export default withRouter(connect(stateToProps)(Header))

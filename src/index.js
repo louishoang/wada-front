@@ -4,11 +4,20 @@ import App from './components/containers/App';
 import store from './stores';
 import { Provider } from 'react-redux';
 
+// Bootstrap and Jquery
+import 'jquery';
+import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Stylesheet from template
 import '../src/assets/css/default.css';
 import '../src/assets/css/themestyle.css';
 import '../src/assets/css/responsive.css';
+
+// Custom Stylesheet
 import '../src/assets/css/main.css';
+import '../src/assets/css/react-datetime.css';
+
 
 ReactDOM.render(
   <Provider store={store.configure(null)}>
