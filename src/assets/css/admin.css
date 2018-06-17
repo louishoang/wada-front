@@ -1,0 +1,92 @@
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+  content: '\f0dd';
+  display: block;
+  position: absolute;
+  right: 20px;
+  font-family: 'Font Awesome\ 5 Free';
+  font-size: 0.9em;
+  font-weight: 900;
+  top: 5px;
+}
+
+a[aria-expanded="true"]::before {
+  content: '\f0d8';
+}
+
+.admin-page .admin-side-bar {
+  position: sticky;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #f8f8f8;
+  z-index: 1000;
+  padding-left: 30px;
+  color: #fff;
+  transition: all 0.3s;
+  bottom: 0;
+  height: Calc( 100vh - 140px );
+}
+
+.admin-page .admin-side-bar .sidebar-header {
+  padding: 20px;
+  background: #6d7fcc;
+}
+
+.admin-page .admin-side-bar ul.components {
+  padding: 20px 0;
+}
+
+.admin-page .admin-side-bar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+.admin-page .admin-side-bar ul li{
+  border-bottom: 1px solid #eeeeee
+}
+
+.admin-page .admin-side-bar ul li a {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px;
+  color: #555555;
+  padding: 10px;
+  font-size: 0.85em;
+  font-weight: 600;
+  display: block;
+}
+.admin-page .admin-side-bar ul li a:hover {
+  color: black;
+  background: #fff;
+}
+
+.admin-page .admin-side-bar ul li > a.active, a.active[aria-expanded="true"] {
+  letter-spacing: 1px;
+  font-weight: 600;
+  padding: 10px;
+  color: #7DB942;
+}
+
+#homeSubmenu{
+  padding: 5px 15px;
+  font-size: 14px;
+}
+
+#homeSubmenu li a{
+  font-size: 1em;
+  text-transform: capitalize;
+  color: #478DC1;
+  font-weight: 500;
+}
+
+#homeSubmenu li{
+  border-bottom: none;
+}
+
+#homeSubmenu li a:hover, #homeSubmenu li a.active{
+  color: #7DB942;
+  background: none;
+}
