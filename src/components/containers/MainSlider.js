@@ -47,7 +47,10 @@ export default class SimpleSlider extends Component {
             <img src={require('../../assets/img/banner/main-photo1.png')} alt="slider1" />
           </div>
           <div>
-            <img src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" />
+            <img src={require('../../assets/img/banner/main-photo2.png')} alt="slider2" />
+          </div>
+          <div>
+            <img src={require('../../assets/img/banner/main-photo3.png')} alt="slider3" />
           </div>
         </Slider>
       </div>
