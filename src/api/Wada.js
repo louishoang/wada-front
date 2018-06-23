@@ -1,7 +1,10 @@
 import axios from 'axios';
 import {
   registerUserRoute,
-  loginRoute
+  loginRoute,
+  categoriesRoute,
+  brandsRoute,
+  createProductRoute
 } from '../api/ApiRouter';
 import store from '../stores';
 import { requestStarted, requestSucceeded, requestFailed } from '../actions'
@@ -19,10 +22,18 @@ const defaultConfig = (authRequired = true) => {
     timeout: 4000,
   }
 
-  const accessToken = localStorage.getItem('user');
+  let accessToken, email; 
 
-  if (!authRequired && accessToken !== null && accessToken !== 'undefined') {
-    config = Object.assign(config, {headers: { 'Authorization': `Bearer ${accessToken}` }})
+  try {
+    const user = JSON.parse(localStorage.getItem('user'))
+    accessToken = user.authentication_token;
+    email = user.email
+  } catch (err) {
+    accessToken = null
+  }
+
+  if (authRequired && accessToken !== null && accessToken !== 'undefined') {
+    config = Object.assign(config, {headers: { 'X-User-Email': email, 'X-User-Token': accessToken }})
   }
 
   return config
@@ -34,6 +45,15 @@ module.exports = {
   },
   callLogin: (user) => {
     return axios(Object.assign(defaultConfig(false), loginRoute(user)))
+  },
+  fetchCategories: () => {
+    return axios(Object.assign(defaultConfig(), categoriesRoute()))
+  },
+  fetchBrands: () => {
+    return axios(Object.assign(defaultConfig(), brandsRoute()))
+  },
+  callCreateProduct: (product) => {
+    return axios(Object.assign(defaultConfig(), createProductRoute(product)))
   }
 }
 
