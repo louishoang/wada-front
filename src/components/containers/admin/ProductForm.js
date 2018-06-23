@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Control, Form, actions, Errors } from 'react-redux-form';
+import { Control, Form, actions } from 'react-redux-form';
 import { fetchCategories, fetchBrands, callCreateProduct } from '../../../api/Wada';
 import FormError from '../../presentations/FormError';
 import DateField from '../../../utils/DateField';
@@ -7,6 +7,7 @@ import AsyncSelect from 'react-select/lib/Async';
 import { connect } from 'react-redux';
 import { getResponseErr } from '../../../utils/ResponseHelpers';
 import { Redirect } from 'react-router-dom';
+import PropTypes  from 'prop-types';
 
 class ProductsForm extends Component {
   constructor() {
@@ -180,6 +181,12 @@ const dispatchToProps = (dispatch) => {
     updateBrandInStore: (value) => dispatch(actions.change('forms.admin.product.brand_id', value)),
     submitForm: (promise) => dispatch(actions.submit('createProduct', promise)),
   }
+}
+
+ProductsForm.propTypes = {
+  submitForm: PropTypes.func,
+  updateCategoryInStore: PropTypes.func,
+  updateBrandInStore: PropTypes.func
 }
 
 export default connect(null, dispatchToProps)(ProductsForm)

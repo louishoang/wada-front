@@ -111,6 +111,18 @@ const HeaderTopRow = ({ user, isAuthenticated }) => (
   </div>
 )
 
+HeaderTopRow.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    authentication_token: PropTypes.string.isRequired,
+    first_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    auth_token_expired_at: PropTypes.string.isRequired,
+  }),
+  isAuthenticated: PropTypes.bool
+}
+
 const HeaderLogoRow = ({user, isAuthenticated}) => (
   <div className="header-middle ptb-15 red-background">
     <div className="container-fluid">
@@ -202,6 +214,18 @@ const HeaderLogoRow = ({user, isAuthenticated}) => (
 
 )
 
+HeaderLogoRow.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    authentication_token: PropTypes.string.isRequired,
+    first_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    auth_token_expired_at: PropTypes.string.isRequired,
+  }),
+  isAuthenticated: PropTypes.bool
+}
+
 class Header extends Component {
   render() {
     const { location, user, isAuthenticated } = this.props
@@ -214,6 +238,10 @@ class Header extends Component {
       </header>
     )
   }
+}
+
+Header.propTypes = {
+  location: PropTypes.shape
 }
 
 const stateToProps = (state) => {

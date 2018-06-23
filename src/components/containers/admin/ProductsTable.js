@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ProductsTable = ({match}) => (
   <div>
@@ -10,5 +11,9 @@ const ProductsTable = ({match}) => (
     Product List
   </div>
 )
+
+ProductsTable.propTypes = {
+  match: PropTypes.shape
+}
 
 export default ProductsTable

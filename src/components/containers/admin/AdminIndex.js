@@ -6,7 +6,6 @@ class AdminIndex extends Component {
   }
 
   render() {
-    const { match } = this.props
     return (
       <div>Admin Index</div>
     )

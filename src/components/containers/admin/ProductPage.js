@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProductForm from './ProductForm';
 import ProductsTable from './ProductsTable';
+import PropTypes from 'prop-types';
 
 class ProductPage extends Component {
   constructor() {
@@ -19,6 +20,10 @@ class ProductPage extends Component {
       </div>
     )
   }
+}
+
+ProductPage.propTypes = {
+  match: PropTypes.shape
 }
 
 export default ProductPage
