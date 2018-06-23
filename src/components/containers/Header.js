@@ -113,12 +113,12 @@ const HeaderTopRow = ({ user, isAuthenticated }) => (
 
 HeaderTopRow.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    authentication_token: PropTypes.string.isRequired,
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    auth_token_expired_at: PropTypes.string.isRequired,
+    email: PropTypes.string,
+    authentication_token: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    role: PropTypes.string,
+    auth_token_expired_at: PropTypes.string,
   }),
   isAuthenticated: PropTypes.bool
 }
@@ -216,12 +216,12 @@ const HeaderLogoRow = ({user, isAuthenticated}) => (
 
 HeaderLogoRow.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    authentication_token: PropTypes.string.isRequired,
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    auth_token_expired_at: PropTypes.string.isRequired,
+    email: PropTypes.string,
+    authentication_token: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    role: PropTypes.string,
+    auth_token_expired_at: PropTypes.string,
   }),
   isAuthenticated: PropTypes.bool
 }
