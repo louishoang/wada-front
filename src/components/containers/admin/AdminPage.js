@@ -4,6 +4,7 @@ import AdminIndex from '../admin/AdminIndex';
 import ProductPage from '../admin/ProductPage';
 import '../../../assets/css/admin.css';
 import SideBar from './SideBar';
+import PropTypes from 'prop-types';
 
 class AdminPage extends Component {
   constructor() {
@@ -31,6 +32,10 @@ class AdminPage extends Component {
       </div>
     )
   }
+}
+
+AdminPage.propTypes = {
+  match: PropTypes.shape
 }
 
 export default AdminPage

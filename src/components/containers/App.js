@@ -18,6 +18,7 @@ import '../../assets/img/favicon.ico';
 import LogoutPage from './LogoutPage';
 import AdminPage from '../containers/admin/AdminPage';
 import NotFoundPage from '../presentations/NotFoundPage';
+import PropTypes from 'prop-types';
 
 const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -26,16 +27,21 @@ const AdminRoute = ({ component: Component, ...rest }) => (
       (isAdmin()) ? (
         <Component {...props} />
       ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: props.location }
-            }}
-          />
-        )
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      )
     }
   />
 );
+
+AdminRoute.propTypes = {
+  component: PropTypes.element,
+  location: PropTypes.shape
+}
 
 const isAdmin = () => {
   const auth = store.currentStore().getState().auth

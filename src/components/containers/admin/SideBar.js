@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class SideBar extends Component {
   render() {
@@ -36,6 +37,11 @@ class SideBar extends Component {
       </nav>
     )
   }
+}
+
+SideBar.propTypes = {
+  match: PropTypes.shape,
+  location: PropTypes.shape
 }
 
 export default withRouter(SideBar)
