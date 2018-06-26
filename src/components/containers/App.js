@@ -39,8 +39,10 @@ const AdminRoute = ({ component: Component, ...rest }) => (
 );
 
 AdminRoute.propTypes = {
-  component: PropTypes.element,
-  location: PropTypes.shape
+  component: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }),
 }
 
 const isAdmin = () => {

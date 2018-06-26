@@ -40,8 +40,14 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
-  match: PropTypes.shape,
-  location: PropTypes.shape
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  })
 }
 
 export default withRouter(SideBar)

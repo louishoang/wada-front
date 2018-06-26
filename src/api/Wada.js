@@ -1,11 +1,5 @@
 import axios from 'axios';
-import {
-  registerUserRoute,
-  loginRoute,
-  categoriesRoute,
-  brandsRoute,
-  createProductRoute
-} from '../api/ApiRouter';
+import * as ApiRouter from '../api/ApiRouter';
 import store from '../stores';
 import { requestStarted, requestSucceeded, requestFailed } from '../actions'
 
@@ -39,21 +33,31 @@ const defaultConfig = (authRequired = true) => {
   return config
 }
 
+const makeRequest = (route) => {
+  return axios(Object.assign(defaultConfig(), route))
+}
+
 module.exports = {
   registerUser: (user) => {
-    return axios(Object.assign(defaultConfig(false), registerUserRoute(user)))
+    return axios(Object.assign(defaultConfig(false), ApiRouter.registerUserRoute(user)))
   },
   callLogin: (user) => {
-    return axios(Object.assign(defaultConfig(false), loginRoute(user)))
+    return axios(Object.assign(defaultConfig(false), ApiRouter.loginRoute(user)))
   },
   fetchCategories: () => {
-    return axios(Object.assign(defaultConfig(), categoriesRoute()))
+    return makeRequest(ApiRouter.categoriesRoute())
   },
   fetchBrands: () => {
-    return axios(Object.assign(defaultConfig(), brandsRoute()))
+    return makeRequest(ApiRouter.brandsRoute())
   },
   callCreateProduct: (product) => {
-    return axios(Object.assign(defaultConfig(), createProductRoute(product)))
+    return makeRequest(ApiRouter.createProductRoute(product))
+  },
+  callProducts: (pageSize, page, sortBy, order) => {
+    return makeRequest(ApiRouter.getProductsRoute(pageSize, page, sortBy, order))
+  },
+  deleteProduct: (id) => {
+    return makeRequest(ApiRouter.deleteProductRoute(id))
   }
 }
 
