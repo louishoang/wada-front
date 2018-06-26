@@ -33,6 +33,10 @@ const defaultConfig = (authRequired = true) => {
   return config
 }
 
+const makeRequest = (route) => {
+  return axios(Object.assign(defaultConfig(), route))
+}
+
 module.exports = {
   registerUser: (user) => {
     return axios(Object.assign(defaultConfig(false), ApiRouter.registerUserRoute(user)))
@@ -41,19 +45,19 @@ module.exports = {
     return axios(Object.assign(defaultConfig(false), ApiRouter.loginRoute(user)))
   },
   fetchCategories: () => {
-    return axios(Object.assign(defaultConfig(), ApiRouter.categoriesRoute()))
+    return makeRequest(ApiRouter.categoriesRoute())
   },
   fetchBrands: () => {
-    return axios(Object.assign(defaultConfig(), ApiRouter.brandsRoute()))
+    return makeRequest(ApiRouter.brandsRoute())
   },
   callCreateProduct: (product) => {
-    return axios(Object.assign(defaultConfig(), ApiRouter.createProductRoute(product)))
+    return makeRequest(ApiRouter.createProductRoute(product))
   },
   callProducts: (pageSize, page, sortBy, order) => {
-    return axios(Object.assign(defaultConfig(), ApiRouter.getProductsRoute(pageSize, page, sortBy, order)))
+    return makeRequest(ApiRouter.getProductsRoute(pageSize, page, sortBy, order))
   },
   deleteProduct: (id) => {
-    return axios(Object.assign(defaultConfig(), ApiRouter.deleteProductRoute(id)))
+    return makeRequest(ApiRouter.deleteProductRoute(id))
   }
 }
 
