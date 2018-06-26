@@ -53,3 +53,12 @@ export const adminDeletedProduct = (product) => {
     }
   }
 }
+
+export const getAdminProductDetailsSucceeded = (product) => {
+  return {
+    type: constants.GET_ADMIN_PRODUCT_DETAILS_SUCCEEDED,
+    data: {
+      product: product
+    }
+  }
+}

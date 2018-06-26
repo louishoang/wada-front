@@ -53,11 +53,17 @@ module.exports = {
   callCreateProduct: (product) => {
     return makeRequest(ApiRouter.createProductRoute(product))
   },
+  callUpdateProduct: (product) => {
+    return makeRequest(ApiRouter.updateProductRoute(product))
+  },
   callProducts: (pageSize, page, sortBy, order) => {
     return makeRequest(ApiRouter.getProductsRoute(pageSize, page, sortBy, order))
   },
   deleteProduct: (id) => {
     return makeRequest(ApiRouter.deleteProductRoute(id))
+  },
+  getProductDetails: (id) => {
+    return makeRequest(ApiRouter.getProductDetailsRoute(id)) 
   }
 }
 

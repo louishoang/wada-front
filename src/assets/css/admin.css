@@ -17,6 +17,14 @@ a[aria-expanded="true"]::before {
   content: '\f0d8';
 }
 
+.admin-page #right-nav {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background:#f8f8f8;;
+  z-index: 1000;
+  height: fit-content
+}
+
 .admin-page .admin-side-bar {
   position: sticky;
   overflow-x: hidden;
@@ -30,23 +38,36 @@ a[aria-expanded="true"]::before {
   height: Calc( 100vh - 140px );
 }
 
-.admin-page .admin-side-bar .sidebar-header {
+.admin-page .admin-side-bar .sidebar-header,
+.admin-page #right-nav .sidebar-header{
   padding: 20px;
   background: #6d7fcc;
 }
 
-.admin-page .admin-side-bar ul.components {
+.admin-page .admin-side-bar ul.components,
+.admin-page #right-nav ul.components{
   padding: 20px 0;
 }
 
+.admin-page #right-nav ul p,
 .admin-page .admin-side-bar ul p {
   color: #fff;
   padding: 10px;
 }
 
+.admin-page #right-nav ul li,
 .admin-page .admin-side-bar ul li{
   border-bottom: 1px solid #eeeeee
 }
+
+.admin-page #right-nav ul li a {
+  color: #3565d8;
+  padding: 10px;
+  font-size: 0.85em;
+  font-weight: 600;
+  display: block;
+}
+
 
 .admin-page .admin-side-bar ul li a {
   text-transform: uppercase;
@@ -58,6 +79,8 @@ a[aria-expanded="true"]::before {
   font-weight: 600;
   display: block;
 }
+
+.admin-page #right-nav ul li a:hover,
 .admin-page .admin-side-bar ul li a:hover {
   color: black;
   background: #fff;
