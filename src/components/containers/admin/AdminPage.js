@@ -35,7 +35,11 @@ class AdminPage extends Component {
 }
 
 AdminPage.propTypes = {
-  match: PropTypes.shape
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired
 }
 
 export default AdminPage

@@ -147,6 +147,7 @@ class ProductsForm extends Component {
               placeholder="Deleted At"
               required
               validateOn="blur" />
+            <span className="errors small form-text">* Deleted At is automatically set to current time if not specified</span>
           </div>
           <div className="form-group">
             <label htmlFor="product-meta-keywords">Meta Keywords</label>

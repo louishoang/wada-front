@@ -301,3 +301,11 @@ form#main-search-form .search-rounded {
 	width: 100%;
 	height: 100%;
 }
+
+.pagination-bottom {
+	height: fit-content;
+}
+
+.t95-width {
+	width: 95%
+}
