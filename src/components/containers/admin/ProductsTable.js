@@ -30,7 +30,7 @@ class ProductsTable extends Component {
     this.deleteProduct = this.deleteProduct.bind(this)
   }
 
-  fetchProducts(state, instance) {
+  fetchProducts(state) {
     const { dispatchAdminProductsSucceeded } = this.props
 
     this.setState({ loading: true })
@@ -38,7 +38,6 @@ class ProductsTable extends Component {
       .then(res => {
         dispatchAdminProductsSucceeded(res.data)
       })
-      .catch(err => console.log(err))
   }
 
   deleteProduct(e, id) {
@@ -47,7 +46,6 @@ class ProductsTable extends Component {
     const { dispatchAdminDeletedProduct } = this.props
     deleteProduct(id)
       .then(() => dispatchAdminDeletedProduct(id))
-      .catch(err => console.log(err))
   }
 
   render() {
@@ -132,6 +130,13 @@ ProductsTable.propTypes = {
       id: PropTypes.node,
     }).isRequired,
   }).isRequired,
+  dispatchAdminProductsSucceeded: PropTypes.func.isRequired,
+  dispatchAdminDeletedProduct: PropTypes.func.isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({
+    permalink: PropTypes.string,
+    name: PropTypes.string,
+    status: PropTypes.string
+  }))
 }
 
 const stateToProps = (state) => {
