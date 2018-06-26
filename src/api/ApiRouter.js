@@ -1,4 +1,4 @@
-import { POST, GET, DELETE } from '../constants';
+import { POST, GET, DELETE, PUT } from '../constants';
 import queryString from 'query-string';
 
 export const registerUserRoute = (params) => {
@@ -39,6 +39,14 @@ export const createProductRoute = (product) => {
   }
 }
 
+export const updateProductRoute = (product) => {
+  return {
+    method: PUT,
+    url: `/api/v1/admin/products/${product.permalink}`,
+    data: { product: product }
+  }
+}
+
 export const getProductsRoute = (pageSize, page, sortBy, order) => {
   const params = {
     page_size: pageSize,
@@ -57,6 +65,13 @@ export const getProductsRoute = (pageSize, page, sortBy, order) => {
 export const deleteProductRoute = (id) => {
   return {
     method: DELETE,
+    url: `/api/v1/admin/products/${id}`
+  }
+}
+
+export const getProductDetailsRoute = (id) => {
+  return {
+    method: GET,
     url: `/api/v1/admin/products/${id}`
   }
 }

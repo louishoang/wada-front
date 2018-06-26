@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { Control, Form, actions } from 'react-redux-form';
-import { fetchCategories, fetchBrands, callCreateProduct } from '../../../api/Wada';
+import { fetchCategories, fetchBrands, callCreateProduct, callUpdateProduct } from '../../../api/Wada';
 import FormError from '../../presentations/FormError';
 import DateField from '../../../utils/DateField';
 import AsyncSelect from 'react-select/lib/Async';
 import { connect } from 'react-redux';
 import { getResponseErr } from '../../../utils/ResponseHelpers';
 import { Redirect } from 'react-router-dom';
-import PropTypes  from 'prop-types';
+import PropTypes from 'prop-types';
 
 class ProductsForm extends Component {
   constructor() {
     super()
     this.state = {
       errors: [],
-      category_id: null,
+      categories: null,
       productDetailsRoute: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,14 +22,28 @@ class ProductsForm extends Component {
     this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.filterBrands = this.filterBrands.bind(this)
     this.handleBrandChange = this.handleBrandChange.bind(this)
+    this.selectedValue = this.selectedValue.bind(this)
+  }
+
+  createForm(match) {
+    return match.path === '/admin/products/new'
+  }
+
+  componentDidMount() {
+    const { match, resetForm } = this.props
+    // Ensure form's fields are blank when switching from edit a product to create a new one.
+    // Because we are sharing the same form model in redux store 
+    if (this.createForm(match)) { resetForm() }
   }
 
   handleSubmit(product) {
-    const { submitForm } = this.props;
+    const { submitForm, match } = this.props;
     this.setState({ errors: [] })
-    let createProductPromise = callCreateProduct(product)
+    let createProductPromise = (this.createForm(match) ? callCreateProduct(product): callUpdateProduct(product))
       .then((res) => {
-        this.setState({ productDetailsRoute: `/admin/products/${res.data.id}` })
+        if (this.createForm(match)) {
+          this.setState({ productDetailsRoute: `/admin/products/${res.data.id}` })
+        }
       })
       .catch(err => {
         this.setState({ errors: getResponseErr(err) })
@@ -40,23 +54,23 @@ class ProductsForm extends Component {
   filterCategory(inputValue, callback) {
     fetchCategories()
       .then(res => {
-        let options = res.data
-        options = options.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
-        callback(options.map(i => {
-          const label = i.parent_name !== '' ? `${i.name} - (${i.parent_name})` : i.name
-          return { value: i.id, label: label }
-        }))
+        let options = res.data.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
+          .map(i => {
+            const label = i.parent_name !== '' ? `${i.name} - (${i.parent_name})` : i.name
+            return { value: i.id, label: label }
+          })
+        this.setState({ categories: options })
+        callback(options)
       })
   }
 
   filterBrands(inputValue, callback) {
     fetchBrands()
       .then(res => {
-        let options = res.data
-        options = options.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
-        callback(options.map(i => {
-          return { value: i.id, label: i.name }
-        }))
+        let options = res.data.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
+          .map(i => { return { value: i.id, label: i.name } })
+        this.setState({ brands: options })
+        callback(options)
       })
   }
 
@@ -68,14 +82,21 @@ class ProductsForm extends Component {
     this.props.updateBrandInStore(inputValue.value)
   }
 
+  selectedValue(options, selected) {
+    if (options) {
+      return options.filter(item => item.value === selected)[0];
+    }
+  }
+
   render() {
-    const { errors, productDetailsRoute } = this.state
+    const { errors, productDetailsRoute, categories, brands } = this.state
+    const { product } = this.props
 
     if (productDetailsRoute) { return <Redirect to={{ pathname: productDetailsRoute }} /> }
 
     return (
       <div>
-        <h3 className="mb-20">Create A Product</h3>
+        <h3 className="mb-20">{product.name !== null ? `Product Details: ${product.name}` : 'Create A Product'}</h3>
         <FormError messages={errors} />
         <Form model="forms.admin.product"
           className="contact-form"
@@ -106,6 +127,7 @@ class ProductsForm extends Component {
               loadOptions={this.filterCategory}
               defaultOptions
               onChange={this.handleCategoryChange}
+              value={this.selectedValue(categories, product.category_id)}
             />
             <Control.text model="forms.admin.product.category_id" hidden />
           </div>
@@ -116,6 +138,7 @@ class ProductsForm extends Component {
               loadOptions={this.filterBrands}
               defaultOptions
               onChange={this.handleBrandChange}
+              value={this.selectedValue(brands, product.brand_id)}
             />
             <Control.text model="forms.admin.product.brand_id" hidden />
           </div>
@@ -174,6 +197,10 @@ class ProductsForm extends Component {
   }
 }
 
+const stateToProps = (state) => ({
+  product: state.forms.admin.product
+})
+
 const dispatchToProps = (dispatch) => {
   return {
     fetchCategories: () => dispatch(fetchCategories()),
@@ -181,13 +208,21 @@ const dispatchToProps = (dispatch) => {
     fetchBrands: () => dispatch(fetchBrands()),
     updateBrandInStore: (value) => dispatch(actions.change('forms.admin.product.brand_id', value)),
     submitForm: (promise) => dispatch(actions.submit('createProduct', promise)),
+    resetForm: () => dispatch(actions.reset('forms.admin.product'))
   }
 }
 
 ProductsForm.propTypes = {
   submitForm: PropTypes.func,
+  resetForm: PropTypes.func,
   updateCategoryInStore: PropTypes.func,
-  updateBrandInStore: PropTypes.func
+  updateBrandInStore: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+  product: PropTypes.shape
 }
 
-export default connect(null, dispatchToProps)(ProductsForm)
+export default connect(stateToProps, dispatchToProps)(ProductsForm)

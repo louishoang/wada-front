@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProductForm from './ProductForm';
 import ProductsTable from './ProductsTable';
+import ProductDetails from './ProductDetails';
 import PropTypes from 'prop-types';
 
 class ProductPage extends Component {
@@ -15,7 +16,8 @@ class ProductPage extends Component {
       <div>
         <Switch>
           <Route exact path={`${match.url}`} component={ProductsTable} />
-          <Route path={`${match.url}/new`} component={ProductForm} />
+          <Route exact path={`${match.url}/new`} component={ProductForm} />
+          <Route path={`${match.url}/:id`} component={ProductDetails} />
         </Switch>
       </div>
     )
