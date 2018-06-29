@@ -69,7 +69,7 @@ module.exports = {
     return makeRequest(ApiRouter.getProductDetailsRoute(id)) 
   },
   postProductImage: (id, file) => {
-    const config = Object.assign(defaultConfig(), headers: { 'Content-Type': 'multipart/form-data' })
+    const config = Object.assign(defaultConfig(), { headers: { 'Content-Type': 'multipart/form-data' } })
     const route = ApiRouter.postProductImagesRoute(id, file)
     return axios(config, route)
   },

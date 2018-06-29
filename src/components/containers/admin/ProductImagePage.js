@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { config as wadaConfig, deleteProductImage } from '../../../api/Wada';
 import { postProductImagesRoute } from '../../../api/ApiRouter';
-import { SortableContainer, SortableElement, arrayMove, SortableHandle} from 'react-sortable-hoc';
+import { SortableContainer, SortableElement, SortableHandle} from 'react-sortable-hoc';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -105,6 +105,7 @@ class ProductImagePage extends Component {
                   <SortableList items={product.images}
                     useDragHandle={true} 
                     refreshProductData={refreshProductData}/>
+                // TODO: Need to send images position to the back-end after sorted
                 ) : null
               }
             </div>
@@ -120,7 +121,9 @@ ProductImagePage.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.node,
     }).isRequired,
-  }).isRequired
+  }).isRequired,
+  refreshProductData: PropTypes.func,
+  product: PropTypes.shape
 }
 
 export default ProductImagePage
