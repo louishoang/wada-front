@@ -3,6 +3,16 @@ import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class SideBar extends Component {
+  showProductDropDown(currentPath) {
+    const pathUnderProducts = ['/admin/products', '/admin/option_types', '/admin/properties']
+    for (let i = 0; i < pathUnderProducts.length; i++) {
+      if (currentPath.startsWith(pathUnderProducts[i])) {
+        return true
+      }
+    }
+    false
+  }
+
   render() {
     const { match, location } = this.props
     return (
@@ -21,16 +31,16 @@ class SideBar extends Component {
             <NavLink to={`${match.url}/brand`}>Brand</NavLink>
           </li>
           <li>
-            <a href="#homeSubmenu" 
-              data-toggle="collapse" 
-              className={`${location.pathname.startsWith('/admin/products') ? 'active': null}`}
+            <a href="#homeSubmenu"
+              data-toggle="collapse"
+              className={`${this.showProductDropDown(location.pathname)} ? 'active': null}`}
               aria-expanded="false">Products</a>
 
-            <ul className={`collapse list-unstyled ${location.pathname.startsWith('/admin/products') ? 'show': null}`} id="homeSubmenu">
+            <ul className={`collapse list-unstyled ${this.showProductDropDown(location.pathname) ? 'show' : null}`} id="homeSubmenu">
               <li><NavLink exact to={`${match.url}/products`}>Products</NavLink></li>
               <li><NavLink to={`${match.url}/products/new`}>Create Product</NavLink></li>
-              <li><NavLink to={`${match.url}/products/options_types`}>Option Types</NavLink></li>
-              <li><NavLink to={`${match.url}/products/properties`}>Properties</NavLink></li>
+              <li><NavLink to={`${match.url}/option_types`}>Option Types</NavLink></li>
+              <li><NavLink to={`${match.url}/properties`}>Properties</NavLink></li>
             </ul>
           </li>
         </ul>

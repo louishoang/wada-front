@@ -62,3 +62,12 @@ export const getAdminProductDetailsSucceeded = (product) => {
     }
   }
 }
+
+export const getAdminOptionTypesSucceeded = (optionTypes) => {
+  return {
+    type: constants.GET_ADMIN_OPTION_TYPES_SUCCEEDED,
+    data: {
+      optionTypes: optionTypes
+    }
+  }
+}

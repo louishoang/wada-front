@@ -75,6 +75,12 @@ module.exports = {
   },
   deleteProductImage: (id) => {
     return makeRequest(ApiRouter.deleteProductImageRoute(id)) 
+  },
+  getOptiontypes: (pageSize, page, sortBy, order) => {
+    return makeRequest(ApiRouter.getOptionTypesRoute(pageSize, page, sortBy, order))
+  },
+  callCreateOptionType: (optionType) => {
+    return makeRequest(ApiRouter.createOptionTypeRoute(optionType)) 
   }
 }
 

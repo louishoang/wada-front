@@ -98,3 +98,26 @@ export const deleteProductImageRoute = (id) => {
   }
 }
 
+
+export const getOptionTypesRoute = (pageSize, page, sortBy, order) => {
+  const params = {
+    page_size: pageSize,
+    page: page,
+    sort_by: sortBy,
+    order: order
+  }
+  const url = `/api/v1/admin/option_types?${queryString.stringify(params)}`
+
+  return {
+    method: GET,
+    url: url
+  }
+}
+
+export const createOptionTypeRoute = (optionType) => {
+  return {
+    method: POST,
+    url: '/api/v1/admin/option_types',
+    data: { option_type: optionType }
+  }
+}
