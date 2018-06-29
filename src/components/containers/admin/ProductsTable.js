@@ -6,6 +6,7 @@ import 'react-table/react-table.css';
 import { connect } from 'react-redux';
 import { callProducts, deleteProduct } from '../../../api/Wada';
 import { fetchAdminProductsSucceded, adminDeletedProduct } from '../../../actions';
+import * as ReactTableHelper from '../../../utils/ReactTableHelper';
 
 const DEFAULT_PAGE_SIZE = 25
 
@@ -22,35 +23,24 @@ const badgeColor = (text) => {
 class ProductsTable extends Component {
   constructor() {
     super();
-    this.state = {
-      pages: null,
-      loading: true
-    }
     this.fetchProducts = this.fetchProducts.bind(this)
     this.deleteProduct = this.deleteProduct.bind(this)
   }
 
   fetchProducts(state) {
     const { dispatchAdminProductsSucceeded } = this.props
-
-    this.setState({ loading: true })
     callProducts(state.pageSize, state.page, state.sortBy, state.order)
-      .then(res => {
-        dispatchAdminProductsSucceeded(res.data)
-      })
+      .then(res => dispatchAdminProductsSucceeded(res.data))
   }
 
   deleteProduct(e, id) {
     e.preventDefault();
-
     const { dispatchAdminDeletedProduct } = this.props
-    deleteProduct(id)
-      .then(() => dispatchAdminDeletedProduct(id))
+    deleteProduct(id).then(() => dispatchAdminDeletedProduct(id))
   }
 
   render() {
-    const { match, products: data } = this.props
-    let pages = parseInt((length + DEFAULT_PAGE_SIZE - 1) / DEFAULT_PAGE_SIZE);
+    const { match, products: data } = this.props;
 
     const columns = [{
       Header: 'SKU',
@@ -115,7 +105,7 @@ class ProductsTable extends Component {
           <ReactTable
             manual // Forces table not to paginate or sort automatically, so we can handle it server-side
             data={data}
-            pages={pages}
+            pages={ReactTableHelper.pageCount(length, DEFAULT_PAGE_SIZE)}
             columns={columns}
             onFetchData={this.fetchProducts}
             defaultPageSize={DEFAULT_PAGE_SIZE}

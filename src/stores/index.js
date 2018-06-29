@@ -8,6 +8,7 @@ import { combineForms } from 'react-redux-form';
 import logger from 'redux-logger';
 import initialUserState from '../reducers/UserReducer';
 import { initialAdminProductState } from '../reducers/admin/ProductReducer';
+import { initialAdminOptionTypeState } from '../reducers/admin/OptionTypeFormReducer';
 import { initialLoginState, authReducer } from '../reducers/LoginReducer';
 import adminReducer from '../reducers/admin/AdminReducer';
 import isLoading from '../reducers/IsLoadingReducer';
@@ -24,7 +25,8 @@ export default {
         user: initialUserState,
         login: initialLoginState,
         admin: {
-          product: initialAdminProductState
+          product: initialAdminProductState,
+          optionType: initialAdminOptionTypeState
         }
       }, 'forms')
     })
