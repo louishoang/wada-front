@@ -4,17 +4,23 @@ import ProductForm from './ProductForm';
 import { connect } from 'react-redux';
 import { getProductDetails } from '../../../api/Wada';
 import { actions } from 'react-redux-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import ProductImagePage from './ProductImagePage';
 
 class ProductDetails extends Component{
   constructor(){
     super();
     this.state = {
       product: null
-    }
+    },
+    this.refreshProductData = this.refreshProductData.bind(this)
   }
 
   componentDidMount() {
+    this.refreshProductData()
+  }
+
+  refreshProductData() {
     const { match, dispatch } = this.props
     getProductDetails(match.params.id)
       .then(res => {
@@ -25,26 +31,35 @@ class ProductDetails extends Component{
 
   render(){
     const { match } = this.props
+    const { product } = this.state
+
     return(
       <div className="row">
         <div className="col-10 columns">
-          <ProductForm {...this.props} />
+          <Switch>
+            <Route exact path={`${match.url}`} component={ProductForm}/>
+            <Route path={`${match.url}/images`} render={() => (
+              <ProductImagePage {...this.props} product={product} refreshProductData={this.refreshProductData}/>
+            )}/>
+          </Switch>
         </div>
-        <div className="col-2 columns" id="right-nav">
-          <ul className="list-unstyled components">
-            <li>
-              <NavLink exact to={`${match.url}`}>Product Details</NavLink>
-            </li>
-            <li>
-              <NavLink to={`${match.url}/images`}>Images</NavLink>
-            </li>
-            <li>
-              <NavLink to={`${match.url}/variants`}>Variants</NavLink>
-            </li>
-            <li>
-              <NavLink to={`${match.url}/properties`}>Properties</NavLink>
-            </li>
-          </ul>
+        <div className="col-2 columns">
+          <div id="right-nav">
+            <ul className="list-unstyled components" >
+              <li>
+                <NavLink exact to={`${match.url}`}>Product Details</NavLink>
+              </li>
+              <li>
+                <NavLink to={`${match.url}/images`}>Images</NavLink>
+              </li>
+              <li>
+                <NavLink to={`${match.url}/variants`}>Variants</NavLink>
+              </li>
+              <li>
+                <NavLink to={`${match.url}/properties`}>Properties</NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     )

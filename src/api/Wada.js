@@ -13,7 +13,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 const defaultConfig = (authRequired = true) => {
   let config = {
     baseURL: baseURL,
-    timeout: 4000,
+    timeout: 4000
   }
 
   let accessToken, email; 
@@ -38,6 +38,9 @@ const makeRequest = (route) => {
 }
 
 module.exports = {
+  config: () => {
+    return defaultConfig()
+  },
   registerUser: (user) => {
     return axios(Object.assign(defaultConfig(false), ApiRouter.registerUserRoute(user)))
   },
@@ -64,6 +67,14 @@ module.exports = {
   },
   getProductDetails: (id) => {
     return makeRequest(ApiRouter.getProductDetailsRoute(id)) 
+  },
+  postProductImage: (id, file) => {
+    const config = Object.assign(defaultConfig(), headers: { 'Content-Type': 'multipart/form-data' })
+    const route = ApiRouter.postProductImagesRoute(id, file)
+    return axios(config, route)
+  },
+  deleteProductImage: (id) => {
+    return makeRequest(ApiRouter.deleteProductImageRoute(id)) 
   }
 }
 
