@@ -75,3 +75,26 @@ export const getProductDetailsRoute = (id) => {
     url: `/api/v1/admin/products/${id}`
   }
 }
+
+// This route is here only for reference and centralize routes
+// but the actual process is handle inside ProductImagePage
+export const postProductImagesRoute = (id, file) => {
+  return {
+    method: POST,
+    url: `/api/v1/admin/product_images`,
+    data: {
+      product_id: id,  
+      file: file
+    }
+  }
+}
+
+// End Special route
+
+export const deleteProductImageRoute = (id) => {
+  return {
+    method: DELETE,
+    url: `/api/v1/admin/product_images/${id}`,
+  }
+}
+

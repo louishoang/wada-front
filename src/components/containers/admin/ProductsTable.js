@@ -89,7 +89,7 @@ class ProductsTable extends Component {
         return (
           <div>
             <Link className="btn btn-primary btn-sm icon-spr"
-              to={`/admin/products/${permalink}/edit`} >
+              to={`/admin/products/${permalink}`} >
               <i className="fas fa-pencil-alt"></i>
             </Link>
             <Link className="btn btn-primary btn-sm icon-spr"
@@ -106,7 +106,10 @@ class ProductsTable extends Component {
       <div>
         <div className="row">
           <Link to={`${match.url}/new`}
-            className="btn btn-success">Create Product</Link>
+            className="btn btn-success">
+            <i className="fas fa-plus icon-spr5"></i>
+            Create Product
+          </Link>
         </div>
         <div className="row pt-20">
           <ReactTable

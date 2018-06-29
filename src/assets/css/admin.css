@@ -44,8 +44,11 @@ a[aria-expanded="true"]::before {
   background: #6d7fcc;
 }
 
-.admin-page .admin-side-bar ul.components,
 .admin-page #right-nav ul.components{
+  padding: 10px 10px 0px 20px
+}
+
+.admin-page .admin-side-bar ul.components{
   padding: 20px 0;
 }
 

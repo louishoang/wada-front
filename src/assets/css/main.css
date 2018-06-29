@@ -27,6 +27,7 @@ html, body{
 	position: absolute;
 	right: 15;
 	margin-top: 15;
+	z-index: 9999999;
 }
 
 .form-text.errors{
@@ -212,6 +213,22 @@ form#main-search-form .search-rounded {
 	margin-right: 15px;
 }
 
+.icon-spr10{
+	margin-right: 10px;
+}
+
+.icon-spr5{
+	margin-right: 5px;
+}
+
+.icon-red{
+	color: red;
+}
+
+.icon-s25{
+	font-size: 25px;
+}
+
 .vertical-menu-list > li a i.icon-left{
 	position: relative;
 	right: 0; /* override template */
@@ -308,4 +325,72 @@ form#main-search-form .search-rounded {
 
 .t95-width {
 	width: 95%
+}
+
+.dropzone{
+	position: relative;
+	width: 100%;
+	min-height: 200px;
+	height: fit-content;
+	border-width: 2px;
+	border-color: rgb(102, 102, 102);
+	border-style: dashed;
+	border-radius: 5px;
+}
+
+.dropzone p {
+	text-align: center;
+	vertical-align: middle;
+	line-height: 200px;
+	color: #363636;
+	font-size: 1em;
+	font-weight: 500;
+}
+
+.dropzone p i{
+	font-size: 3.5em;
+	position: relative;
+	top: 10px;
+}
+
+.dropzone .bgtext{
+	opacity: 0.15;
+}
+
+.dropzone .preview{
+	position: absolute;
+	left: 20px;
+	top: 30px;
+}
+
+.dropzone .preview img{
+	width: 75px;
+	height: 75px;
+	opacity: 1;
+	margin-right: 15px;
+	padding: 10px;
+}
+
+.sortable-list img{
+	width: 50px;
+}
+
+.sortable-list .list-group-item.sortable-item{
+	position: relative;
+	display: block;
+	padding: .75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: #fff;
+	border-bottom: 1px solid rgba(0,0,0,.125);
+	border-left: none;
+	border-right: none;
+}
+
+.flex-center{
+	display: flex;
+  align-items: center;
+}
+
+.no-paddingl{
+	padding-left: 0px
 }
