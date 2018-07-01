@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Control, Form, actions } from 'react-redux-form';
-import { fetchCategories, fetchBrands, callCreateProduct, callUpdateProduct } from '../../../api/Wada';
+import { fetchCategories,
+  fetchBrands,
+  callCreateProduct,
+  callUpdateProduct,
+  fetchOptionTypes } from '../../../api/Wada';
 import FormError from '../../presentations/FormError';
 import DateField from '../../../utils/DateField';
 import AsyncSelect from 'react-select/lib/Async';
@@ -15,6 +19,8 @@ class ProductsForm extends Component {
     this.state = {
       errors: [],
       categories: null,
+      brands: null,
+      option_types: [],
       productDetailsRoute: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,6 +29,8 @@ class ProductsForm extends Component {
     this.filterBrands = this.filterBrands.bind(this)
     this.handleBrandChange = this.handleBrandChange.bind(this)
     this.selectedValue = this.selectedValue.bind(this)
+    this.filterOptionTypes = this.filterOptionTypes.bind(this)
+    this.handleOptionTypeChange = this.handleOptionTypeChange.bind(this)
   }
 
   createForm(match) {
@@ -49,6 +57,19 @@ class ProductsForm extends Component {
         this.setState({ errors: getResponseErr(err) })
       })
     submitForm(createProductPromise)
+  }
+
+  filterOptionTypes(inputValue, callback) {
+    fetchOptionTypes()
+      .then(res => {
+        let options = res.data.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
+          .map(i => {
+            const label = `${i.display_name} (${i.name})`
+            return { value: i.id, label: label }
+          })
+        this.setState({ option_types: options })
+        callback(options)
+      })
   }
 
   filterCategory(inputValue, callback) {
@@ -82,14 +103,20 @@ class ProductsForm extends Component {
     this.props.updateBrandInStore(inputValue.value)
   }
 
+  handleOptionTypeChange(inputValue) {
+    const selected = inputValue.map(v => v.value)
+    this.props.updateOptionTypeIdsInStore(selected)
+  }
+
   selectedValue(options, selected) {
+    const selectedValues = Array.isArray(selected) ? selected : [selected]
     if (options) {
-      return options.filter(item => item.value === selected)[0];
+      return options.filter(item => selectedValues.includes(item.value));
     }
   }
 
   render() {
-    const { errors, productDetailsRoute, categories, brands } = this.state
+    const { errors, productDetailsRoute, categories, brands, option_types } = this.state
     const { product } = this.props
 
     if (productDetailsRoute) { return <Redirect to={{ pathname: productDetailsRoute }} /> }
@@ -119,6 +146,18 @@ class ProductsForm extends Component {
               required
               validateOn="blur"
               rows="10" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="product-option-types">Option Types</label>
+            <AsyncSelect
+              isMulti
+              cacheOptions
+              loadOptions={this.filterOptionTypes}
+              defaultOptions
+              onChange={this.handleOptionTypeChange}
+              value={this.selectedValue(option_types, product.option_type_ids)}
+            />
+            <Control.text model="forms.admin.product.option_type_ids" hidden />
           </div>
           <div className="form-group">
             <label htmlFor="product-category">Category</label>
@@ -207,6 +246,7 @@ const dispatchToProps = (dispatch) => {
     updateCategoryInStore: (value) => dispatch(actions.change('forms.admin.product.category_id', value)),
     fetchBrands: () => dispatch(fetchBrands()),
     updateBrandInStore: (value) => dispatch(actions.change('forms.admin.product.brand_id', value)),
+    updateOptionTypeIdsInStore: (value) => dispatch(actions.change('forms.admin.product.option_type_ids', value)),
     submitForm: (promise) => dispatch(actions.submit('createProduct', promise)),
     resetForm: () => dispatch(actions.reset('forms.admin.product'))
   }
@@ -217,6 +257,7 @@ ProductsForm.propTypes = {
   resetForm: PropTypes.func,
   updateCategoryInStore: PropTypes.func,
   updateBrandInStore: PropTypes.func,
+  updateOptionTypeIdsInStore: PropTypes.func,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.node,

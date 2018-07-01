@@ -31,6 +31,13 @@ export const brandsRoute = () => {
   }
 }
 
+export const optionTypesRoute = () => {
+  return {
+    method: GET,
+    url: '/api/v1/admin/option_types'
+  }
+}
+
 export const createProductRoute = (product) => {
   return {
     method: POST,

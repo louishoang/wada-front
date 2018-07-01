@@ -7,5 +7,6 @@ export const initialAdminProductState = {
   meta_keywords: [],
   meta_description: null,
   category_id: null,
-  brand_id: null
+  brand_id: null,
+  option_type_ids: []
 }
