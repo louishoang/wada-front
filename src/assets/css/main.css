@@ -394,3 +394,7 @@ form#main-search-form .search-rounded {
 .no-paddingl{
 	padding-left: 0px
 }
+
+.width-100{
+	max-width: 100px;
+}

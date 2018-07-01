@@ -13,17 +13,24 @@ const DEFAULT_PAGE_SIZE = 25
 class OptionTypeTable extends Component{
   constructor(){
     super();
+    this.state = {
+      loading: true
+    }
     this.fetchOptionTypes = this.fetchOptionTypes.bind(this)
   }
 
   fetchOptionTypes(state) {
     const { dispatchAdminOptionTypesSucceeded } = this.props
     getOptiontypes(state.pageSize, state.page, state.sortBy, state.order)
-      .then(res => dispatchAdminOptionTypesSucceeded(res.data))
+      .then(res => {
+        this.setState({ loading: false })
+        dispatchAdminOptionTypesSucceeded(res.data)}
+      )
   }
 
   render(){
     const { match, optionTypes: data } = this.props
+    const { loading } = this.state
 
     const columns = [{
       Header: 'NAME',
@@ -49,6 +56,7 @@ class OptionTypeTable extends Component{
         </div>
         <div className="row pt-20">
           <ReactTable
+            loading={loading}
             manual // Forces table not to paginate or sort automatically, so we can handle it server-side
             data={data}
             pages={ReactTableHelper.pageCount(length, DEFAULT_PAGE_SIZE)}
