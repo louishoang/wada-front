@@ -87,6 +87,9 @@ module.exports = {
   },
   callUpdateOptionType: (optionType) => {
     return makeRequest(ApiRouter.updateOptionTypeRoute(optionType)) 
+  },
+  fetchOptionTypes: () => {
+    return makeRequest(ApiRouter.optionTypesRoute()) 
   }
 }
 

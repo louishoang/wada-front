@@ -101,8 +101,8 @@ class ProductImagePage extends Component {
             <h3>Product Images</h3>
             <div className="col-8 columns pt-40 pt-sm-40 pl-20 no-paddingl">
               { 
-                product && product.images.length > 0 ? (
-                  <SortableList items={product.images}
+                product && product.product_images.length > 0 ? (
+                  <SortableList items={product.product_images}
                     useDragHandle={true} 
                     refreshProductData={refreshProductData}/>
                 // TODO: Need to send images position to the back-end after sorted
