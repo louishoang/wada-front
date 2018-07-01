@@ -97,7 +97,6 @@ class OptForm extends Component {
 
   render() {
     const { errors, handleSubmit, optionType, match } = this.props
-    console.log(optionType)
     return (
       <div>
         <FormError messages={errors} />
