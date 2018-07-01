@@ -13,7 +13,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 const defaultConfig = (authRequired = true) => {
   let config = {
     baseURL: baseURL,
-    timeout: 4000
+    timeout: 16000
   }
 
   let accessToken, email; 
@@ -81,6 +81,12 @@ module.exports = {
   },
   callCreateOptionType: (optionType) => {
     return makeRequest(ApiRouter.createOptionTypeRoute(optionType)) 
+  },
+  getOptionTypeDetails: (id) => {
+    return makeRequest(ApiRouter.getOptionTypeDetailsRoute(id)) 
+  },
+  callUpdateOptionType: (optionType) => {
+    return makeRequest(ApiRouter.updateOptionTypeRoute(optionType)) 
   }
 }
 

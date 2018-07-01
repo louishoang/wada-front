@@ -11,7 +11,7 @@ import * as ReactTableHelper from '../../../utils/ReactTableHelper';
 const DEFAULT_PAGE_SIZE = 25
 
 const badgeColor = (text) => {
-  if (text === 'Active'){
+  if (text === 'Active') {
     return 'badge-success'
   } else if (text === 'Deleted') {
     return 'badge-danger'
@@ -23,6 +23,9 @@ const badgeColor = (text) => {
 class ProductsTable extends Component {
   constructor() {
     super();
+    this.state = {
+      loading: true
+    }
     this.fetchProducts = this.fetchProducts.bind(this)
     this.deleteProduct = this.deleteProduct.bind(this)
   }
@@ -30,7 +33,10 @@ class ProductsTable extends Component {
   fetchProducts(state) {
     const { dispatchAdminProductsSucceeded } = this.props
     callProducts(state.pageSize, state.page, state.sortBy, state.order)
-      .then(res => dispatchAdminProductsSucceeded(res.data))
+      .then(res => {
+        this.setState({ loading: false })
+        dispatchAdminProductsSucceeded(res.data)
+      })
   }
 
   deleteProduct(e, id) {
@@ -41,12 +47,13 @@ class ProductsTable extends Component {
 
   render() {
     const { match, products: data } = this.props;
+    const { loading } = this.state
 
     const columns = [{
       Header: 'SKU',
       accessor: 'sku',
       maxWidth: 180
-    },{
+    }, {
       Header: 'NAME',
       accessor: 'name',
       minWidth: 500,
@@ -103,6 +110,7 @@ class ProductsTable extends Component {
         </div>
         <div className="row pt-20">
           <ReactTable
+            loading={loading}
             manual // Forces table not to paginate or sort automatically, so we can handle it server-side
             data={data}
             pages={ReactTableHelper.pageCount(length, DEFAULT_PAGE_SIZE)}

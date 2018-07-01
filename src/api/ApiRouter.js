@@ -121,3 +121,18 @@ export const createOptionTypeRoute = (optionType) => {
     data: { option_type: optionType }
   }
 }
+
+export const getOptionTypeDetailsRoute = (id) => {
+  return {
+    method: GET,
+    url: `/api/v1/admin/option_types/${id}`
+  }
+}
+
+export const updateOptionTypeRoute = (optionType) => {
+  return {
+    method: PUT,
+    url: `/api/v1/admin/option_types/${optionType.id}`,
+    data: { option_type: optionType }
+  }
+}
