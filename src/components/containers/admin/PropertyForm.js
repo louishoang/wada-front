@@ -7,16 +7,6 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-PropertyForm.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.node,
-    }).isRequired,
-  }).isRequired,
-  submitForm: PropTypes.func,
-  resetForm: PropTypes.func
-}
-
 class PropertyForm extends Component{
   constructor(){
     super();
@@ -80,5 +70,15 @@ const dispatchToProps = (dispatch) => ({
   submitForm: (promise) => dispatch(actions.submit('createProperty', promise)),
   resetForm: () => dispatch(actions.reset('forms.admin.property'))
 })
+
+PropertyForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+  submitForm: PropTypes.func,
+  resetForm: PropTypes.func
+}
 
 export default connect(null, dispatchToProps)(PropertyForm)
