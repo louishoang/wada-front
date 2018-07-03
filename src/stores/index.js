@@ -12,6 +12,7 @@ import { initialAdminOptionTypeState } from '../reducers/admin/OptionTypeFormRed
 import { initialLoginState, authReducer } from '../reducers/LoginReducer';
 import adminReducer from '../reducers/admin/AdminReducer';
 import isLoading from '../reducers/IsLoadingReducer';
+import { initialAdminVariantState } from '../reducers/admin/VariantReducer';
 // import reducers here
 
 var store
@@ -26,7 +27,8 @@ export default {
         login: initialLoginState,
         admin: {
           product: initialAdminProductState,
-          optionType: initialAdminOptionTypeState
+          optionType: initialAdminOptionTypeState,
+          variant: initialAdminVariantState
         }
       }, 'forms')
     })

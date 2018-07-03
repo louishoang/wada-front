@@ -31,10 +31,13 @@ export const brandsRoute = () => {
   }
 }
 
-export const optionTypesRoute = () => {
+export const optionTypesRoute = (search = {}) => {
+  let params = queryString.stringify(search)
+  let url = '/api/v1/admin/option_types'
+  if (params) { url = `${url}?${params}` }
   return {
     method: GET,
-    url: '/api/v1/admin/option_types'
+    url: url
   }
 }
 
@@ -105,9 +108,8 @@ export const deleteProductImageRoute = (id) => {
   }
 }
 
-
 export const getOptionTypesRoute = (pageSize, page, sortBy, order) => {
-  const params = {
+  let params = {
     page_size: pageSize,
     page: page,
     sort_by: sortBy,
@@ -141,5 +143,20 @@ export const updateOptionTypeRoute = (optionType) => {
     method: PUT,
     url: `/api/v1/admin/option_types/${optionType.id}`,
     data: { option_type: optionType }
+  }
+}
+
+export const createVariantRoute = (variant) => {
+  return {
+    method: POST,
+    url: '/api/v1/admin/variants',
+    data: { variant: variant }
+  }
+}
+
+export const deleteProductVariantRoute = (id) => {
+  return {
+    method: DELETE,
+    url: `/api/v1/admin/variants/${id}`
   }
 }
