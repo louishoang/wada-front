@@ -5,6 +5,17 @@ import { callCreateProperty } from '../../../api/Wada';
 import { getResponseErr } from '../../../utils/ResponseHelpers';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+PropertyForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+  submitForm: PropTypes.func,
+  resetForm: PropTypes.func
+}
 
 class PropertyForm extends Component{
   constructor(){
@@ -16,7 +27,7 @@ class PropertyForm extends Component{
   }
 
   handleSubmit(data){
-    const { submitForm, match, resetForm } = this.props;
+    const { submitForm, resetForm } = this.props;
 
     this.setState({ errors: [] })
     let createPropertyPromise = callCreateProperty(data)

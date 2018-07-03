@@ -88,12 +88,12 @@ class PropertiesTable extends Component{
   }
 }
 
-// PropertiesPage.propTypes = {
-//   match: PropTypes.shape({
-//     params: PropTypes.shape({
-//       id: PropTypes.node,
-//     }).isRequired,
-//   }).isRequired,
-// }
+PropertiesTable.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired
+}
 
 export default PropertiesTable
