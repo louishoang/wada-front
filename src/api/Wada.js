@@ -97,6 +97,15 @@ module.exports = {
   deleteProductVariant: (id) => {
     return makeRequest(ApiRouter.deleteProductVariantRoute(id))
   },
+  getProperties: () => {
+    return makeRequest(ApiRouter.getPropertiesRoute())
+  },
+  callDeleteProperty: (id) => {
+    return makeRequest(ApiRouter.deletePropertyRoute(id))
+  },
+  callCreateProperty: (property) => {
+    return makeRequest(ApiRouter.createPropertyRoute(property)) 
+  },
 }
 
 // Do something before request is sent

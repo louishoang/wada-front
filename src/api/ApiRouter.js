@@ -160,3 +160,25 @@ export const deleteProductVariantRoute = (id) => {
     url: `/api/v1/admin/variants/${id}`
   }
 }
+
+export const getPropertiesRoute = () => {
+  return {
+    method: GET,
+    url: `/api/v1/admin/properties`
+  }
+}
+
+export const deletePropertyRoute = (id) => {
+  return {
+    method: DELETE,
+    url: `/api/v1/admin/properties/${id}`
+  }
+}
+
+export const createPropertyRoute = (property) => {
+  return {
+    method: POST,
+    url: '/api/v1/admin/properties',
+    data: { property: property }
+  }
+}

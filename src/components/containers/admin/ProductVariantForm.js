@@ -49,6 +49,7 @@ class ProductVariantForm extends Component {
     const { submitForm, match, resetForm } = this.props;
 
     this.setState({ errors: [] })
+    // #TODO what is 123?
     let createVariantPromise = callCreateVariant(variant, 123)
       .then(() => {
         resetForm()

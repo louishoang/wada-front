@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import AdminIndex from '../admin/AdminIndex';
 import ProductPage from '../admin/ProductPage';
 import OptionTypesPage from '../admin/OptionTypesPage';
+import PropertiesPage from '../admin/PropertiesPage';
 import '../../../assets/css/admin.css';
 import SideBar from './SideBar';
 import PropTypes from 'prop-types';
@@ -27,6 +28,7 @@ class AdminPage extends Component {
                 <Route exact path={`${match.url}`} component={AdminIndex} />
                 <Route path={`${match.url}/products`} component={ProductPage} />
                 <Route path={`${match.url}/option_types`} component={OptionTypesPage} />
+                <Route path={`${match.url}/properties`} component={PropertiesPage} />
               </Switch>
             </div>
           </div>
