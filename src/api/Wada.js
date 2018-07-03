@@ -88,9 +88,15 @@ module.exports = {
   callUpdateOptionType: (optionType) => {
     return makeRequest(ApiRouter.updateOptionTypeRoute(optionType)) 
   },
-  fetchOptionTypes: () => {
-    return makeRequest(ApiRouter.optionTypesRoute()) 
-  }
+  fetchOptionTypes: (search = {}) => {
+    return makeRequest(ApiRouter.optionTypesRoute(search)) 
+  },
+  callCreateVariant: (variant) => {
+    return makeRequest(ApiRouter.createVariantRoute(variant))
+  },
+  deleteProductVariant: (id) => {
+    return makeRequest(ApiRouter.deleteProductVariantRoute(id))
+  },
 }
 
 // Do something before request is sent

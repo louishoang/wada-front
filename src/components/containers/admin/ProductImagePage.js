@@ -1,45 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import { config as wadaConfig, deleteProductImage } from '../../../api/Wada';
+import { config as wadaConfig } from '../../../api/Wada';
 import { postProductImagesRoute } from '../../../api/ApiRouter';
-import { SortableContainer, SortableElement, SortableHandle} from 'react-sortable-hoc';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
-const DragHandle = SortableHandle(() => <i className="fas fa-arrows-alt icon-spr"></i>);
-
-const SortableItem = SortableElement(({value, refreshProductData}) => {
-  return (
-    <li className="list-group-item sortable-item">
-      <div className="row">
-        <div className="col-2 flex-center">
-          <DragHandle />
-        </div>
-        <div className="col-8 flex-center">
-          <img src={value.url} alt="Product image" />
-        </div>
-        <div className="col-2 flex-center">
-          <Link className="btn btn-sm icon-spr"
-            to="#"
-            onClick={() => deleteProductImage(value.id).then(()=> refreshProductData())} >
-            <i className="fas fa-times icon-red icon-s25"></i>
-          </Link>
-        </div>
-      </div>
-    </li>
-  )
-})
-
-const SortableList = SortableContainer(({items, refreshProductData}) => {
-  return (
-    <ul className="list-group sortable-list">
-      {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value} refreshProductData={refreshProductData}/>
-      ))}
-    </ul>
-  );
-});
+import { SortableList } from '../../presentations/sortable/SortableList';
 
 class ProductImagePage extends Component {
   constructor() {
@@ -103,6 +68,7 @@ class ProductImagePage extends Component {
               { 
                 product && product.product_images.length > 0 ? (
                   <SortableList items={product.product_images}
+                    modelTypes="productImage"
                     useDragHandle={true} 
                     refreshProductData={refreshProductData}/>
                 // TODO: Need to send images position to the back-end after sorted

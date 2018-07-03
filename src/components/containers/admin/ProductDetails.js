@@ -6,9 +6,10 @@ import { getProductDetails } from '../../../api/Wada';
 import { actions } from 'react-redux-form';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import ProductImagePage from './ProductImagePage';
+import ProductVariantPage from './ProductVariantPage';
 
-class ProductDetails extends Component{
-  constructor(){
+class ProductDetails extends Component {
+  constructor() {
     super();
     this.state = {
       product: null
@@ -29,18 +30,21 @@ class ProductDetails extends Component{
       })
   }
 
-  render(){
+  render() {
     const { match } = this.props
     const { product } = this.state
 
-    return(
+    return (
       <div className="row">
         <div className="col-10 columns">
           <Switch>
-            <Route exact path={`${match.url}`} component={ProductForm}/>
+            <Route exact path={`${match.url}`} component={ProductForm} />
             <Route path={`${match.url}/images`} render={() => (
-              <ProductImagePage {...this.props} product={product} refreshProductData={this.refreshProductData}/>
-            )}/>
+              <ProductImagePage {...this.props} product={product} refreshProductData={this.refreshProductData} />
+            )} />
+            <Route path={`${match.url}/variants`} render={() => (
+              <ProductVariantPage {...this.props} product={product} refreshProductData={this.refreshProductData}/>
+            )} />
           </Switch>
         </div>
         <div className="col-2 columns">
