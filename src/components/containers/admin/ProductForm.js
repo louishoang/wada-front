@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Control, Form, actions } from 'react-redux-form';
-import { fetchCategories,
+import {
+  fetchCategories,
   fetchBrands,
   callCreateProduct,
   callUpdateProduct,
-  fetchOptionTypes } from '../../../api/Wada';
+  fetchOptionTypes
+} from '../../../api/Wada';
 import FormError from '../../presentations/FormError';
 import DateField from '../../../utils/DateField';
 import AsyncSelect from 'react-select/lib/Async';
@@ -12,25 +14,24 @@ import { connect } from 'react-redux';
 import { getResponseErr } from '../../../utils/ResponseHelpers';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import * as constants from '../../../constants';
+import * as ReactSelectHelpers from '../../../utils/ReactSelectHelpers'
 
 class ProductsForm extends Component {
   constructor() {
     super()
     this.state = {
       errors: [],
-      categories: null,
-      brands: null,
+      categories: [],
+      brands: [],
       option_types: [],
       productDetailsRoute: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.filterCategory = this.filterCategory.bind(this)
-    this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.filterBrands = this.filterBrands.bind(this)
-    this.handleBrandChange = this.handleBrandChange.bind(this)
-    this.selectedValue = this.selectedValue.bind(this)
     this.filterOptionTypes = this.filterOptionTypes.bind(this)
-    this.handleOptionTypeChange = this.handleOptionTypeChange.bind(this)
+    this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
   createForm(match) {
@@ -47,7 +48,7 @@ class ProductsForm extends Component {
   handleSubmit(product) {
     const { submitForm, match } = this.props;
     this.setState({ errors: [] })
-    let createProductPromise = (this.createForm(match) ? callCreateProduct(product): callUpdateProduct(product))
+    let createProductPromise = (this.createForm(match) ? callCreateProduct(product) : callUpdateProduct(product))
       .then((res) => {
         if (this.createForm(match)) {
           this.setState({ productDetailsRoute: `/admin/products/${res.data.id}` })
@@ -62,12 +63,10 @@ class ProductsForm extends Component {
   filterOptionTypes(inputValue, callback) {
     fetchOptionTypes()
       .then(res => {
-        let options = res.data.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
-          .map(i => {
-            const label = `${i.display_name} (${i.name})`
-            return { value: i.id, label: label }
-          })
-        this.setState({ option_types: options })
+        this.setState({ option_types: res.data })
+        let options = res.data.filter(i => {
+          return i.name.toLowerCase().includes(inputValue.toLowerCase()) || i.display_name.toLowerCase().includes(inputValue.toLowerCase())
+        }).map(i => ReactSelectHelpers.formatForSelect2(i, constants.OPTION_TYPE))
         callback(options)
       })
   }
@@ -75,12 +74,9 @@ class ProductsForm extends Component {
   filterCategory(inputValue, callback) {
     fetchCategories()
       .then(res => {
+        this.setState({ categories: res.data })
         let options = res.data.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
-          .map(i => {
-            const label = i.parent_name !== '' ? `${i.name} - (${i.parent_name})` : i.name
-            return { value: i.id, label: label }
-          })
-        this.setState({ categories: options })
+          .map(i => ReactSelectHelpers.formatForSelect2(i, constants.CATEGORY))
         callback(options)
       })
   }
@@ -88,31 +84,23 @@ class ProductsForm extends Component {
   filterBrands(inputValue, callback) {
     fetchBrands()
       .then(res => {
+        this.setState({ brands: res.data })
         let options = res.data.filter(i => i.name.toLowerCase().includes(inputValue.toLowerCase()))
-          .map(i => { return { value: i.id, label: i.name } })
-        this.setState({ brands: options })
+          .map(i => ReactSelectHelpers.formatForSelect2(i, constants.BRAND))
         callback(options)
       })
   }
 
-  handleCategoryChange(inputValue) {
-    this.props.updateCategoryInStore(inputValue.value)
-  }
+  handleSelectChange(inputValue, type){
+    const { updateCategoryInStore, updateBrandInStore, updateOptionTypeIdsInStore} = this.props
 
-  handleBrandChange(inputValue) {
-    this.props.updateBrandInStore(inputValue.value)
-  }
-
-  handleOptionTypeChange(inputValue) {
-    const selected = inputValue.map(v => v.value)
-    this.props.updateOptionTypeIdsInStore(selected)
-  }
-
-  selectedValue(options, selected) {
-    const selectedValues = Array.isArray(selected) ? selected : [selected]
-    if (options) {
-      return options.filter(item => selectedValues.includes(item.value));
-    }
+    switch(type){
+    case constants.CATEGORY: { return updateCategoryInStore(inputValue.value) }
+    case constants.BRAND: {return updateBrandInStore(inputValue.value) }
+    case constants.OPTION_TYPE: {
+      const selected = inputValue.map(v => v.value)
+      return updateOptionTypeIdsInStore(selected)
+    }}
   }
 
   render() {
@@ -154,8 +142,8 @@ class ProductsForm extends Component {
               cacheOptions
               loadOptions={this.filterOptionTypes}
               defaultOptions
-              onChange={this.handleOptionTypeChange}
-              value={this.selectedValue(option_types, product.option_type_ids)}
+              onChange={input => this.handleSelectChange(input, constants.OPTION_TYPE)}
+              value={ReactSelectHelpers.selectedValue(option_types, product.option_type_ids, constants.OPTION_TYPE)}
             />
             <Control.text model="forms.admin.product.option_type_ids" hidden />
           </div>
@@ -165,8 +153,8 @@ class ProductsForm extends Component {
               cacheOptions
               loadOptions={this.filterCategory}
               defaultOptions
-              onChange={this.handleCategoryChange}
-              value={this.selectedValue(categories, product.category_id)}
+              onChange={input => this.handleSelectChange(input, constants.CATEGORY)}
+              value={ReactSelectHelpers.selectedValue(categories, product.category_id, constants.CATEGORY)}
             />
             <Control.text model="forms.admin.product.category_id" hidden />
           </div>
@@ -176,8 +164,8 @@ class ProductsForm extends Component {
               cacheOptions
               loadOptions={this.filterBrands}
               defaultOptions
-              onChange={this.handleBrandChange}
-              value={this.selectedValue(brands, product.brand_id)}
+              onChange={input => this.handleSelectChange(input, constants.BRAND)}
+              value={ReactSelectHelpers.selectedValue(brands, product.brand_id, constants.BRAND)}
             />
             <Control.text model="forms.admin.product.brand_id" hidden />
           </div>
