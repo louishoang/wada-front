@@ -12,10 +12,9 @@ import DateField from '../../../utils/DateField';
 import AsyncSelect from 'react-select/lib/Async';
 import { connect } from 'react-redux';
 import { getResponseErr } from '../../../utils/ResponseHelpers';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as constants from '../../../constants';
-import * as ReactSelectHelpers from '../../../utils/ReactSelectHelpers'
+import * as ReactSelectHelpers from '../../../utils/ReactSelectHelpers';
 
 class ProductsForm extends Component {
   constructor() {
@@ -25,7 +24,6 @@ class ProductsForm extends Component {
       categories: [],
       brands: [],
       option_types: [],
-      productDetailsRoute: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.filterCategory = this.filterCategory.bind(this)
@@ -46,17 +44,11 @@ class ProductsForm extends Component {
   }
 
   handleSubmit(product) {
-    const { submitForm, match } = this.props;
+    const { submitForm, match, history } = this.props;
     this.setState({ errors: [] })
     let createProductPromise = (this.createForm(match) ? callCreateProduct(product) : callUpdateProduct(product))
-      .then((res) => {
-        if (this.createForm(match)) {
-          this.setState({ productDetailsRoute: `/admin/products/${res.data.id}` })
-        }
-      })
-      .catch(err => {
-        this.setState({ errors: getResponseErr(err) })
-      })
+      .then((res) => history.push(`/admin/products/${res.data.id}`))
+      .catch(err => this.setState({ errors: getResponseErr(err) }))
     submitForm(createProductPromise)
   }
 
@@ -91,12 +83,12 @@ class ProductsForm extends Component {
       })
   }
 
-  handleSelectChange(inputValue, type){
-    const { updateCategoryInStore, updateBrandInStore, updateOptionTypeIdsInStore} = this.props
+  handleSelectChange(inputValue, type) {
+    const { updateCategoryInStore, updateBrandInStore, updateOptionTypeIdsInStore } = this.props
 
-    switch(type){
+    switch (type) {
     case constants.CATEGORY: { return updateCategoryInStore(inputValue.value) }
-    case constants.BRAND: {return updateBrandInStore(inputValue.value) }
+    case constants.BRAND: { return updateBrandInStore(inputValue.value) }
     case constants.OPTION_TYPE: {
       const selected = inputValue.map(v => v.value)
       return updateOptionTypeIdsInStore(selected)
@@ -104,10 +96,8 @@ class ProductsForm extends Component {
   }
 
   render() {
-    const { errors, productDetailsRoute, categories, brands, option_types } = this.state
-    const { product } = this.props
-
-    if (productDetailsRoute) { return <Redirect to={{ pathname: productDetailsRoute }} /> }
+    const { errors, categories, brands, option_types } = this.state
+    const { product, loading } = this.props
 
     return (
       <div>
@@ -122,8 +112,7 @@ class ProductsForm extends Component {
               id="product-name"
               className="form-control"
               placeholder="Product's name"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="product-description">Description</label>
@@ -132,7 +121,6 @@ class ProductsForm extends Component {
               className="form-control"
               placeholder="Product's description"
               required
-              validateOn="blur"
               rows="10" />
           </div>
           <div className="form-group">
@@ -175,8 +163,7 @@ class ProductsForm extends Component {
               id="product-keywords"
               className="form-control"
               placeholder="Product's Keywords"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="product-available-at">Available At</label>
@@ -185,8 +172,7 @@ class ProductsForm extends Component {
               id="product-available-at"
               className="form-control"
               placeholder="Available At"
-              requireds
-              validateOn="blur" />
+              requireds />
           </div>
           <div className="form-group">
             <label htmlFor="product-deleted-at">Deleted At</label>
@@ -195,8 +181,7 @@ class ProductsForm extends Component {
               id="product-deleted-at"
               className="form-control"
               placeholder="Deleted At"
-              required
-              validateOn="blur" />
+              required />
             <span className="errors small form-text">* Deleted At is automatically set to current time if not specified</span>
           </div>
           <div className="form-group">
@@ -205,8 +190,7 @@ class ProductsForm extends Component {
               id="product-meta-keywords"
               className="form-control"
               placeholder="Meta Keywords"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="product-meta-description">Meta Description</label>
@@ -214,10 +198,17 @@ class ProductsForm extends Component {
               id="product-meta-description"
               className="form-control"
               placeholder="Meta Description"
-              required
-              validateOn="blur" />
+              required />
           </div>
-          <input type="submit" value="Submit" className="btn btn-success" />
+          <button id="submit-button" type="submit" className="btn btn-success" disabled={loading}>
+            <span id="submit-text">Submit</span>
+            <div className="submit-spinner">
+              <span className="icon-spr">Loading</span>
+              <div className="bounce1"></div>
+              <div className="bounce2"></div>
+              <div className="bounce3"></div>
+            </div>
+          </button>
         </Form>
       </div>
     )
@@ -225,7 +216,8 @@ class ProductsForm extends Component {
 }
 
 const stateToProps = (state) => ({
-  product: state.forms.admin.product
+  product: state.forms.admin.product,
+  loading: state.isLoading
 })
 
 const dispatchToProps = (dispatch) => {
@@ -251,7 +243,9 @@ ProductsForm.propTypes = {
       id: PropTypes.node,
     }).isRequired,
   }).isRequired,
-  product: PropTypes.shape
+  product: PropTypes.object,
+  loading: PropTypes.bool,
+  history: PropTypes.object,
 }
 
 export default connect(stateToProps, dispatchToProps)(ProductsForm)

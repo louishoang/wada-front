@@ -10,6 +10,12 @@ class ProductPage extends Component {
     super()
   }
 
+  componentDidUpdate(prevProps){
+    if (this.props.location.key !== prevProps.location.key) {
+      window.scrollTo(0, 0)
+    }
+  }
+
   render() {
     const { match } = this.props
     return (
@@ -30,6 +36,7 @@ ProductPage.propTypes = {
       id: PropTypes.node,
     }).isRequired,
   }).isRequired,
+  location: PropTypes.object
 }
 
 export default ProductPage

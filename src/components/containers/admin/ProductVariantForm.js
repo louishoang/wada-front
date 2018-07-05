@@ -167,7 +167,7 @@ class ProductVariantForm extends Component {
 }
 
 ProductVariantForm.propTypes = {
-  product: PropTypes.shape,
+  product: PropTypes.object,
   setDefaultProductId: PropTypes.func,
   resetForm: PropTypes.func,
   submitForm: PropTypes.func,
