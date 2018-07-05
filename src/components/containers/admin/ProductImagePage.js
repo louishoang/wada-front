@@ -89,7 +89,7 @@ ProductImagePage.propTypes = {
     }).isRequired,
   }).isRequired,
   refreshProductData: PropTypes.func,
-  product: PropTypes.shape
+  product: PropTypes.object
 }
 
 export default ProductImagePage

@@ -67,7 +67,7 @@ ProductVariantTable.propTypes = {
       id: PropTypes.node,
     }).isRequired,
   }).isRequired,
-  product: PropTypes.func
+  product: PropTypes.object
 }
 
 export default connect(null, null)(ProductVariantTable)

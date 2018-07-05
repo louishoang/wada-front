@@ -33,7 +33,7 @@ ProductVariantPage.propTypes = {
       id: PropTypes.node,
     }).isRequired,
   }).isRequired,
-  product: PropTypes.shape,
+  product: PropTypes.object,
   refreshProductData: PropTypes.func
 }
 
