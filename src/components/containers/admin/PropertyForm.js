@@ -36,7 +36,7 @@ class PropertyForm extends Component{
 
     return(
       <div>
-        <h3 className="mb-20">Create New Variant</h3>
+        <h3 className="mb-20">Create New Property</h3>
         <FormError messages={errors} />
         <Form model="forms.admin.property"
           className="contact-form"

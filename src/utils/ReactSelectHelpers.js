@@ -10,6 +10,9 @@ export const formatForSelect2 = (item, type) => {
     const label = item.parent_name !== '' ? `${item.name} - (${item.parent_name})` : item.name
     return { value: item.id, label: label }
   }
+  case constants.PRODUCT_PROPERTY: {
+    return { value: item.id, label: item.display_name }
+  }
   default: { return { value: item.id, label: item.name } }
   }
 }

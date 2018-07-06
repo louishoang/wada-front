@@ -14,6 +14,7 @@ import adminReducer from '../reducers/admin/AdminReducer';
 import isLoading from '../reducers/IsLoadingReducer';
 import { initialAdminVariantState } from '../reducers/admin/VariantReducer';
 import { initialAdminPropertyState } from '../reducers/admin/PropertyReducer';
+import { initialAdminProductPropertyState } from '../reducers/admin/ProductPropertyReducer';
 // import reducers here
 
 var store
@@ -30,7 +31,8 @@ export default {
           product: initialAdminProductState,
           optionType: initialAdminOptionTypeState,
           variant: initialAdminVariantState,
-          property: initialAdminPropertyState
+          property: initialAdminPropertyState,
+          productProperties: initialAdminProductPropertyState
         }
       }, 'forms')
     })

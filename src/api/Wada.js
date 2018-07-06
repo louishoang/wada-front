@@ -106,6 +106,12 @@ module.exports = {
   callCreateProperty: (property) => {
     return makeRequest(ApiRouter.createPropertyRoute(property)) 
   },
+  callGetProductProperties: (productId) => {
+    return makeRequest(ApiRouter.getProductProperties(productId)) 
+  },
+  callUpdateProductProperties: (properties) => {
+    return makeRequest(ApiRouter.updateProductProperties(properties)) 
+  }
 }
 
 // Do something before request is sent

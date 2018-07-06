@@ -7,10 +7,11 @@ import { actions } from 'react-redux-form';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import ProductImagePage from './ProductImagePage';
 import ProductVariantPage from './ProductVariantPage';
+import ProductProperties from './ProductProperties';
 
 class ProductDetails extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       product: null
     },
@@ -44,6 +45,9 @@ class ProductDetails extends Component {
             )} />
             <Route path={`${match.url}/variants`} render={() => (
               <ProductVariantPage {...this.props} product={product} refreshProductData={this.refreshProductData}/>
+            )} />
+            <Route path={`${match.url}/properties`} render={() => (
+              <ProductProperties {...this.props} product={product} refreshProductData={this.refreshProductData}/>
             )} />
           </Switch>
         </div>
