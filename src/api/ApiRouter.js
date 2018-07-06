@@ -182,3 +182,21 @@ export const createPropertyRoute = (property) => {
     data: { property: property }
   }
 }
+
+export const getProductProperties = (productId) => {
+  return {
+    method: GET,
+    url: `/api/v1/admin/product_properties?product_id=${productId}`
+  }
+}
+
+export const updateProductProperties = (data) => {
+  return {
+    method: POST,
+    url: `/api/v1/admin/product_properties/update_from_product`,
+    data: {
+      id: data.product_id,
+      product_properties_attributes: data.product_properties
+    }
+  }
+}

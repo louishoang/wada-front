@@ -15,8 +15,14 @@ const SortableVariant = SortableElement(({ value, refreshProductData }) => {
         <div className="col-2 flex-center">
           {value.sku}
         </div>
-        <div className="col-6 flex-center">
-          {value.name}
+        <div className="col-4 flex-center">
+          {value.name} - ({value.option_value_names})
+        </div>
+        <div className="col-2 flex-center">
+          {value.price}
+        </div>
+        <div className="col-1 flex-center">
+          {value.master ? 'Master' : ''}
         </div>
         <div className="col-2 flex-center">
           <Link className="btn btn-sm icon-spr"

@@ -14,3 +14,4 @@ export const GET_ADMIN_OPTION_TYPES_SUCCEEDED = 'GET_ADMIN_OPTION_TYPES_SUCCEEDE
 export const OPTION_TYPE = 'OptionType'
 export const CATEGORY = 'Category'
 export const BRAND = 'Brand'
+export const PRODUCT_PROPERTY = 'Product Property'
