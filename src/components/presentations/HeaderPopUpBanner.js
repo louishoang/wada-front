@@ -5,14 +5,23 @@ class HeaderPopUpBanner extends Component {
   constructor() {
     super()
     this.state = {
-      hidden: sessionStorage.getItem('showHeaderPopUp') || false
+      hidden: this.showPopUp()
     }
     this.hidePopUp = this.hidePopUp.bind(this)
   }
 
+  showPopUp(){
+    const expiredAt = localStorage.getItem('hideHeaderPopUpUntil')
+    if(!expiredAt) { return false }
+    return new Date().getTime() < expiredAt
+  }
+
   hidePopUp() {
     this.setState({ hidden: true })
-    sessionStorage.setItem('showHeaderPopUp', true);
+
+    const expiration = 1 * 24 * 60 * 60 * 1000 // 1 DAY
+    const expiredAt = new Date().getTime() + expiration
+    localStorage.setItem('hideHeaderPopUpUntil', expiredAt);
   }
 
   render() {
