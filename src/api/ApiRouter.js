@@ -195,7 +195,7 @@ export const updateProductProperties = (data) => {
     method: POST,
     url: `/api/v1/admin/product_properties/update_from_product`,
     data: {
-      id: data.product_id,
+      product_id: data.product_id,
       product_properties_attributes: data.product_properties
     }
   }
