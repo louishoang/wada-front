@@ -303,7 +303,7 @@ form#main-search-form .search-rounded {
 	right: 25px;
 }
 
-.slick-prev:before, .slick-next:before{
+#main-slider .slick-prev:before, .slick-next:before{
 	font-family: 'slick';
 	font-size: 45px;
 	line-height: 1;
@@ -313,11 +313,91 @@ form#main-search-form .search-rounded {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.slick-slide img{
+#main-slider .slick-slide img{
 	display: block;
 	width: 100%;
 	height: 100%;
 }
+
+.one-x-five-slider{
+	position: relative;
+}
+
+.one-x-five-slider .slick-slide img{
+	display: block;
+	width: 216px;
+	height: 216px;
+}
+
+.one-x-five-slider .single-product{
+	width: 100%;
+	max-width: 216px;
+	display: inline-block;
+}
+
+.one-x-five-slider .actions-secondary a i{
+	color: #363636;
+	float: left;
+	font-size: 25px;
+	width: 28px;
+}
+
+.one-x-five-slider .slider-nav{
+	position: absolute;
+	right: 0px;
+	margin-top: -45px;
+}
+
+.tab-menu.no-mg-right{
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	margin-right: 0px;
+}
+
+.button-nav {
+	background: #fff none repeat scroll 0 0;
+	border-radius: 3px;
+	font-size: 14px;
+	height: 33px;
+	line-height: 33px;
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	border: 1px solid #cbcbcb;
+	transition: all 300ms ease-in 0s;
+	width: 33px;
+	-webkit-transition: all 300ms ease-in 0s;
+	transition: all 300ms ease-in 0s;
+	z-index: 55;
+}
+
+.one-x-five-slider .actions-secondary a span{
+	color: #363636;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 15px;
+	padding-left: 7px;
+	vertical-align: -4px;
+	white-space: normal;
+	width: calc(100% - 28px);
+	margin-top: 5px;
+}
+
+.one-x-five-slider .single-product .actions-secondary a:hover span,
+.one-x-five-slider .single-product .actions-secondary a:hover i
+{
+	color: red;
+	transform: scale(1);
+	opacity: 1;
+}
+
 
 .pagination-bottom {
 	height: fit-content;
