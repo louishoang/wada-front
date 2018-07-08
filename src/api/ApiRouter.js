@@ -200,3 +200,10 @@ export const updateProductProperties = (data) => {
     }
   }
 }
+
+export const featuredProductsRoute = () => {
+  return {
+    method: GET,
+    url: '/api/v1/home'
+  }
+}

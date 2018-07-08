@@ -111,6 +111,9 @@ module.exports = {
   },
   callUpdateProductProperties: (properties) => {
     return makeRequest(ApiRouter.updateProductProperties(properties)) 
+  },
+  getFeaturedProducts: () => {
+    return makeRequest(ApiRouter.featuredProductsRoute()) 
   }
 }
 
