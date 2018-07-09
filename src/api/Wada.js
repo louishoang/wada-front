@@ -60,7 +60,14 @@ module.exports = {
     return makeRequest(ApiRouter.updateProductRoute(product))
   },
   callProducts: (pageSize, page, sortBy, order) => {
-    return makeRequest(ApiRouter.getProductsRoute(pageSize, page, sortBy, order))
+    const params = {
+      page_size: pageSize,
+      page: page,
+      sort_by: sortBy,
+      order: order
+    }
+
+    return makeRequest(ApiRouter.getProductsRoute(params))
   },
   deleteProduct: (id) => {
     return makeRequest(ApiRouter.deleteProductRoute(id))
@@ -114,6 +121,15 @@ module.exports = {
   },
   getFeaturedProducts: () => {
     return makeRequest(ApiRouter.featuredProductsRoute()) 
+  },
+  fetchNewArrivalsByCategory: (category) => {
+    const params = {
+      category_name: category,
+      page: 1,
+      per_page: 30,
+      sort_by: 'created_at DESC'
+    }
+    return makeRequest(ApiRouter.getProductsHomePageRoute(params)) 
   }
 }
 

@@ -8,7 +8,7 @@ class AdsBanner extends Component {
 
   render() {
     return (
-      <div className="image-banner pb-30 pt-30">
+      <div className="image-banner pb-30 pt-60">
         <div className="container">
           <div className="col-img">
             <Link to="/deals">
