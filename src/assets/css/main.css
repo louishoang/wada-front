@@ -319,8 +319,22 @@ form#main-search-form .search-rounded {
 	height: 100%;
 }
 
+.three-x-five-slider,
+.two-x-five-slider,
 .one-x-five-slider{
 	position: relative;
+}
+
+.three-x-five-slider .slick-slide img{
+	display: block;
+	width: 345px;
+	height: 345px;
+}
+
+.two-x-five-slider .slick-slide img{
+	display: block;
+	width: 210px;
+	height: 210px;
 }
 
 .one-x-five-slider .slick-slide img{
@@ -329,12 +343,28 @@ form#main-search-form .search-rounded {
 	height: 216px;
 }
 
+.three-x-five-slider .single-product{
+	width: 100%;
+	max-width: 345px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.two-x-five-slider .single-product{
+	width: 100%;
+	max-width: 210px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
 .one-x-five-slider .single-product{
 	width: 100%;
 	max-width: 216px;
 	display: inline-block;
 }
 
+.three-x-five-slider .single-product,
+.two-x-five-slider .actions-secondary a i,
 .one-x-five-slider .actions-secondary a i{
 	color: #363636;
 	float: left;
@@ -342,12 +372,50 @@ form#main-search-form .search-rounded {
 	width: 28px;
 }
 
+.three-x-five-slider .slider-nav{
+	position: absolute;
+	right: 0px;
+	margin-top: -55px;
+}
+
 .one-x-five-slider .slider-nav{
 	position: absolute;
 	right: 0px;
-	margin-top: -45px;
+	margin-top: -55px;
 }
 
+.two-x-five-slider .slider-nav{
+	position: absolute;
+	right: 10px;
+  margin-top: -70px;
+}
+
+.two-x-five-slider .slick-list{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.fit-content-height{
+	height: fit-content;
+}
+
+.hot-deal-products #hp-hot-deals {
+	height: fit-content;
+	overflow: hidden;
+}
+
+.fira-header {
+	font-family: 'Fira Sans', sans-serif;
+}
+
+.fs-25{
+	font-size: 25px !important;
+}
+
+.fs-30{
+	font-size: 30px !important;
+}
 .tab-menu.no-mg-right{
 	-webkit-box-align: center;
 	-ms-flex-align: center;
@@ -538,4 +606,17 @@ form#main-search-form .search-rounded {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
+}
+
+.mgr-30{
+	right: 30px;
+	position: relative;
+}
+
+.grey-bg{
+	background-color: #e1e1e1;
+}
+
+.grey-bdr-top{
+	border-top: 3px solid #cacaca;
 }

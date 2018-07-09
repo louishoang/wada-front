@@ -57,13 +57,7 @@ export const updateProductRoute = (product) => {
   }
 }
 
-export const getProductsRoute = (pageSize, page, sortBy, order) => {
-  const params = {
-    page_size: pageSize,
-    page: page,
-    sort_by: sortBy,
-    order: order
-  }
+export const getProductsRoute = (params={}) => {
   const url = `/api/v1/admin/products?${queryString.stringify(params)}`
 
   return {
@@ -205,5 +199,14 @@ export const featuredProductsRoute = () => {
   return {
     method: GET,
     url: '/api/v1/home'
+  }
+}
+
+export const getProductsHomePageRoute = (params={}) => {
+  const url = `/api/v1/home/new_arrivals?${queryString.stringify(params)}`
+
+  return {
+    method: GET,
+    url: url
   }
 }
