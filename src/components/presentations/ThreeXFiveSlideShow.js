@@ -67,7 +67,7 @@ class ThreeXFiveSlideShow extends Component {
               <div className="single-product" key={p.name}>
                 <div className="pro-img">
                   <Link to={`/products/${p.permalink}`}>
-                    <img src={p.product_images.length > 0 ? p.product_images[0].url : require('../../assets/img/products/1.jpg')}
+                    <img src={p.product_images.length > 0 ? p.product_images[0].square_url : require('../../assets/img/products/1.jpg')}
                       alt={p.name}
                       className="primary-img" />
                   </Link>
