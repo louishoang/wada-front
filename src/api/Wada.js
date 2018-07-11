@@ -101,6 +101,9 @@ module.exports = {
   callCreateVariant: (variant) => {
     return makeRequest(ApiRouter.createVariantRoute(variant))
   },
+  callUpdateVariant: (variant) => {
+    return makeRequest(ApiRouter.updateVariantRoute(variant))
+  },
   deleteProductVariant: (id) => {
     return makeRequest(ApiRouter.deleteProductVariantRoute(id))
   },

@@ -33,7 +33,7 @@ class ProductVariantTable extends Component {
     return (
       <div>
         <div className="row">
-          <Link to={{pathname: `${match.url}/variants/new`}}
+          <Link to={{pathname: `${match.url}/new`}}
             className="btn btn-success">
             <i className="fas fa-plus icon-spr5"></i>
               Add New Variant
@@ -46,6 +46,7 @@ class ProductVariantTable extends Component {
               { 
                 product && product.variants.length > 0 ? (
                   <SortableList items={product.variants}
+                    productPermalink={product.permalink}
                     modelTypes="variant"
                     useDragHandle={true} 
                     refreshProductData={refreshProductData}/>

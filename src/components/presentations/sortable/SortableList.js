@@ -5,7 +5,7 @@ import { deleteProductImage, deleteProductVariant } from '../../../api/Wada';
 
 const DragHandle = SortableHandle(() => <i className="fas fa-arrows-alt icon-spr"></i>);
 
-const SortableVariant = SortableElement(({ value, refreshProductData }) => {
+const SortableVariant = SortableElement(({ value, refreshProductData, productPermalink }) => {
   return (
     <li className="list-group-item sortable-item">
       <div className="row">
@@ -25,6 +25,10 @@ const SortableVariant = SortableElement(({ value, refreshProductData }) => {
           {value.master ? 'Master' : ''}
         </div>
         <div className="col-2 flex-center">
+          <Link className="btn btn-primary btn-sm icon-spr"
+            to={`/admin/products/${productPermalink}/variants/${value.id}`} >
+            <i className="fas fa-pencil-alt"></i>
+          </Link>
           <Link className="btn btn-sm icon-spr"
             to="#"
             onClick={() => deleteProductVariant(value.id).then(() => refreshProductData())} >
@@ -63,7 +67,10 @@ const components = {
   productImage: SortableImage
 };
 
-export const SortableList = SortableContainer(({ items, refreshProductData, modelTypes }) => {
+export const SortableList = SortableContainer(({ items, 
+  refreshProductData, 
+  modelTypes, 
+  productPermalink }) => {
   let SortableItemComponent = components[modelTypes]
 
   return (
@@ -72,7 +79,8 @@ export const SortableList = SortableContainer(({ items, refreshProductData, mode
         <SortableItemComponent key={`item-${index}`} 
           index={index} 
           value={value} 
-          refreshProductData={refreshProductData} />
+          refreshProductData={refreshProductData}
+          productPermalink={productPermalink} />
       ))}
     </ul>
   );

@@ -148,6 +148,14 @@ export const createVariantRoute = (variant) => {
   }
 }
 
+export const updateVariantRoute = (variant) => {
+  return {
+    method: PUT,
+    url: `/api/v1/admin/variants/${variant.id}`,
+    data: { variant: variant }
+  }
+}
+
 export const deleteProductVariantRoute = (id) => {
   return {
     method: DELETE,

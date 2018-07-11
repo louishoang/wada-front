@@ -15,11 +15,14 @@ class ProductVariantPage extends Component {
 
     return(
       <Switch>
-        <Route exact path={`${match.url}/variants`} render={() => (
+        <Route exact path={`${match.url}`} render={() => (
           <ProductVariantTable {...this.props} product={product} refreshProductData={refreshProductData} />
         )} />
-        <Route exact path={`${match.url}/variants/new`} render={() => (
-          <ProductVariantForm {...this.props} product={product} refreshProductData={refreshProductData} />
+        <Route exact path={`${match.url}/new`} render={(props) => (
+          <ProductVariantForm {...props} product={product} refreshProductData={refreshProductData} />
+        )} />
+        <Route path={`${match.url}/:id`} render={(props) => (
+          <ProductVariantForm {...props} product={product} refreshProductData={refreshProductData} />
         )} />
       </Switch>
     )
