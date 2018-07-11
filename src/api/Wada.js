@@ -130,6 +130,11 @@ module.exports = {
       sort_by: 'created_at DESC'
     }
     return makeRequest(ApiRouter.getProductsHomePageRoute(params)) 
+  },
+  public: {
+    getProductDetails: (id) => {
+      return makeRequest(ApiRouter.getPublicProductDetailsRoute(id)) 
+    },
   }
 }
 

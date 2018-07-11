@@ -620,3 +620,220 @@ form#main-search-form .search-rounded {
 .grey-bdr-top{
 	border-top: 3px solid #cacaca;
 }
+
+.wada-product .thumb-bg{
+	background: #fff;
+	padding: 20px;
+	border: none;
+}
+
+main-product-slider{
+	display: block;
+	z-index: 10;
+}
+
+.vertical-thumbnails{
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: -68px;
+	z-index: 99;
+}
+
+.vertical-thumbnails .slick-list{
+	max-width: 150px;
+	margin-top: 25px;
+	position: relative;
+}
+
+.vertical-thumbnails .slick-list .slick-track{
+	max-height: 500px;
+}
+
+.vertical-thumbnails .slick-list .slick-slide{
+	width: fit-content;
+	margin-bottom: 15px;
+}
+
+.vertical-thumbnails .slick-list img{
+	width: 80px;
+}
+
+.vertical-thumbnails .slick-prev{
+	font-size: 0;
+	line-height: 0;
+	position: absolute;
+	left: 35px;
+	top: -20%;
+	display: block;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	-webkit-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	cursor: pointer;
+	color: transparent;
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.vertical-thumbnails .slick-next{
+	font-size: 0;
+	line-height: 0;
+	position: absolute;
+	left: 30px;
+	top: 120%;
+	display: block;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	-webkit-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	cursor: pointer;
+	color: transparent;
+	border: none;
+	outline: none;
+	background: transparent;
+}
+
+.vertical-thumbnails .slick-prev:before,
+.vertical-thumbnails .slick-next:before{
+	content: '\2329';
+}
+
+.vertical-thumbnails .slick-prev:before,
+.vertical-thumbnails .slick-next:before{
+	font-family: 'Segoe UI Symbol';
+	font-size: 30px;
+	line-height: 1;
+	opacity: .25;
+	color: black;
+	font-weight: 900;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.vertical-thumbnails .slick-prev{
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.vertical-thumbnails .slick-next{
+	-webkit-transform: rotate(270deg);
+	-moz-transform: rotate(270deg);
+	-o-transform: rotate(270deg);
+	-ms-transform: rotate(270deg);
+	transform: rotate(270deg);
+}
+
+.sku{
+	padding-bottom: 5px;
+	padding-left: 2px;
+	font-family: Roboto;
+	font-weight: normal;
+	font-size: 14px;
+	text-transform: none;
+	color: #333333;
+	-webkit-font-smoothing: antialiased;
+}
+
+.pre-wrap{
+	white-space: pre-wrap;
+}
+
+.product-quantity-box .product-minus {
+	border-right: 0;
+	line-height: 42px;
+	font-size: 18px;
+}
+
+.icon-minus:before {
+	content: "-";
+	font-style: normal;
+	font-weight: normal;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1em;
+	margin-left: .15em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.in-stock{
+	font-size: 17px;
+	line-height: 1.255;
+	color: #4CBB76;
+	font-weight: 900;
+}
+
+.product-quantity-box .product-plus, .product-quantity-box .product-minus {
+	background: #f2f2f2;
+	font-weight: 300;
+	position: relative;
+	cursor: pointer;
+	height: 42px;
+	display: block;
+	width: 42px;
+	text-align: center;
+	float: left;
+}
+
+.product-quantity-box .quantity{
+	height: 42px;
+	text-align: center;
+	padding: 0px;
+	background-color: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	box-shadow: none;
+	color: #7a7a7a;
+	width: 70px;
+}
+
+.product-quantity-box .quantity, 
+.product-quantity-box .quantity:focus,
+.product-quantity-box .product-plus, 
+.product-quantity-box .product-minus {
+	border: #e2e2e2 1px solid;
+	color: #000;
+}
+
+.product-quantity-box .quantity, .product-quantity-box .quantity:focus, .product-quantity-box .product-plus, .product-quantity-box .product-minus {
+	border: #e2e2e2 1px solid;
+	color: #000;
+}
+
+.quantity-group{
+	display: table;
+}
+
+.quantity-item{
+	display: table-cell;
+}
+
+.product-quantity-box .product-minus {
+	border-right: 0;
+	line-height: 42px;
+	font-size: 18px;
+}
+
+.product-quantity-box .product-plus {
+	border-left: 0;
+	line-height: 42px;
+	font-size: 18px;
+	float: right;
+}
+
+.btn-add-to-cart{
+	min-width: 388px;
+}
