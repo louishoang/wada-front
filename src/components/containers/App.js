@@ -19,6 +19,7 @@ import LogoutPage from './LogoutPage';
 import AdminPage from '../containers/admin/AdminPage';
 import NotFoundPage from '../presentations/NotFoundPage';
 import PropTypes from 'prop-types';
+import ProductDetails from '../containers/public/ProductDetails';
 
 const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -61,6 +62,7 @@ class App extends Component {
             <Spinner />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/products/:id" component={ProductDetails}/>
               <Route path="/about" component={AboutUs} />
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />

@@ -210,3 +210,11 @@ export const getProductsHomePageRoute = (params={}) => {
     url: url
   }
 }
+
+export const getPublicProductDetailsRoute = (id) => {
+  return {
+    method: GET,
+    url: `/api/v1/products/${id}`
+  }
+}
+
