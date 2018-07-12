@@ -777,6 +777,13 @@ main-product-slider{
 	font-weight: 900;
 }
 
+.out-stock{
+	font-size: 17px;
+	line-height: 1.255;
+	color: red;
+	font-weight: 900;
+}
+
 .product-quantity-box .product-plus, .product-quantity-box .product-minus {
 	background: #f2f2f2;
 	font-weight: 300;
@@ -836,4 +843,13 @@ main-product-slider{
 
 .btn-add-to-cart{
 	min-width: 388px;
+}
+
+.badge-border-only{
+	font-size: 10px;
+	border: 1px solid #6c757d;
+	position: relative;
+	top: -2px;
+	color: black;
+	margin-left: 10px;
 }
