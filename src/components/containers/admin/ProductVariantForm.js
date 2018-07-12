@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Control, Form, actions } from 'react-redux-form';
 import FormError from '../../presentations/FormError';
-import { fetchOptionTypes, callCreateVariant } from '../../../api/Wada';
+import { fetchOptionTypes, callCreateVariant, callUpdateVariant } from '../../../api/Wada';
 import { connect } from 'react-redux';
 import DateField from '../../../utils/DateField';
 import { getResponseErr } from '../../../utils/ResponseHelpers';
@@ -20,19 +20,37 @@ class ProductVariantForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { product, setDefaultProductId } = this.props
+    const { product, setDefaultProductId, match, resetForm } = this.props
 
     if (prevProps.product !== product) {
       this.loadOptionTypes()
-      setDefaultProductId(product.id)
+      setDefaultProductId(product.id) 
+      this.populateVariantInfo(product)
     }
+
+    if(!match.params.id) { resetForm() }
   }
 
   componentDidMount() {
-    const { product, setDefaultProductId } = this.props
+    const { product, setDefaultProductId,match, resetForm } = this.props
+    
     this.loadOptionTypes()
     if(product){
       setDefaultProductId(product.id)
+      this.populateVariantInfo(product)
+    }
+    if(!match.params.id) { resetForm() }
+  }
+
+  populateVariantInfo(){
+    const { match, product, dispatchPopulateVariantInfo } = this.props
+    const variantId = match.params.id
+
+    if (!variantId) { return null } // No need to populate variant on create new variant form
+    const variant = product.variants.find(v => v.id === parseInt(variantId))
+
+    if(variant){
+      dispatchPopulateVariantInfo(variant)
     }
   }
 
@@ -46,38 +64,63 @@ class ProductVariantForm extends Component {
   }
 
   handleSubmit(variant) {
-    const { submitForm, match, resetForm } = this.props;
-
+    const { submitForm, match, resetForm, product, refreshProductData } = this.props;
     this.setState({ errors: [] })
-    // #TODO what is 123?
-    let createVariantPromise = callCreateVariant(variant, 123)
+    let createVariantPromise = (match.params.id ? callUpdateVariant(variant) : callCreateVariant(variant))
       .then(() => {
         resetForm()
-        this.setState({ productVariantsRoute: `/admin/products/${match.params.id}/variants` })
+        refreshProductData()
+        this.setState({ productVariantsRoute: `/admin/products/${product.permalink}/variants` })
       })
       .catch(err => this.setState({ errors: getResponseErr(err) }))
     submitForm(createVariantPromise)
   }
 
   handleOptionValuesChange() {
+    const { dispatchUpdateOptionValueIdsInStore } = this.props
     const elms = document.getElementsByClassName("option-values-select")
-    let option_value_ids = []
+    let optionValueIds = []
     for (let i = 0; i < elms.length; i++) {
       const selected = elms[i].options[elms[i].selectedIndex].value
-      if (selected !== '') { option_value_ids.push(selected) }
+      if (selected !== '') { optionValueIds.push(selected) }
     }
-    this.props.dispatch(actions.change('forms.admin.variant.option_value_ids', option_value_ids))
+    dispatchUpdateOptionValueIdsInStore(optionValueIds)
+  }
+
+  selectedValue(optionName, optionList, optionValueList) {
+    let selected = ''
+    let newValue = null
+
+    if (!optionValueList || ! optionList) { return '' }
+
+    const elm = document.getElementById(`option-values-select-${optionName}`)
+    
+    if(elm) { newValue = elm.value }
+
+    Object.entries(optionList).forEach(([key, value]) => {
+      if(key === optionName){ 
+        selected = optionValueList.find(v => v.display_name ==  value).id
+      }
+    })
+
+    if (selected && newValue){
+      return newValue
+    }else{
+      return  selected
+    }
   }
 
   render() {
-    const { errors } = this.props
+    const { errors, variant, match } = this.props
     const { optionTypes, productVariantsRoute } = this.state
 
     if (productVariantsRoute) { return <Redirect to={{ pathname: productVariantsRoute }} /> }
 
     return (
       <div>
-        <h3 className="mb-20">Create New Variant</h3>
+        <h3 className="mb-20">
+          {match.params.id === undefined ? 'Create New Variant' : 'Update Variant'}
+        </h3>
         <FormError messages={errors} />
         <Form model="forms.admin.variant"
           className="contact-form"
@@ -89,8 +132,10 @@ class ProductVariantForm extends Component {
                   <div key={option.id} className="form-group">
                     <label htmlFor={`option-${idx}-name`}>{option.display_name}</label>
                     <select
+                      id={`option-values-select-${option.display_name}`}
                       className="form-control option-values-select"
-                      onChange={() => this.handleOptionValuesChange()}>
+                      onChange={() => this.handleOptionValuesChange()}
+                      value={this.selectedValue(option.display_name, variant.option_list, option.option_values)}>
                       <option value=""></option>
                       {option.option_values.map(val => {
                         return (
@@ -113,8 +158,7 @@ class ProductVariantForm extends Component {
               id="variant-name"
               className="form-control"
               placeholder="Variant's name"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="variant-sku">SKU</label>
@@ -122,8 +166,7 @@ class ProductVariantForm extends Component {
               id="variant-sku"
               className="form-control"
               placeholder="SKU"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="variant-price">Price</label>
@@ -132,8 +175,7 @@ class ProductVariantForm extends Component {
               id="variant-price"
               className="form-control"
               placeholder="Price"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="variant-cost">Cost</label>
@@ -142,8 +184,7 @@ class ProductVariantForm extends Component {
               id="variant-cost"
               className="form-control"
               placeholder="Cost"
-              required
-              validateOn="blur" />
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="variant-deleted-at">Deleted At</label>
@@ -152,13 +193,45 @@ class ProductVariantForm extends Component {
               id="variant-deleted-at"
               className="form-control"
               placeholder="Deleted At"
-              required
-              validateOn="blur" />
+              required />
           </div>
-          <div className="field">
+
+          <Control.text hidden model="orms.admin.variant.inventory_id" />
+
+          <div className="form-group">
+            <label htmlFor="variant-inventory-count-on-hand">Count On Hand</label>
+            <Control model="forms.admin.variant.inventory_attributes.count_on_hand"
+              type="number"
+              id="variant-inventory-count-on-hand"
+              className="form-control"
+              placeholder="0"
+              required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="variant-inventory-vendor-link">Vendor Link</label>
+            <Control.textarea model="forms.admin.variant.inventory_attributes.vendor_link"
+              id="variant-inventory-vendor-link"
+              className="form-control"
+              placeholder="http://example.com"
+              required
+              rows="3" />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="variant-inventory-vendor-sku">Vendor SKU</label>
+            <Control.text model="forms.admin.variant.inventory_attributes.vendor_sku"
+              id="variant-inventory-vendor-sku"
+              className="form-control"
+              placeholder="SKU"
+              required />
+          </div>
+
+          <div className="field form-group">
             <label className="icon-spr">Master Variant</label>
             <Control.checkbox model="forms.admin.variant.master" />
           </div>
+
           <input type="submit" value="Submit" className="btn btn-success" />
         </Form>
       </div>
@@ -177,7 +250,11 @@ ProductVariantForm.propTypes = {
     }).isRequired,
   }).isRequired,
   dispatch: PropTypes.func,
-  errors: PropTypes.array
+  errors: PropTypes.array,
+  dispatchPopulateVariantInfo: PropTypes.func,
+  dispatchUpdateOptionValueIdsInStore: PropTypes.func,
+  variant: PropTypes.object,
+  refreshProductData: PropTypes.func
 }
 
 const stateToProps = (state) => {
@@ -189,7 +266,9 @@ const stateToProps = (state) => {
 const dispatchToProps = (dispatch) => ({
   submitForm: (promise) => dispatch(actions.submit('createVariant', promise)),
   setDefaultProductId: (id) => dispatch(actions.change('forms.admin.variant.product_id', id)),
-  resetForm: () => dispatch(actions.reset('forms.admin.variant'))
+  resetForm: () => dispatch(actions.reset('forms.admin.variant')),
+  dispatchPopulateVariantInfo: (variant) => dispatch(actions.change('forms.admin.variant', variant)),
+  dispatchUpdateOptionValueIdsInStore: (optionValueIds) => dispatch(actions.change('forms.admin.variant.option_value_ids', optionValueIds))
 })
 
 export default connect(stateToProps, dispatchToProps)(ProductVariantForm)

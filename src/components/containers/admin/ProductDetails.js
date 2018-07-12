@@ -43,8 +43,8 @@ class ProductDetails extends Component {
             <Route path={`${match.url}/images`} render={() => (
               <ProductImagePage {...this.props} product={product} refreshProductData={this.refreshProductData} />
             )} />
-            <Route path={`${match.url}/variants`} render={() => (
-              <ProductVariantPage {...this.props} product={product} refreshProductData={this.refreshProductData}/>
+            <Route path={`${match.url}/variants`} render={(props) => (
+              <ProductVariantPage {...props} product={product} refreshProductData={this.refreshProductData}/>
             )} />
             <Route path={`${match.url}/properties`} render={() => (
               <ProductProperties {...this.props} product={product} refreshProductData={this.refreshProductData}/>
