@@ -195,10 +195,43 @@ class ProductVariantForm extends Component {
               placeholder="Deleted At"
               required />
           </div>
-          <div className="field">
+
+          <Control.text hidden model="orms.admin.variant.inventory_id" />
+
+          <div className="form-group">
+            <label htmlFor="variant-inventory-count-on-hand">Count On Hand</label>
+            <Control model="forms.admin.variant.inventory_attributes.count_on_hand"
+              type="number"
+              id="variant-inventory-count-on-hand"
+              className="form-control"
+              placeholder="0"
+              required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="variant-inventory-vendor-link">Vendor Link</label>
+            <Control.textarea model="forms.admin.variant.inventory_attributes.vendor_link"
+              id="variant-inventory-vendor-link"
+              className="form-control"
+              placeholder="http://example.com"
+              required
+              rows="3" />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="variant-inventory-vendor-sku">Vendor SKU</label>
+            <Control.text model="forms.admin.variant.inventory_attributes.vendor_sku"
+              id="variant-inventory-vendor-sku"
+              className="form-control"
+              placeholder="SKU"
+              required />
+          </div>
+
+          <div className="field form-group">
             <label className="icon-spr">Master Variant</label>
             <Control.checkbox model="forms.admin.variant.master" />
           </div>
+
           <input type="submit" value="Submit" className="btn btn-success" />
         </Form>
       </div>
