@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isequal';
 
 class AsNavFor extends Component {
   constructor(props) {
@@ -77,8 +78,12 @@ class ProductDetails extends Component {
     super(props)
     this.state = {
       product: null,
-      optionList: []
+      optionList: [],
+      selectedVariant: null,
+      quantity: 1
     }
+    this.selectAppropriateVariant = this.selectAppropriateVariant.bind(this)
+    this.addItemToCart = this.addItemToCart.bind(this)
   }
 
   collectOptionList(product) {
@@ -102,12 +107,71 @@ class ProductDetails extends Component {
     PublicApi.getProductDetails(productId)
       .then(res => {
         const optionList = this.collectOptionList(res.data)
-        this.setState({ product: res.data, optionList: optionList })
+        this.setState({ 
+          product: res.data, 
+          optionList: optionList,
+          selectedVariant: res.data.variants.find(v => v.master)
+        })
       })
   }
 
+  selectAppropriateVariant() {
+    const { product } = this.state
+
+    const elms = document.getElementsByClassName('pd-select');
+    let options = {}
+
+    for (let i = 0; i <= elms.length - 1; i++) {
+      const key = elms[i].dataset.optionType
+      const value = elms[i].options[elms[i].selectedIndex].value
+      options[key] = value
+    }
+
+    const selectedVariant = product.variants.find(p => isEqual(p.option_list, options))
+
+    if (selectedVariant) {
+      this.setState({ selectedVariant: selectedVariant })
+    }
+  }
+
+  inStock(variant){
+    return variant.inventory_attributes.count_on_hand > 0
+  }
+
+  updateQuantity(type, value){
+    const oldValue = this.state.quantity
+    const max = this.state.selectedVariant.inventory_attributes.count_on_hand
+
+    let newValue = null
+    switch(type){
+    case 'minus':
+      newValue = oldValue - 1; break;
+    case 'plus':
+      newValue = oldValue + 1; break;
+    case 'change':
+      newValue = value; break;
+    default: 
+      newValue = oldValue
+    }
+
+    if(newValue < 0){
+      newValue = 0
+    }else if(newValue > max){
+      newValue = max
+    }
+
+    this.setState({ quantity: newValue })
+  }
+
+  addItemToCart(e){
+    e.preventDefault();
+    const { quantity, selectedVariant } = this.state
+    console.log(quantity, selectedVariant.id)
+
+  }
+
   render() {
-    const { product, optionList } = this.state
+    const { product, optionList, selectedVariant, quantity } = this.state
     if (product === null) { return null }
 
     return (
@@ -152,17 +216,42 @@ class ProductDetails extends Component {
                         <div className="left product-quantity-box">
                           <label htmlFor="quantity">Qty</label>
                           <div className="col-xs-12 quantity-group">
-                            <span className="ss-icon product-minus quantity-item" data-func="minus">-</span>
-                            <input className="quantity quantity-item" type="number" min="1" value="1" />
-                            <span className="ss-icon product-plus quantity-item" data-func="plus">+</span>
+                            <span className="ss-icon product-minus quantity-item" 
+                              data-func="minus"
+                              onClick={() => this.updateQuantity('minus')}>-</span>
+                            <input className="quantity quantity-item" 
+                              type="number" 
+                              min="1" 
+                              value={quantity}
+                              onChange={e => this.updateQuantity('change', e.target.value)} />
+                            <span className="ss-icon product-plus quantity-item" 
+                              data-func="plus"
+                              onClick={() => this.updateQuantity('plus')}>+</span>
                             <div className="pro-ref mt-20 quantity-item pl-20">
-                              <p><span className="in-stock"><i className="fas fa-check"></i> IN STOCK</span></p>
+                              <p>
+                                {
+                                  this.inStock(selectedVariant) ? (
+                                    <span className="in-stock">
+                                      <i className="fas fa-check"></i> IN STOCK
+                                      <span className="badge badge-border-only">
+                                        {selectedVariant.inventory_attributes.count_on_hand}
+                                      </span>
+                                    </span>
+                                  ) : (
+                                    <span className="out-stock">
+                                      <i className="fas fa-times"></i> OUT OF STOCK
+                                    </span>
+                                  )
+                                }
+                              </p>
                             </div>
                           </div>
                         </div>
 
                         <div className="ptb-30">
-                          <button className="btn btn-secondary btn-block btn-lg btn-add-to-cart active">
+                          <button className="btn btn-secondary btn-block btn-lg btn-add-to-cart active"
+                            disabled={!this.inStock(selectedVariant)}
+                            onClick={(e) => this.addItemToCart(e)}>
                             Add To Cart
                           </button>
                         </div>
