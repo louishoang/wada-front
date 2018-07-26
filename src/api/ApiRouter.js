@@ -226,3 +226,32 @@ export const getPublicProductDetailsRoute = (id) => {
   }
 }
 
+export const getCartRoute = (user) => {
+  return {
+    method: GET,
+    url: `api/v1/carts/find_cart_by_user?user_id=${user.id}`
+  }
+}
+
+export const updateCartRoute = (cartId, cartItems) => {
+  return {
+    method: PUT,
+    url: `api/v1/carts/${cartId}`,
+    data: {
+      cart: {
+        cart_items_attributes: cartItems
+      }
+    }
+  }
+}
+
+export const addItemToCartRoute = (cartItem) => {
+  return {
+    method: POST,
+    url: `api/v1/cart_items/`,
+    data: {
+      cart_item: cartItem
+    }
+  }
+}
+

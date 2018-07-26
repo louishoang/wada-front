@@ -853,3 +853,52 @@ main-product-slider{
 	color: black;
 	margin-left: 10px;
 }
+
+.nav-cart{
+	position: absolute;
+	right: -10px;
+	top: 65px;
+}
+
+#shopping-cart-icon{
+	font-size: 32px;
+  color: white;
+}
+
+.my-cart span:hover{
+	color: white;
+}
+
+.cart-box > ul > li:hover .my-cart > span:not(.total-pro){
+	color: white;
+}
+
+.cart-img {
+	float: left;
+	padding-right: 10px;
+	position: relative;
+	width: 25%;
+}
+
+.cart-content h6 a {
+	color: #666;
+	display: block;
+	font-size: 12px;
+	line-height: 20px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.nav-cart .cart-footer .price-content li span{
+	color: black;
+}
+
+#empty-cart{
+	text-align: center;
+	font-size: 1.2em;
+	color: grey;
+	padding: 20px 20px;
+}

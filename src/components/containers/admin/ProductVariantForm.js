@@ -103,7 +103,7 @@ class ProductVariantForm extends Component {
       }
     })
 
-    if (selected && newValue){
+    if ((selected && newValue) || newValue){
       return newValue
     }else{
       return  selected
@@ -111,8 +111,8 @@ class ProductVariantForm extends Component {
   }
 
   render() {
-    const { errors, variant, match } = this.props
-    const { optionTypes, productVariantsRoute } = this.state
+    const { variant, match } = this.props
+    const { errors, optionTypes, productVariantsRoute } = this.state
 
     if (productVariantsRoute) { return <Redirect to={{ pathname: productVariantsRoute }} /> }
 

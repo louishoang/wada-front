@@ -5,6 +5,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isequal';
+import { addItemToCart } from '../../../api/Wada';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions';
 
 class AsNavFor extends Component {
   constructor(props) {
@@ -117,7 +120,6 @@ class ProductDetails extends Component {
 
   selectAppropriateVariant() {
     const { product } = this.state
-
     const elms = document.getElementsByClassName('pd-select');
     let options = {}
 
@@ -128,13 +130,11 @@ class ProductDetails extends Component {
     }
 
     const selectedVariant = product.variants.find(p => isEqual(p.option_list, options))
-
-    if (selectedVariant) {
-      this.setState({ selectedVariant: selectedVariant })
-    }
+    this.setState({ selectedVariant: selectedVariant })
   }
 
   inStock(variant){
+    if(typeof variant === "undefined"){return false}
     return variant.inventory_attributes.count_on_hand > 0
   }
 
@@ -165,9 +165,24 @@ class ProductDetails extends Component {
 
   addItemToCart(e){
     e.preventDefault();
-    const { quantity, selectedVariant } = this.state
-    console.log(quantity, selectedVariant.id)
+    const { quantity, selectedVariant, product } = this.state
+    const { dispatchAddItemToCart, user, cart } = this.props
 
+    if(user && user.id) { 
+      const cartItem = {
+        variant_id: selectedVariant.id,
+        quantity: quantity,
+        cart_id: cart.id
+      }
+      addItemToCart(cartItem)
+    }
+    
+    dispatchAddItemToCart({
+      variant_id: selectedVariant.id,
+      quantity: quantity,
+      price: selectedVariant.price,
+      name: product.name,
+      image: product.product_images[0].thumbnail_url })
   }
 
   render() {
@@ -203,7 +218,9 @@ class ProductDetails extends Component {
                         Object.entries(optionList).map(([key, value]) => (
                           <div className="product-size clearfix quantity-item pr-30" key={key}>
                             <label>{key}</label>
-                            <select className="">
+                            <select className="pd-select" 
+                              data-option-type={key}
+                              onChange={this.selectAppropriateVariant}>
                               {value.map(k => <option key={k}>{k}</option>)}
                             </select>
                           </div>
@@ -292,8 +309,20 @@ ProductDetails.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.node,
     }).isRequired,
-  }).isRequired
+  }).isRequired,
+  dispatchAddItemToCart: PropTypes.func,
+  user: PropTypes.object,
+  cart: PropTypes.object
 }
 
+const stateToProps = (state) => ({
+  cart: state.cart,
+  user: state.auth.user
+})
 
-export default ProductDetails
+const dispatchToProps = (dispatch) => ({
+  dispatchAddItemToCart: (quantity, item) => dispatch(actions.addItemToShoppingCart(quantity, item))
+})
+
+
+export default connect(stateToProps, dispatchToProps)(ProductDetails)

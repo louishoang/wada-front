@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as ApiRouter from '../api/ApiRouter';
 import store from '../stores';
 import { requestStarted, requestSucceeded, requestFailed } from '../actions'
+import { loadState }  from '../stores/localStorage';
 
 let baseURL;
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -19,7 +20,7 @@ const defaultConfig = (authRequired = true) => {
   let accessToken, email; 
 
   try {
-    const user = JSON.parse(localStorage.getItem('user'))
+    let user = loadState().auth.user
     accessToken = user.authentication_token;
     email = user.email
   } catch (err) {
@@ -133,6 +134,15 @@ module.exports = {
       sort_by: 'created_at DESC'
     }
     return makeRequest(ApiRouter.getProductsHomePageRoute(params)) 
+  },
+  fetchCart: (user) => {
+    return makeRequest(ApiRouter.getCartRoute(user))
+  },
+  addItemToCart: (cartItem) => {
+    return makeRequest(ApiRouter.addItemToCartRoute(cartItem))
+  },
+  updateCart: (cartId, cartItems) => {
+    return makeRequest(ApiRouter.updateCartRoute(cartId, cartItems))
   },
   public: {
     getProductDetails: (id) => {
