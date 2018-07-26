@@ -3,7 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import CategoryDropDown from '../presentations/CategoryDropDown';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import NavCart from '../containers/NavCart';
 
 const MyAccUserView = () => (
   <ul className="ht-dropdown">
@@ -155,56 +156,7 @@ const HeaderLogoRow = ({user, isAuthenticated}) => (
                   </span>
                 </Link>
               </li>
-              <li className="shopping-cart">
-                <Link to="/shopping-cart">
-                  <i className="fas fa-shopping-cart"></i>
-                  <span className="my-cart">
-                    <span className="total-pro">2</span>
-                    <span>cart</span>
-                  </span>
-                </Link>
-                <ul className="ht-dropdown cart-box-width">
-                  <li>
-                    <div className="single-cart-box">
-                      <div className="cart-img">
-                        <a href="#"><img src={require('../../assets/img/products/1.jpg')} alt="cart-image" /></a>
-                        <span className="pro-quantity">1X</span>
-                      </div>
-                      <div className="cart-content">
-                        <h6><a href="product.html">Printed Summer Red </a></h6>
-                        <span className="cart-price">27.45</span>
-                        <span>Size: S</span>
-                        <span>Color: Yellow</span>
-                      </div>
-                      <a className="del-icone" href="#"><i className="ion-close"></i></a>
-                    </div>
-                    <div className="single-cart-box">
-                      <div className="cart-img">
-                        <a href="#"><img src={require('../../assets/img/products/2.jpg')} alt="cart-image" /></a>
-                        <span className="pro-quantity">1X</span>
-                      </div>
-                      <div className="cart-content">
-                        <h6><a href="product.html">Printed Round Neck</a></h6>
-                        <span className="cart-price">45.00</span>
-                        <span>Size: XL</span>
-                        <span>Color: Green</span>
-                      </div>
-                      <a className="del-icone" href="#"><i className="ion-close"></i></a>
-                    </div>
-                    <div className="cart-footer">
-                      <ul className="price-content">
-                        <li>Subtotal <span>$57.95</span></li>
-                        <li>Shipping <span>$7.00</span></li>
-                        <li>Taxes <span>$0.00</span></li>
-                        <li>Total <span>$64.95</span></li>
-                      </ul>
-                      <div className="cart-actions text-center">
-                        <a className="cart-checkout" href="checkout.html">Checkout</a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+              <li className="shopping-cart"><NavCart/></li>
             </ul>
           </div>
         </div>
@@ -256,4 +208,4 @@ Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 }
 
-export default withRouter(connect(stateToProps)(Header))
+export default withRouter(connect(stateToProps, null)(Header))

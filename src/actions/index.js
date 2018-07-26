@@ -30,7 +30,6 @@ export const setCurrentUser = (user) => {
 
 export const logout = () => {
   return dispatch => {
-    localStorage.removeItem('user');
     dispatch(setCurrentUser({}))
   }
 }
@@ -68,6 +67,45 @@ export const getAdminOptionTypesSucceeded = (optionTypes) => {
     type: constants.GET_ADMIN_OPTION_TYPES_SUCCEEDED,
     data: {
       optionTypes: optionTypes
+    }
+  }
+}
+
+export const addItemToShoppingCart = (item) => {
+  return {
+    type: constants.ADD_ITEM_TO_SHOPPING_CART,
+    data: {
+      item
+    }
+  }
+}
+
+export const removeItemFromShoppingCart = (item) => {
+  return {
+    type: constants.REMOVE_ITEM_FROM_SHOPPING_CART,
+    data: {
+      item
+    }
+  }
+}
+
+export const updateCart = (items, cartId) => {
+  return {
+    type: constants.UPDATE_ALL_ITEMS_IN_CART,
+    data: {
+      cart_items: items,
+      id: cartId
+    }
+  }
+}
+
+export const resetCart = () => {
+  return {
+    type: constants.RESET_CART,
+    data: {
+      id: null,
+      cart_items: [],
+      subTotal: 0
     }
   }
 }

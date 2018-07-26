@@ -20,6 +20,11 @@ import AdminPage from '../containers/admin/AdminPage';
 import NotFoundPage from '../presentations/NotFoundPage';
 import PropTypes from 'prop-types';
 import ProductDetails from '../containers/public/ProductDetails';
+import { saveState } from '../../stores/localStorage';
+import { connect } from 'react-redux';
+import watch from 'redux-watch';
+import isEmpty from 'lodash/isEmpty';
+import { resetCart } from '../../actions';
 
 const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -46,15 +51,38 @@ AdminRoute.propTypes = {
   }),
 }
 
+var wadaStore = store.configure(null)
+
 const isAdmin = () => {
-  const auth = store.currentStore().getState().auth
+  const auth = wadaStore.getState().auth
   return auth.isAuthenticated && (auth.user.role === 'admin' || auth.user.role === 'manager')
 }
 
+let w = watch(wadaStore.getState, 'auth.user')
+
+wadaStore.subscribe(w((newUser, oldUser) => {
+  // Delete all items in shopping cart on logout
+  if (oldUser !== newUser && isEmpty(newUser)) {
+    wadaStore.dispatch(resetCart())
+    return null;
+  }
+}))
+
 class App extends Component {
+  componentDidMount() {
+    wadaStore.subscribe(() => {
+      const currentStore = wadaStore.getState()
+
+      saveState({
+        cart: currentStore.cart,
+        auth: currentStore.auth
+      })
+    })
+  }
+
   render() {
     return (
-      <Provider store={store.configure(null)}>
+      <Provider store={wadaStore}>
         <Router>
           <div className="wrapper">
             <HeaderPopUpBanner />
@@ -62,7 +90,7 @@ class App extends Component {
             <Spinner />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/products/:id" component={ProductDetails}/>
+              <Route path="/products/:id" component={ProductDetails} />
               <Route path="/about" component={AboutUs} />
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />
@@ -77,4 +105,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const stateToProps = (state) => ({
+  user: state.auth.user
+})
+
+export default connect(stateToProps, null)(App);

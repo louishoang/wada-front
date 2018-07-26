@@ -12,18 +12,21 @@ import { initialAdminOptionTypeState } from '../reducers/admin/OptionTypeFormRed
 import { initialLoginState, authReducer } from '../reducers/LoginReducer';
 import adminReducer from '../reducers/admin/AdminReducer';
 import isLoading from '../reducers/IsLoadingReducer';
+import cartReducer from '../reducers/CartReducer';
 import { initialAdminVariantState } from '../reducers/admin/VariantReducer';
 import { initialAdminPropertyState } from '../reducers/admin/PropertyReducer';
 import { initialAdminProductPropertyState } from '../reducers/admin/ProductPropertyReducer';
+import { loadState } from './localStorage';
 // import reducers here
 
-var store
+let store
 export default {
   configure: (initialState) => {
     const reducers = combineReducers({ // insert reducers here
       isLoading,
       admin: adminReducer,
       auth: authReducer,
+      cart: cartReducer,
       forms: combineForms({
         user: initialUserState,
         login: initialLoginState,
@@ -54,12 +57,12 @@ export default {
 
     store = createStore(
       reducers,
+      loadState(), // persisted state from localStorage
       applyMiddleware(...middleware) 
     )
 
     return store
   },
-
   currentStore: () => {
     return store
   }
