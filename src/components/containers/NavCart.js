@@ -1,34 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { removeItemFromShoppingCart } from '../../actions';
 import PropTypes from 'prop-types';
-
-const CartItem = ({item}) => {
-  return (
-    <div className="single-cart-box">
-      <div className="cart-img">
-        <a href="#">
-          <img src={item.image} />
-        </a>
-      </div>
-      <div className="cart-content">
-        <h6>
-          <Link to={`/products/`}>{item.name}</Link>
-        </h6>
-        <span className="cart-price">{item.price} x {item.quantity}</span>
-      </div>
-      <a className="del-icone" href="#"><i className="ion-close"></i></a>
-    </div>
-  )
-}
-
-CartItem.propTypes = {
-  item: PropTypes.object
-}
+import CartItem from './CartItem';
 
 const EmptyCart = () => {
-  return(
+  return (
     <div id="empty-cart">Your cart is empty!</div>
   )
 }
@@ -53,11 +30,12 @@ class NavCart extends Component {
             <span>cart</span>
           </span>
         </Link>
-        <ul className="ht-dropdown cart-box-width nav-cart">
+        <ul className="ht-dropdown cart-box-width nav-cart limit-height-500">
           <li>
             {
               cart_items.length > 0 ?
-                cart_items.map(item => <CartItem key={item.variant_id} item={item}/>) :
+                cart_items.map(item => <CartItem key={item.variant_id} 
+                  item={item} cartId={cart.id} {...item}/>) :
                 <EmptyCart />
             }
 
@@ -81,13 +59,9 @@ const stateToProps = (state) => ({
   cart: state.cart
 })
 
-const dispatchToProps = (dispatch) => ({
-  dispatchRemoveItemFromShoppingCart: (item) => dispatch(removeItemFromShoppingCart(item))
-})
-
 NavCart.propTypes = {
   dispatchRemoveItemFromShoppingCart: PropTypes.func,
   cart: PropTypes.object
 }
 
-export default connect(stateToProps, dispatchToProps)(NavCart)
+export default connect(stateToProps, null)(NavCart)

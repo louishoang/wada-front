@@ -255,3 +255,20 @@ export const addItemToCartRoute = (cartItem) => {
   }
 }
 
+export const updateCartItemRoute = (itemId, params) => {
+  return {
+    method: PUT,
+    url: `api/v1/cart_items/${itemId}`,
+    data: {
+      cart_item: params
+    }
+  }
+}
+
+
+export const removeCartItemRoute = (itemId) => {
+  return {
+    method: DELETE,
+    url: `/api/v1/cart_items/${itemId}`
+  }
+}

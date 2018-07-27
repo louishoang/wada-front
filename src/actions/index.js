@@ -80,11 +80,21 @@ export const addItemToShoppingCart = (item) => {
   }
 }
 
-export const removeItemFromShoppingCart = (item) => {
+export const updateCartItemQuantity = (itemId, quantity) => {
+  return {
+    type: constants.UPDATE_CART_ITEM_QUANTITY,
+    data: {
+      itemId,
+      quantity
+    }
+  }
+}
+
+export const removeItemFromShoppingCart = (itemId) => {
   return {
     type: constants.REMOVE_ITEM_FROM_SHOPPING_CART,
     data: {
-      item
+      itemId
     }
   }
 }
