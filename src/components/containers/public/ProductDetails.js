@@ -180,8 +180,10 @@ class ProductDetails extends Component {
     dispatchAddItemToCart({
       variant_id: selectedVariant.id,
       quantity: quantity,
+      count_on_hand: selectedVariant.count_on_hand,
       price: selectedVariant.price,
       name: product.name,
+      permalink: product.permalink,
       image: product.product_images[0].thumbnail_url })
   }
 

@@ -3,7 +3,8 @@ import {
   REMOVE_ITEM_FROM_SHOPPING_CART,
   UPDATE_CART_ID,
   RESET_CART,
-  UPDATE_ALL_ITEMS_IN_CART
+  UPDATE_ALL_ITEMS_IN_CART,
+  UPDATE_CART_ITEM_QUANTITY
 } from '../constants';
 
 let cart = JSON.parse(localStorage.getItem('cart'));
@@ -22,6 +23,20 @@ const CartReducer = (state = cart, action) => {
   const reducer = (accumulator, currentValue) => accumulator + parseFloat(currentValue.price * currentValue.quantity);
   let newCartItems = JSON.parse(JSON.stringify(state.cart_items));
   switch (action.type) {
+  case UPDATE_CART_ITEM_QUANTITY: {
+    const newItems = state.cart_items.map(i => {
+      if(i.id === action.data.itemId){
+        return { ...i, quantity: action.data.quantity }
+      } else{
+        return i
+      }
+    })
+    return{
+      ...state,
+      cart_items: newItems,
+      subTotal: newItems.reduce(reducer, 0).toFixed(2)
+    }
+  }
   case UPDATE_ALL_ITEMS_IN_CART: {
     return{
       ...state,
@@ -63,7 +78,7 @@ const CartReducer = (state = cart, action) => {
     }
   }
   case REMOVE_ITEM_FROM_SHOPPING_CART: {
-    const newItems = state.cart_items.filter(i => i.id !== action.data.item.id)
+    const newItems = state.cart_items.filter(i => i.id !== action.data.itemId)
     return {
       ...state,
       subTotal: newItems.reduce(reducer, 0).toFixed(2),

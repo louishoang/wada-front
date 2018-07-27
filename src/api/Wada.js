@@ -144,6 +144,12 @@ module.exports = {
   updateCart: (cartId, cartItems) => {
     return makeRequest(ApiRouter.updateCartRoute(cartId, cartItems))
   },
+  callUpdateCartItem: (itemId, params) => {
+    return makeRequest(ApiRouter.updateCartItemRoute(itemId, params))
+  },
+  removeCartItem: (itemId) => {
+    return makeRequest(ApiRouter.removeCartItemRoute(itemId))
+  },
   public: {
     getProductDetails: (id) => {
       return makeRequest(ApiRouter.getPublicProductDetailsRoute(id)) 
