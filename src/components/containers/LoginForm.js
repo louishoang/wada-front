@@ -20,7 +20,7 @@ const mergedCartItems = (serverCart, localCart) => {
   localCart.cart_items.forEach(i => {
     if (existingVariantIds.includes(i.variant_id)){
       const duplicate = newItems.filter(item => item.variant_id == i.variant_id)[0]
-      duplicate.quantity = duplicate.quantity + 1
+      duplicate.quantity = duplicate.quantity + i.quantity
     } else {
       newItems.push(i)
     }

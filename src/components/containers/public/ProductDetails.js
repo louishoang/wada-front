@@ -202,7 +202,7 @@ class ProductDetails extends Component {
                 </div>
                 <div className="col-lg-6">
                   <div className="thubnail-desc fix">
-                    <div className="sku">SKU: {product.sku}</div>
+                    <div className="sku">SKU: {selectedVariant.sku}</div>
                     <h2 className="product-header fira-header fs-30">{product.name}</h2>
                     <div className="pro-price mtb-30">
                       <p className="d-flex align-items-center">
@@ -220,7 +220,8 @@ class ProductDetails extends Component {
                             <label>{key}</label>
                             <select className="pd-select" 
                               data-option-type={key}
-                              onChange={this.selectAppropriateVariant}>
+                              onChange={this.selectAppropriateVariant}
+                              defaultValue={selectedVariant.option_list[key]}>
                               {value.map(k => <option key={k}>{k}</option>)}
                             </select>
                           </div>
