@@ -25,12 +25,31 @@ import { connect } from 'react-redux';
 import watch from 'redux-watch';
 import isEmpty from 'lodash/isEmpty';
 import { resetCart } from '../../actions';
+import Cart from './carts/Cart';
 
 const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       (isAdmin()) ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      (isAuthenticated()) ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -51,11 +70,23 @@ AdminRoute.propTypes = {
   }),
 }
 
+PrivateRoute.propTypes = {
+  component: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }),
+}
+
 var wadaStore = store.configure(null)
 
 const isAdmin = () => {
   const auth = wadaStore.getState().auth
   return auth.isAuthenticated && (auth.user.role === 'admin' || auth.user.role === 'manager')
+}
+
+const isAuthenticated = () => {
+  const auth = wadaStore.getState().auth
+  return auth.isAuthenticated && auth.user && auth.user.email
 }
 
 let w = watch(wadaStore.getState, 'auth.user')
@@ -96,6 +127,7 @@ class App extends Component {
               <Route path="/login" component={LoginForm} />
               <Route path="/logout" component={LogoutPage} />
               <AdminRoute path="/admin" component={AdminPage} />
+              <PrivateRoute path="/cart" component={Cart} />
               <Route component={NotFoundPage} />
             </Switch>
           </div>

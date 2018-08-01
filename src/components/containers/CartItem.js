@@ -25,24 +25,26 @@ class CartItem extends Component {
       newValue = oldValue
     }
 
-    if (newValue < 0) {
-      newValue = 0
+    if (newValue < 1) {
+      newValue = 1
     } else if (newValue > max) {
       newValue = max
     }
 
     if(isAuthenticated){callUpdateCartItem(item.id, { quantity: newValue })}
-    dispatchUpdateItemQuantity(item.id, newValue)
+    dispatchUpdateItemQuantity(item.variant_id, newValue)
   }
 
-  removeItemFromCart(itemId, e){
+  // If a user is not logged in, cart item doesn't have the ID from the backend
+  // Have to use variantID to find and remove item from shopping cart
+  removeItemFromCart(itemId, variantId, e){
     e.preventDefault()
-    removeCartItem(itemId)
-    this.props.dispatchRemoveItemFromCart(itemId)
+    if (itemId) { removeCartItem(itemId) }
+    this.props.dispatchRemoveItemFromCart(variantId)
   }
 
   render() {
-    const { image, permalink, name, price, quantity, id } = this.props.item
+    const { image, permalink, name, price, quantity, id, variant_id } = this.props.item
 
     return (
       <div className="single-cart-box">
@@ -74,7 +76,7 @@ class CartItem extends Component {
             <div className="row">
               <span>
                 <a className="remove-cart-item"
-                  onClick={e => this.removeItemFromCart(id, e)}>Remove</a></span>
+                  onClick={e => this.removeItemFromCart(id, variant_id, e)}>Remove</a></span>
             </div>
           </div>
         </div>
@@ -98,7 +100,7 @@ const stateToProps = (state) => ({
 
 const dispatchToProps = (dispatch) => ({
   dispatchUpdateItemQuantity: (itemId, quantity) => dispatch(updateCartItemQuantity(itemId, quantity)),
-  dispatchRemoveItemFromCart: (itemId) => dispatch(removeItemFromShoppingCart(itemId))
+  dispatchRemoveItemFromCart: (variantId) => dispatch(removeItemFromShoppingCart(variantId))
 })
 
 export default connect(stateToProps, dispatchToProps)(CartItem)
