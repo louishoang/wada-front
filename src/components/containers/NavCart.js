@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CartItem from './CartItem';
-
-const EmptyCart = () => {
-  return (
-    <div id="empty-cart">Your cart is empty!</div>
-  )
-}
+import EmptyCart from './carts/EmptyCart';
 
 class NavCart extends Component {
   constructor(props) {
@@ -34,8 +29,7 @@ class NavCart extends Component {
           <li>
             {
               cart_items.length > 0 ?
-                cart_items.map(item => <CartItem key={item.variant_id} 
-                  item={item} cartId={cart.id} {...item}/>) :
+                cart_items.map(item => <CartItem key={item.variant_id} item={item}/>) :
                 <EmptyCart />
             }
 
@@ -45,7 +39,7 @@ class NavCart extends Component {
               </ul>
               <div className="cart-actions text-center">
                 <Link className="cart-checkout"
-                  to="/shopping-cart">View Cart</Link>
+                  to="/cart">View Cart</Link>
               </div>
             </div>
           </li>

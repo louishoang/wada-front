@@ -21,3 +21,7 @@ export const OPTION_TYPE = 'OptionType'
 export const CATEGORY = 'Category'
 export const BRAND = 'Brand'
 export const PRODUCT_PROPERTY = 'Product Property'
+
+
+export const ITEM_TYPE_SHOPPING_CART = 0
+export const ITEM_TYPE_WISH_LIST = 1

@@ -901,6 +901,56 @@ main-product-slider{
 	width: 25px;
 }
 
+.sc-row .product-info .product-minus {
+	line-height: 40px;
+	background: #f2f2f2;
+	font-weight: 600;
+	position: relative;
+	cursor: pointer;
+	height: 40px;
+	display: block;
+	width: 40px;
+	text-align: center;
+	float: left;
+}
+
+.sc-row .product-info .item-name{
+	color: #666;
+	font-family: 'Fira Sans';
+	font-weight: 300;
+}
+
+.sc-row .product-info .product-plus{
+	line-height: 40px;
+	background: #f2f2f2;
+	font-weight: 600;
+	position: relative;
+	cursor: pointer;
+	height: 40px;
+	display: block;
+	width: 40px;
+	text-align: center;
+	float: right;
+}
+
+.sc-row .product-info .quantity-group input.quantity.quantity-item {
+	height: 40;
+	text-align: center;
+	padding: 0px;
+	background-color: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	box-shadow: none;
+	color: #7a7a7a;
+	width: 50px;
+}
+
+.sc-row .product-info .amount{
+	line-height: 24px;
+	color: red;
+	font-size: 19px;
+	font-weight: bolder;
+}
+
 .cart-actions .product-quantity-box.small .quantity::-webkit-inner-spin-button, 
 .cart-actions .product-quantity-box.small .quantity::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -914,8 +964,28 @@ main-product-slider{
 	background: none;
 }
 
+.sc-row .product-info a.remove-cart-item:hover,
 .cart-actions span a.remove-cart-item:hover{
 	color: red;
+}
+
+.sc-row .product-info a.remove-cart-item{
+	line-height: 24px;
+	color: #666;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.item-option-list:first-child{
+	margin-top: 10px
+}
+
+.item-option-list{
+	color: #666;
+	fill: #666;
+	font-size: 14px;
+	line-height: 19px;
+	font-weight: normal;
 }
 
 .btn-add-to-cart{
@@ -984,4 +1054,25 @@ main-product-slider{
 	font-size: 1.2em;
 	color: grey;
 	padding: 20px 20px;
+}
+
+.sc-row td.product-photo{
+	max-width: 50px;
+}
+
+.sc-row td.product-info {
+	text-align: left;
+	font-size: 20px;
+}
+
+.product-cart-actions{
+	text-align: center;
+}
+
+.product-thumbnail img{
+	float: left;
+	padding-right: 5px;
+	position: relative;
+	min-width: 25px;
+	width: 100%;
 }

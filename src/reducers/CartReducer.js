@@ -25,7 +25,7 @@ const CartReducer = (state = cart, action) => {
   switch (action.type) {
   case UPDATE_CART_ITEM_QUANTITY: {
     const newItems = state.cart_items.map(i => {
-      if(i.id === action.data.itemId){
+      if(i.variant_id === action.data.variantId){
         return { ...i, quantity: action.data.quantity }
       } else{
         return i
@@ -78,7 +78,7 @@ const CartReducer = (state = cart, action) => {
     }
   }
   case REMOVE_ITEM_FROM_SHOPPING_CART: {
-    const newItems = state.cart_items.filter(i => i.id !== action.data.itemId)
+    const newItems = state.cart_items.filter(i => i.variant_id !== action.data.variantId)
     return {
       ...state,
       subTotal: newItems.reduce(reducer, 0).toFixed(2),

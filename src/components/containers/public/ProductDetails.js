@@ -8,6 +8,7 @@ import isEqual from 'lodash/isequal';
 import { addItemToCart } from '../../../api/Wada';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import { ITEM_TYPE_SHOPPING_CART } from '../../../constants';
 
 class AsNavFor extends Component {
   constructor(props) {
@@ -154,8 +155,8 @@ class ProductDetails extends Component {
       newValue = oldValue
     }
 
-    if(newValue < 0){
-      newValue = 0
+    if(newValue < 1){
+      newValue = 1
     }else if(newValue > max){
       newValue = max
     }
@@ -172,7 +173,8 @@ class ProductDetails extends Component {
       const cartItem = {
         variant_id: selectedVariant.id,
         quantity: quantity,
-        cart_id: cart.id
+        cart_id: cart.id,
+        item_type: ITEM_TYPE_SHOPPING_CART
       }
       addItemToCart(cartItem)
     }
@@ -180,8 +182,10 @@ class ProductDetails extends Component {
     dispatchAddItemToCart({
       variant_id: selectedVariant.id,
       quantity: quantity,
-      count_on_hand: selectedVariant.count_on_hand,
+      count_on_hand: selectedVariant.inventory_attributes.count_on_hand,
       price: selectedVariant.price,
+      item_type: ITEM_TYPE_SHOPPING_CART,
+      option_list: selectedVariant.option_list,
       name: product.name,
       permalink: product.permalink,
       image: product.product_images[0].thumbnail_url })
